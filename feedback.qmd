@@ -1,0 +1,131 @@
+---
+title: "Feedback Analysis"
+author: "siju.swamy@saintgits.org"
+format:
+    html: default
+execute:
+  echo: false
+jupyter: python3
+---
+
+## Workshop Feedback Questionnaire
+
+We value your feedback! Please take a moment to provide your insights on the workshop. Your responses will help us improve and tailor future sessions to better meet your needs.
+
+### Feedback Questionnaire
+
+Please rate the following statements on a scale of 1 to 5, where 1 is "Strongly Disagree" and 5 is "Strongly Agree":
+
+1. **How effective was the workshop in teaching you to use Quarto for websites, blogs, and technical writing?**
+   - [ ] 1
+   - [ ] 2
+   - [ ] 3
+   - [ ] 4
+   - [ ] 5
+
+2. **How clear was the instruction on the end-to-end machine learning workflow, from data preprocessing to model deployment?**
+   - [ ] 1
+   - [ ] 2
+   - [ ] 3
+   - [ ] 4
+   - [ ] 5
+
+3. **How beneficial was the hands-on approach to learning and applying machine learning techniques?**
+   - [ ] 1
+   - [ ] 2
+   - [ ] 3
+   - [ ] 4
+   - [ ] 5
+
+4. **How would you rate the knowledge and expertise of the resource person in the topics covered?**
+   - [ ] 1
+   - [ ] 2
+   - [ ] 3
+   - [ ] 4
+   - [ ] 5
+
+5. **How satisfactory was the support and assistance provided by the resource person during the workshop?**
+   - [ ] 1
+   - [ ] 2
+   - [ ] 3
+   - [ ] 4
+   - [ ] 5
+
+Thank you for your feedback!
+
+---
+
+You can access the feedback form through the link below or scan the QR code to provide your responses:
+
+<https://forms.gle/bHKwtrkV8JoN8KCc6>
+
+
+{{< qrcode https://forms.gle/bHKwtrkV8JoN8KCc6 >}}
+
+
+## Response Analysis
+
+```{python}
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Load the responses data
+# Replace 'feedback_responses.csv' with the path to your feedback form responses
+responses_df = pd.read_csv('feedback_responses.csv')
+
+# Filter numerical columns
+numerical_columns = responses_df.select_dtypes(include=['number']).columns
+numerical_df = responses_df[numerical_columns]
+
+#short_names = {col: f'Q{i+1}' for i, col in enumerate(numerical_df.columns)}
+# Define short names dynamically, excluding the last column
+short_names = {col: f'Q{i+1}' for i, col in enumerate(numerical_df.columns)}
+
+# Add the last column with its original name
+#short_names[numerical_df.columns[-1]] = f'Q{len(short_names)+1}'
+
+# Ensure that the short_headings match the exact column names in your DataFrame
+numerical_df.rename(columns=short_names, inplace=True)
+
+# Display the first few rows of the numerical dataframe to understand its structure
+#print(numerical_df.head())
+
+# Statistical summary of the numerical feedback responses
+#summary_stats = numerical_df.describe()
+
+# Calculate count, mean, and standard deviation for each numerical question
+question_stats = numerical_df.agg(['count', 'mean', 'std'])
+
+# Display the summary statistics and question stats
+#print("\nStatistical Summary:")
+#print(summary_stats)
+
+print("\nQuestion Statistics:")
+print(question_stats)
+
+# Plot distribution of responses for each numerical question
+# Plot pie charts for each numerical question
+for question in numerical_df.columns:
+    plt.figure(figsize=(6, 5))
+    
+    # Count responses for each score
+    counts = numerical_df[question].value_counts().sort_index()
+    
+    # Plot pie chart
+    plt.pie(counts, labels=counts.index, autopct='%1.1f%%', startangle=140, colors=plt.cm.Paired(range(len(counts))))
+    
+    plt.title(f'Pie Chart of Responses for {question}')
+    plt.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
+    
+    # Show the plot
+    plt.show()
+
+# Plot heatmap of mean responses for numerical questions
+mean_responses = numerical_df.mean()
+plt.figure(figsize=(6, 5))
+sns.heatmap(mean_responses.values.reshape(-1, 1), annot=True, fmt='.2f', yticklabels=numerical_df.columns, cmap='coolwarm', cbar=True)
+plt.title('Mean Responses Heatmap')
+plt.xlabel('Mean Score')
+plt.show()
+```

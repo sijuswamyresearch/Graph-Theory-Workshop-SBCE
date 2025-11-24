@@ -1,0 +1,55 @@
+project:
+  type: website
+  
+website:
+  title: "Workshop on Graph Theory"
+  site-url: https://sijuswamy.github.io/CME-workshop-1/
+  repo-url: https://github.com/sijuswamy/CME-workshop-1
+  repo-branch: main
+  repo-actions: [issue]
+  navbar:
+    right:
+      - href: index.qmd
+        text: Home
+      - href: about.qmd 
+        text: About the Workshop
+      - href: feedback.qmd
+        text: Feed Back  
+  sidebar:
+    style: "docked"
+    logo: "./images/workshop_cover.png"
+    search: true
+    collapse-level: 2
+    contents:
+      - href: index.qmd
+        text: Home
+      - href: introduction/index.qmd
+        text: Introduction
+      - href: setup/index.qmd
+        text: Setting-up
+      - hands_on.qmd
+      - href: Graph_algorithms/ML_lesson.qmd
+        text: Graph Algorithms & Applications
+      - href: Hands-on-Demos/Networkx_demo.qmd
+        text: Hands-on Demos
+      - href: Graphs-in-AIML/Graphs_in_AIML.qmd
+        text: Graphs in AI/ML
+      - about.qmd
+
+format:
+  html:
+    theme: yeti
+    css: styles.css
+    toc: true
+
+# Additional extensions for Sphinx
+sphinx:
+  config:
+    html_js_files:
+    - https://unpkg.com/mermaid@10.9.1/dist/mermaid.min.js
+  extra_extensions:
+    - sphinxcontrib.mermaid # Draw diagrams with Mermaid
+body-header: | 
+  This Cource is designed and implemented by Department of Mathematics
+margin-header: |
+  ![Sharing Innovations](/images//logo.jfif)

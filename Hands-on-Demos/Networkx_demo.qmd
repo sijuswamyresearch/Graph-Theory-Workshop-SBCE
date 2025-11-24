@@ -1,0 +1,46 @@
+---
+title: "Module 4 — Hands-on Demonstrations using Python & NetworkX"
+subtitle: <a href="slides-ML.html" target="_blank"></a>
+author: 
+  - name:
+      given: Siju
+      family: Swamy
+    #orcid: 0000-0001-8925-424X
+    email: siju.swamy@saintgits.org
+    affiliations:
+      - name: Saintgits College of Engineering (Autonomous)
+        city: Kottayam
+        country: India
+        postal-code: 686532
+    attributes:
+        equal-contributor: False
+format:
+  html:
+    mermaid:
+      theme: dark
+    
+  revealjs:
+    output-file: slides-ML.html
+    width: 960
+    height: 700
+    css: assets/style.css
+    mermaid:
+      theme: dark
+jupyter: python3
+execute: 
+  enabled: true
+---
+
+## Introduction
+This module introduces practical graph modelling and algorithm execution using `Python` and the `NetworkX` library. Students will learn to construct real and simulated graphs, visualize structure, compute metrics, and explore algorithms such as *shortest paths, centrality, and colouring*.  
+
+The objective is to bridge theoretical understanding from discrete mathematics to real-world implementations in engineering problems such as *network routing, urban mobility, scheduling, and social network analytics*.
+
+## Module Objectives
+
+After completing this module, students are expected to be able to:
+
+- Construct graphs from real-world datasets
+- Apply algorithms for shortest paths, spanning trees, and colouring
+- Analyse networks using centrality measures
+- Perform visual and interpretative data-driven studies

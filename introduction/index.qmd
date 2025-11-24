@@ -1,0 +1,148 @@
+---
+title: "Graph theory: From Eluer to AI"
+subtitle: <a href="slides-quarto.html" target="_blank"></a>
+author: 
+  - name:
+      given: Siju
+      family: Swamy
+    orcid: 0009-0004-1983-5574
+    email: siju.swamy@saintgits.org
+    affiliations:
+      - name: Saintgits
+        city: Kottayam
+        country: India
+        postal-code: 686572
+    attributes:
+        equal-contributor: False
+format:
+  html:
+    mermaid:
+      theme: dark
+  revealjs:
+    output-file: slides-quarto.html
+    width: 960
+    height: 700
+    css: assets/style.css
+    mermaid:
+      theme: dark
+jupyter: python3
+---
+
+:::: {.content-hidden when-format="revealjs"}
+## Module 1: Applications of Graph Theory in Engineering & Emerging Technologies
+
+## Introduction
+
+Graph Theory forms a foundational pillar across modern Computer Science and Engineering. 
+From the historic *Königsberg Bridge Problem* raised by Leonhard Euler in 1736 to today’s 
+cutting-edge applications in **Artificial Intelligence, Machine Learning, Cyber-security, 
+VLSI, IoT, Intelligent Transportation, and Social Network Analytics**, graph structures 
+provide a natural mathematical way to represent relationships, connectivity, and optimization.
+
+This session is designed to bridge the gap between **Discrete Mathematics** and **real-world 
+engineering applications**, demonstrating how mathematical graph concepts translate into 
+practical computational tools.
+
+
+## Learning Objectives
+
+At the end of this session, participants will be able to:
+
+- Understand the evolution of graph theory from classical problems to modern computational applications.
+- Model real scenarios as graphs and analyze connectivity, traversal, and optimization.
+- Explore graph algorithms implemented through simulation and programming.
+- Recognize the role of graph theory in AI, ML, and data-driven intelligent systems.
+- Develop intuition for advanced concepts such as graph coloring, network flows, and spectral graph theory.
+
+
+This module introduces the historical evolution of graph theory, beginning with the classical foundations laid by *Leonhard Euler (1736)*, and follows its transformation into a cornerstone of modern engineering and computational technologies.
+
+## Historical Starting Point: The Königsberg Bridges Problem
+
+The earliest known problem leading to graph theory originated from the city of Königsberg (now Kaliningrad, Russia), divided by the river Pregel with *seven bridges* linking different land masses. Citizens wondered:
+
+> *Is there a walk through the city that crosses each bridge exactly once?*
+
+Euler abstracted the problem by representing landmasses as *vertices* and bridges as *edges*, forming the world’s first mathematical graph.
+
+### Euler’s Key Result
+
+A connected graph admits an *Eulerian circuit* if and only if *every vertex has even degree*.  
+
+General case: A graph contains an *Eulerian path* if exactly *0 or 2 vertices have odd degree*.
+
+Euler’s solution marks the birth of **topological graph theory** and the first example of modelling reality with abstraction.
+
+## Development Through the 19th & 20th Centuries
+
+| Year | Contributor | Contribution |
+|------|------------|--------------|
+| 1847 | Gustav Kirchhoff | Electrical network theory & spanning trees in circuits |
+| 1857 | Arthur Cayley | Counting labelled trees, chemical molecular structures |
+| 1913 | George D. Birkhoff | Chromatic polynomial & map colouring |
+| 1936 | Kuratowski | Characterization of planar graphs |
+| 1959 | Edsger Dijkstra | Shortest path algorithm |
+| 1959 | Erdős & Rényi | Random graph theory |
+| 1973 | Hopcroft–Karp | Efficient bipartite matching |
+| 1998 | Brin & Page | PageRank: web search based on eigenvector centrality |
+| 2017–present | Kipf & Welling | Graph Neural Networks (GNNs) |
+
+
+## Evolution from Mathematical Theory to Engineering
+
+Graph theory transitioned from pure mathematics to an essential tool for computation and real-world problem solving. Today, nearly every complex engineering system is modelled using graph structures.
+
+### Why Engineers Need Graph Theory
+
+Graphs enable engineers to **analyze**, **optimize**, and **predict** system behavior.
+
+| Domain | Engineering Problem | Graph Concept | Algorithmic Tool |
+|--------|---------------------|---------------|-------------------|
+| Computer Networks | Packet routing, topology design | Weighted graphs | Dijkstra / Bellman–Ford |
+| Artificial Intelligence | Knowledge graphs, reasoning, GNNs | Directed labelled graphs | PageRank, embeddings |
+| VLSI & CAD | Circuit layout & track minimisation | Graph colouring | Greedy, planar colouring |
+| Transport & Robotics | Navigation, path planning | Shortest paths | A*, BFS |
+| Cybersecurity | Attack spread modelling | Attack graphs | Centrality |
+| Social Networks | Influence, community detection | Small-world graphs | Modularity, clustering |
+| Big Data | Large-scale graph analytics | Distributed graphs | MapReduce / Spark GraphX |
+| Healthcare | Disease spread & medical networks | Dynamic graphs | SIR modelling |
+
+
+## Key Ideas That Form the Foundations of Graph Algorithms
+
+- **Traversal:** BFS, DFS for exploring nodes and connectivity
+- **Optimisation:** Minimal spanning trees, flows, cut problems
+- **Ranking & Influence:** Centrality, PageRank
+- **Scheduling & Resources:** Graph colouring
+- **Structure Discovery:** Communities & clustering
+- **Learning:** GNNs for relational intelligence
+
+Mathematically, a graph is defined as:
+
+$$ G = (V, E) $$
+where  
+- $V$ is a set of **vertices**,  
+- $E$ is a set of **edges** connecting pairs of vertices.
+
+---
+
+## Demonstration: Representing Reality through Graph Abstraction
+
+```{python}
+import networkx as nx
+import matplotlib.pyplot as plt
+
+G = nx.Graph()
+G.add_edges_from([("Island 1","Island 2"),("Island 1","Island 3"),
+                  ("Island 2","Island 3"),("Island 3","Island 4"),
+                  ("Island 4","Island 1")])
+nx.draw(G, with_labels=True)
+plt.show()
+```
+
+## Conclusion
+
+Graph Theory evolved from Euler’s solution to a historic puzzle into a powerful computational language for solving real-world problems. It now forms the mathematical backbone of modern engineering systems — from internet routing and GPS navigation to web search engines, cybersecurity, and intelligent AI models such as Graph Neural Networks.
+
+> Graph Theory connects mathematical reasoning with engineering innovation, transforming abstract structures into practical solutions.
+

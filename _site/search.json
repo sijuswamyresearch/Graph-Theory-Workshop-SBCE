@@ -1,0 +1,691 @@
+[
+  {
+    "objectID": "setup/index.html",
+    "href": "setup/index.html",
+    "title": "Setting Up of Quarto",
+    "section": "",
+    "text": "Before diving into literate programming with Quarto, ensure that your development environment is properly set up. Follow these steps to install and configure the necessary tools:",
+    "crumbs": [
+      "Home",
+      "Setting-up"
+    ]
+  },
+  {
+    "objectID": "setup/index.html#introduction",
+    "href": "setup/index.html#introduction",
+    "title": "Setting Up of Quarto",
+    "section": "",
+    "text": "Before diving into literate programming with Quarto, ensure that your development environment is properly set up. Follow these steps to install and configure the necessary tools:",
+    "crumbs": [
+      "Home",
+      "Setting-up"
+    ]
+  },
+  {
+    "objectID": "setup/index.html#step-1-install-python",
+    "href": "setup/index.html#step-1-install-python",
+    "title": "Setting Up of Quarto",
+    "section": "Step 1: Install Python",
+    "text": "Step 1: Install Python\nPython is essential for this workshop as it is integral to Quarto for executing code within documents, accessing a wide range of libraries and tools for data analysis and machine learning, and enabling script execution. It also integrates seamlessly with Visual Studio Code, our recommended IDE, to enhance coding efficiency and support advanced machine learning tasks. By installing Python, you set up a powerful environment that supports both technical documentation and complex computational projects.\n\nDownload and Install Python\n\nGo to the official Python website.\nDownload the latest stable version of Python suitable for your operating system (Windows, macOS, or Linux).\nRun the installer and ensure you check the box to “Add Python to PATH” during installation.\nFollow the on-screen instructions to complete the installation.",
+    "crumbs": [
+      "Home",
+      "Setting-up"
+    ]
+  },
+  {
+    "objectID": "setup/index.html#step-2-install-visual-studio-code-vs-code",
+    "href": "setup/index.html#step-2-install-visual-studio-code-vs-code",
+    "title": "Setting Up of Quarto",
+    "section": "Step 2: Install Visual Studio Code (VS Code)",
+    "text": "Step 2: Install Visual Studio Code (VS Code)\n\nDownload and Install Visual Studio Code (VS Code)\n\nVisit the official VS Code website.\nDownload the installer for your operating system.\nRun the installer and follow the prompts to install VS Code.\nAfter installation, open VS Code and install the recommended extensions:\n\nPython Extension: Search for “Python” in the Extensions view (Ctrl+Shift+X) and install it.\nQuarto Extension: Search for “Quarto” in the Extensions view and install it.",
+    "crumbs": [
+      "Home",
+      "Setting-up"
+    ]
+  },
+  {
+    "objectID": "setup/index.html#step-3-install-quarto-cli",
+    "href": "setup/index.html#step-3-install-quarto-cli",
+    "title": "Setting Up of Quarto",
+    "section": "Step 3: Install Quarto CLI",
+    "text": "Step 3: Install Quarto CLI\nQuarto CLI is crucial as it allows you to create, render, and manage Quarto documents and projects. Quarto CLI integrates seamlessly with your development environment, enabling you to compile literate programming documents that combine code and narrative effectively. It supports various output formats, including HTML, PDF, and slides, and facilitates the integration of code with documentation. By installing Quarto CLI, you equip yourself with the necessary tools to manage and execute Quarto projects efficiently, making it a key component of your setup for this workshop.\n\nDownload and Install Quarto CLI\n\nVisit the Quarto CLI download page.\nDownload the latest stable release of Quarto CLI for your operating system.\nRun the installer and follow the on-screen instructions to complete the installation.\nAfter installation, verify that Quarto CLI is correctly installed by opening a command line interface (Terminal on macOS/Linux, Command Prompt or PowerShell on Windows) and typing:\nquarto --version",
+    "crumbs": [
+      "Home",
+      "Setting-up"
+    ]
+  },
+  {
+    "objectID": "setup/index.html#step-4-install-git-for-cicd",
+    "href": "setup/index.html#step-4-install-git-for-cicd",
+    "title": "Setting Up of Quarto",
+    "section": "Step 4: Install Git for CI/CD",
+    "text": "Step 4: Install Git for CI/CD\nGit is essential for version control and collaborative development, enabling you to track changes in your code, manage different versions of your projects, and collaborate effectively with others. It supports continuous integration and deployment (CI/CD) workflows, which are crucial for maintaining and deploying code systematically. Additionally, Git integrates with GitHub, allowing you to host and publish websites using GitHub Pages, providing a seamless way to share and showcase your projects online. By installing Git, you ensure that you can manage and synchronize your work efficiently, maintain a history of changes, collaborate seamlessly, and leverage GitHub Pages for web hosting throughout the workshop.\n\nDownload and Install Git\n\nVisit the official Git website.\nDownload the installer for your operating system.\nRun the installer and follow the prompts. You can use the default settings for most options.\nEnsure Git is added to your system PATH by checking the appropriate option during installation.\n\nConfigure Git\n\nOpen your command line interface (Terminal on macOS/Linux, Command Prompt or PowerShell on Windows).\nConfigure your Git username and email:\ngit config --global user.name \"Your Name\"\ngit config --global user.email \"your.email@example.com\"\nVerify the installation by checking the Git version:\ngit --version\n\n\n\n\n\n\n\n\nNote\n\n\n\nIf you are in a fresh Python 3 environment, installing the jupyter package will provide everything required to execute Jupyter kernels with Quarto:\npython3 -m pip install jupyter\n\n\nThe publishing workflow is the process in which external resources are prepared and collated together with the help of an authoring tool and subsequently rendered with a formatting tool to generate a publishable output that can be delivered in various forms. This is visualised by the following figure.",
+    "crumbs": [
+      "Home",
+      "Setting-up"
+    ]
+  },
+  {
+    "objectID": "setup/index.html#literate-programming-workflow",
+    "href": "setup/index.html#literate-programming-workflow",
+    "title": "Setting Up of Quarto",
+    "section": "Literate Programming Workflow",
+    "text": "Literate Programming Workflow\n\n\n\n\n\n---\n Literate Programming Workflow\n---\ngraph TD\n    A[Python] --&gt;|Code Execution| B[Quarto CLI]\n    B --&gt;|Document Rendering| C[Technical Documents]\n    B --&gt;|Document Rendering| D[Blogs]\n    B --&gt;|Document Rendering| E[Websites]\n    E --&gt;|Host| F[GitHub Pages]\n    G[Git] --&gt;|Version Control| C\n    G --&gt;|Version Control| D\n    G --&gt;|Version Control| E\n    G --&gt;|CI/CD| F\n\n    subgraph Development\n        A\n        B\n        G\n    end\n\n    subgraph Output\n        C\n        D\n        E\n        F\n    end\n\n    style Development fill:#f9f,stroke:#333,stroke-width:2px\n    style Output fill:#ccf,stroke:#333,stroke-width:2px",
+    "crumbs": [
+      "Home",
+      "Setting-up"
+    ]
+  },
+  {
+    "objectID": "setup/index.html#creating-your-personal-website",
+    "href": "setup/index.html#creating-your-personal-website",
+    "title": "Setting Up of Quarto",
+    "section": "Creating Your Personal Website",
+    "text": "Creating Your Personal Website\nIn the digital era, a personal website is an essential tool for engineering students looking to showcase their skills, projects, and achievements. It acts as an online portfolio, a platform for sharing insights, and a way to make a professional impression. Creating your own website involves several key steps, from planning and design to development and hosting. This guide will walk you through the process of designing a user-friendly site, building it with the right tools, testing and optimizing its performance, and finally, hosting it for the world to see. Whether you want to present your academic projects, share your resume, or maintain a blog, a well-crafted personal website can enhance your visibility and open up new opportunities in your engineering career.",
+    "crumbs": [
+      "Home",
+      "Setting-up"
+    ]
+  },
+  {
+    "objectID": "setup/index.html#step-1-clone-the-website-template-respository-from-github",
+    "href": "setup/index.html#step-1-clone-the-website-template-respository-from-github",
+    "title": "Setting Up of Quarto",
+    "section": "Step 1: Clone the Website template respository from Github",
+    "text": "Step 1: Clone the Website template respository from Github\nCopy the following Github repo url and clone using Vscode source control.\nhttps://github.com/sijuswamy/Website-Template",
+    "crumbs": [
+      "Home",
+      "Setting-up"
+    ]
+  },
+  {
+    "objectID": "setup/index.html#step-2-open-the-folder-in-the-vscode-and-change-and-update-the-necessary-details-and-content.",
+    "href": "setup/index.html#step-2-open-the-folder-in-the-vscode-and-change-and-update-the-necessary-details-and-content.",
+    "title": "Setting Up of Quarto",
+    "section": "Step 2: Open the folder in the VScode and change and update the necessary details and content.",
+    "text": "Step 2: Open the folder in the VScode and change and update the necessary details and content.\nYou can author Quarto documents that include Python code using any text or notebook editor. No matter what editing tool you use, you’ll always run quarto preview first to setup a live preview of changes in your document. Live preview is available for both HTML and PDF output. For example:\nUse any of the following options to create your personal website designed in Quarto.\n# preview as html\nquarto preview index.qmd\n\n# preview as pdf\nquarto preview index.qmd --to pdf\n\n# preview a jupyter notebook\nquarto preview index.ipynb\n\nRendering\nYou can use quarto render command line options to control caching behavior without changing the document’s code. Use options to force the use of caching on all chunks, disable the use of caching on all chunks (even if it’s specified in options), or to force a refresh of the cache even if it has not been invalidated:\n# use a cache (even if not enabled in options)\nquarto render example.qmd --cache \n\n# don't use a cache (even if enabled in options)\nquarto render example.qmd --no-cache \n\n# use a cache and force a refresh \nquarto render example.qmd --cache-refresh",
+    "crumbs": [
+      "Home",
+      "Setting-up"
+    ]
+  },
+  {
+    "objectID": "setup/slides-quarto.html#step-1-install-python",
+    "href": "setup/slides-quarto.html#step-1-install-python",
+    "title": "Setting Up of Quarto",
+    "section": "Step 1: Install Python",
+    "text": "Step 1: Install Python\n\nDownload and Install Python\n\nGo to the official Python website.\nDownload the latest stable version of Python suitable for your operating system (Windows, macOS, or Linux).\nRun the installer and ensure you check the box to “Add Python to PATH” during installation.\nFollow the on-screen instructions to complete the installation."
+  },
+  {
+    "objectID": "setup/slides-quarto.html#step-2-install-visual-studio-code-vs-code",
+    "href": "setup/slides-quarto.html#step-2-install-visual-studio-code-vs-code",
+    "title": "Setting Up of Quarto",
+    "section": "Step 2: Install Visual Studio Code (VS Code)",
+    "text": "Step 2: Install Visual Studio Code (VS Code)\n\nDownload and Install Visual Studio Code (VS Code)\n\nVisit the official VS Code website.\nDownload the installer for your operating system.\nRun the installer and follow the prompts to install VS Code.\nAfter installation, open VS Code and install the recommended extensions:\n\nPython Extension: Search for “Python” in the Extensions view (Ctrl+Shift+X) and install it.\nQuarto Extension: Search for “Quarto” in the Extensions view and install it."
+  },
+  {
+    "objectID": "setup/slides-quarto.html#step-3-install-quarto-cli",
+    "href": "setup/slides-quarto.html#step-3-install-quarto-cli",
+    "title": "Setting Up of Quarto",
+    "section": "Step 3: Install Quarto CLI",
+    "text": "Step 3: Install Quarto CLI\n\nDownload and Install Quarto CLI\n\nVisit the Quarto CLI download page.\nDownload the latest stable release of Quarto CLI for your operating system.\nRun the installer and follow the on-screen instructions to complete the installation.\nAfter installation, verify that Quarto CLI is correctly installed by opening a command line interface (Terminal on macOS/Linux, Command Prompt or PowerShell on Windows) and typing:\nquarto --version"
+  },
+  {
+    "objectID": "setup/slides-quarto.html#step-4-install-git-for-cicd",
+    "href": "setup/slides-quarto.html#step-4-install-git-for-cicd",
+    "title": "Setting Up of Quarto",
+    "section": "Step 4: Install Git for CI/CD",
+    "text": "Step 4: Install Git for CI/CD\n\nDownload and Install Git\n\nVisit the official Git website.\nDownload the installer for your operating system.\nRun the installer and follow the prompts. You can use the default settings for most options.\nEnsure Git is added to your system PATH by checking the appropriate option during installation.\n\nConfigure Git\n\nOpen your command line interface (Terminal on macOS/Linux, Command Prompt or PowerShell on Windows).\nConfigure your Git username and email:\ngit config --global user.name \"Your Name\"\ngit config --global user.email \"your.email@example.com\"\nVerify the installation by checking the Git version:\ngit --version"
+  },
+  {
+    "objectID": "setup/slides-quarto.html#literate-programming-workflow",
+    "href": "setup/slides-quarto.html#literate-programming-workflow",
+    "title": "Setting Up of Quarto",
+    "section": "Literate Programming Workflow",
+    "text": "Literate Programming Workflow\n\n\n\n\n\n---\n Literate Programming Workflow\n---\ngraph TD\n    A[Python] --&gt;|Code Execution| B[Quarto CLI]\n    B --&gt;|Document Rendering| C[Technical Documents]\n    B --&gt;|Document Rendering| D[Blogs]\n    B --&gt;|Document Rendering| E[Websites]\n    E --&gt;|Host| F[GitHub Pages]\n    G[Git] --&gt;|Version Control| C\n    G --&gt;|Version Control| D\n    G --&gt;|Version Control| E\n    G --&gt;|CI/CD| F\n\n    subgraph Development\n        A\n        B\n        G\n    end\n\n    subgraph Output\n        C\n        D\n        E\n        F\n    end\n\n    style Development fill:#f9f,stroke:#333,stroke-width:2px\n    style Output fill:#ccf,stroke:#333,stroke-width:2px"
+  },
+  {
+    "objectID": "setup/slides-quarto.html#creating-your-personal-website",
+    "href": "setup/slides-quarto.html#creating-your-personal-website",
+    "title": "Setting Up of Quarto",
+    "section": "Creating Your Personal Website",
+    "text": "Creating Your Personal Website"
+  },
+  {
+    "objectID": "setup/slides-quarto.html#step-1-clone-the-website-template-respository-from-github",
+    "href": "setup/slides-quarto.html#step-1-clone-the-website-template-respository-from-github",
+    "title": "Setting Up of Quarto",
+    "section": "Step 1: Clone the Website template respository from Github",
+    "text": "Step 1: Clone the Website template respository from Github\nCopy the following Github repo url and clone using Vscode source control.\nhttps://github.com/sijuswamy/Website-Template"
+  },
+  {
+    "objectID": "setup/slides-quarto.html#step-2-open-the-folder-in-the-vscode-and-change-and-update-the-necessary-details-and-content.",
+    "href": "setup/slides-quarto.html#step-2-open-the-folder-in-the-vscode-and-change-and-update-the-necessary-details-and-content.",
+    "title": "Setting Up of Quarto",
+    "section": "Step 2: Open the folder in the VScode and change and update the necessary details and content.",
+    "text": "Step 2: Open the folder in the VScode and change and update the necessary details and content.\nUse any of the following options to create your personal website designed in Quarto.\n# preview as html\nquarto preview index.qmd\n\n# preview as pdf\nquarto preview index.qmd --to pdf\n\n# preview a jupyter notebook\nquarto preview index.ipynb\nRendering\nYou can use quarto render command line options to control caching behavior without changing the document’s code. Use options to force the use of caching on all chunks, disable the use of caching on all chunks (even if it’s specified in options), or to force a refresh of the cache even if it has not been invalidated:\n# use a cache (even if not enabled in options)\nquarto render example.qmd --cache \n\n# don't use a cache (even if enabled in options)\nquarto render example.qmd --no-cache \n\n# use a cache and force a refresh \nquarto render example.qmd --cache-refresh"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Graph Theory: From Euler to AI",
+    "section": "",
+    "text": "We are pleased to announce that the Department of Mathematics, is hosting a hands-on workshop to highlight the transformative power of graph theory in engineering.\nGraph Theory is fundamental to modern engineering intelligence systems. Originating from Euler’s solution to the Königsberg Bridge Problem, graph theory now drives advanced technologies including Artificial Intelligence, Machine Learning, Cybersecurity, Network Routing, Smart Transportation and Compiler Optimization. This expert session explores the evolution of graph theory through interactive demonstrations, live coding, simulation examples and real-world engineering applications.\n\n\n\n\nHalf-Day Workshop\n\n9:00 Inaugural & Introduction\n\nRelevance of Graph Theory in Engineering & Computing\n\n9:20 Session 1 — Evolution of Graph Theory\n\nKönigsberg Bridge Problem to Modern Networks\nGraph Types & Representations\nReal-world Motivation\n\n10:05 Session 2 — Graph Algorithms & Network Optimisation\n\nShortest Path (Dijkstra, A*)\nRouting & Transportation Networks Case Study\nHands-On: Shortest Path Visualizer (Python + NetworkX)\n\n10:55 Break\n11:05 Session 3 — Graph Colouring for Scheduling & Resource Allocation\n\nChromatic Number, Greedy & DSATUR Algorithm\nReal Timetable Scheduling Case Study\nHands-On: Graph Colouring App (Python + NetworkX)\n\n11:50 Session 4 — Graphs in AI & Machine Learning\n\nGraph Neural Networks (GCN / GAT)\nKarate Club Dataset Demonstration\nResearch & Industry Applications\n\n12:30 Feedback & Conclusion\n\nOpen Discussion\nProject / Further Reading Recommendations\n\n\n\n\n\nHands-On Tools & Technologies\n\nPython, Jupyter Notebook\nNetworkX & Matplotlib\nPyTorch Geometric / DGL (demo only)\nQuarto for Documentation & GitHub Pages Deployment\nSample project repositories & templates\n\nExpected Deliverables\n\nWorking examples: Routing, Scheduling, GCN model\nVisualisation of real graph datasets\nCourse project roadmap\n\n\n\n\n\n\nWe would greatly appreciate it if you could take a few moments to complete our feedback form.\nPlease click the link below or scan the QR code to access the feedback form:\nhttps://forms.gle/bHKwtrkV8JoN8KCc6",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "index.html#about-the-workshop",
+    "href": "index.html#about-the-workshop",
+    "title": "Graph Theory: From Euler to AI",
+    "section": "",
+    "text": "We are pleased to announce that the Department of Mathematics, is hosting a hands-on workshop to highlight the transformative power of graph theory in engineering.\nGraph Theory is fundamental to modern engineering intelligence systems. Originating from Euler’s solution to the Königsberg Bridge Problem, graph theory now drives advanced technologies including Artificial Intelligence, Machine Learning, Cybersecurity, Network Routing, Smart Transportation and Compiler Optimization. This expert session explores the evolution of graph theory through interactive demonstrations, live coding, simulation examples and real-world engineering applications.\n\n\n\n\nHalf-Day Workshop\n\n9:00 Inaugural & Introduction\n\nRelevance of Graph Theory in Engineering & Computing\n\n9:20 Session 1 — Evolution of Graph Theory\n\nKönigsberg Bridge Problem to Modern Networks\nGraph Types & Representations\nReal-world Motivation\n\n10:05 Session 2 — Graph Algorithms & Network Optimisation\n\nShortest Path (Dijkstra, A*)\nRouting & Transportation Networks Case Study\nHands-On: Shortest Path Visualizer (Python + NetworkX)\n\n10:55 Break\n11:05 Session 3 — Graph Colouring for Scheduling & Resource Allocation\n\nChromatic Number, Greedy & DSATUR Algorithm\nReal Timetable Scheduling Case Study\nHands-On: Graph Colouring App (Python + NetworkX)\n\n11:50 Session 4 — Graphs in AI & Machine Learning\n\nGraph Neural Networks (GCN / GAT)\nKarate Club Dataset Demonstration\nResearch & Industry Applications\n\n12:30 Feedback & Conclusion\n\nOpen Discussion\nProject / Further Reading Recommendations\n\n\n\n\n\nHands-On Tools & Technologies\n\nPython, Jupyter Notebook\nNetworkX & Matplotlib\nPyTorch Geometric / DGL (demo only)\nQuarto for Documentation & GitHub Pages Deployment\nSample project repositories & templates\n\nExpected Deliverables\n\nWorking examples: Routing, Scheduling, GCN model\nVisualisation of real graph datasets\nCourse project roadmap\n\n\n\n\n\n\nWe would greatly appreciate it if you could take a few moments to complete our feedback form.\nPlease click the link below or scan the QR code to access the feedback form:\nhttps://forms.gle/bHKwtrkV8JoN8KCc6",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "Hands-on-Demos/Networkx_demo.html",
+    "href": "Hands-on-Demos/Networkx_demo.html",
+    "title": "Module 4 — Hands-on Demonstrations using Python & NetworkX",
+    "section": "",
+    "text": "This module introduces practical graph modelling and algorithm execution using Python and the NetworkX library. Students will learn to construct real and simulated graphs, visualize structure, compute metrics, and explore algorithms such as shortest paths, centrality, and colouring.\nThe objective is to bridge theoretical understanding from discrete mathematics to real-world implementations in engineering problems such as network routing, urban mobility, scheduling, and social network analytics.",
+    "crumbs": [
+      "Home",
+      "Hands-on Demos"
+    ]
+  },
+  {
+    "objectID": "Hands-on-Demos/Networkx_demo.html#introduction",
+    "href": "Hands-on-Demos/Networkx_demo.html#introduction",
+    "title": "Module 4 — Hands-on Demonstrations using Python & NetworkX",
+    "section": "",
+    "text": "This module introduces practical graph modelling and algorithm execution using Python and the NetworkX library. Students will learn to construct real and simulated graphs, visualize structure, compute metrics, and explore algorithms such as shortest paths, centrality, and colouring.\nThe objective is to bridge theoretical understanding from discrete mathematics to real-world implementations in engineering problems such as network routing, urban mobility, scheduling, and social network analytics.",
+    "crumbs": [
+      "Home",
+      "Hands-on Demos"
+    ]
+  },
+  {
+    "objectID": "Hands-on-Demos/Networkx_demo.html#module-objectives",
+    "href": "Hands-on-Demos/Networkx_demo.html#module-objectives",
+    "title": "Module 4 — Hands-on Demonstrations using Python & NetworkX",
+    "section": "Module Objectives",
+    "text": "Module Objectives\nAfter completing this module, students are expected to be able to:\n\nConstruct graphs from real-world datasets\nApply algorithms for shortest paths, spanning trees, and colouring\nAnalyse networks using centrality measures\nPerform visual and interpretative data-driven studies",
+    "crumbs": [
+      "Home",
+      "Hands-on Demos"
+    ]
+  },
+  {
+    "objectID": "Hands-on-Demos/slides-ML.html#introduction",
+    "href": "Hands-on-Demos/slides-ML.html#introduction",
+    "title": "Module 4 — Hands-on Demonstrations using Python & NetworkX",
+    "section": "Introduction",
+    "text": "Introduction\nThis module introduces practical graph modelling and algorithm execution using Python and the NetworkX library. Students will learn to construct real and simulated graphs, visualize structure, compute metrics, and explore algorithms such as shortest paths, centrality, and colouring.\nThe objective is to bridge theoretical understanding from discrete mathematics to real-world implementations in engineering problems such as network routing, urban mobility, scheduling, and social network analytics."
+  },
+  {
+    "objectID": "Hands-on-Demos/slides-ML.html#module-objectives",
+    "href": "Hands-on-Demos/slides-ML.html#module-objectives",
+    "title": "Module 4 — Hands-on Demonstrations using Python & NetworkX",
+    "section": "Module Objectives",
+    "text": "Module Objectives\nAfter completing this module, students are expected to be able to:\n\nConstruct graphs from real-world datasets\nApply algorithms for shortest paths, spanning trees, and colouring\nAnalyse networks using centrality measures\nPerform visual and interpretative data-driven studies"
+  },
+  {
+    "objectID": "Graphs-in-AIML/Graphs_in_AIML.html",
+    "href": "Graphs-in-AIML/Graphs_in_AIML.html",
+    "title": "Module 5: Graphs in AI/ML",
+    "section": "",
+    "text": "Module outcomes:\nUpon completion of this module, learners will be able to:",
+    "crumbs": [
+      "Home",
+      "Graphs in AI/ML"
+    ]
+  },
+  {
+    "objectID": "Graphs-in-AIML/Graphs_in_AIML.html#introduction",
+    "href": "Graphs-in-AIML/Graphs_in_AIML.html#introduction",
+    "title": "Module 5: Graphs in AI/ML",
+    "section": "Introduction",
+    "text": "Introduction\nGraphs play an increasingly critical role in modern Artificial Intelligence and Machine Learning, enabling representation and reasoning over structured data with complex relationships. Unlike traditional ML models that handle grid-structured or tabular data, graphs naturally encode interconnected, relational and irregular structures.\nThe development of Graph Neural Networks (GNNs), including Graph Convolutional Networks (GCNs) and Graph Attention Networks (GATs), has opened new avenues for learning from structured dependencies rather than treating data points as independent entities. These models have demonstrated breakthrough performance in tasks such as node classification, link prediction, community detection, recommendation systems, and risk intelligence.\nFurthermore, real-world AI systems—such as Google’s ranking algorithms, fraud detection engines in banking, medical knowledge discovery systems, and smart city analytics—rely heavily on graph-based reasoning. As industry adoption accelerates, expertise in graph analytics and graph-based deep learning has become an essential skill for engineers, data scientists, and AI researchers.\nGraph-based approaches thus represent a powerful paradigm shift: from learning on isolated data points to learning from connected knowledge.\nMastering graph theory and graph ML prepares learners to solve scalable real-world problems and engage in research opportunities at the intersection of mathematics, computation, and intelligent systems.\nThis module introduces core graph-based AI models and algorithms: - Knowledge Graphs (KGs) for semantic reasoning and information organization - PageRank algorithm for ranking & recommendation - Graph Neural Networks (GNNs) for deep learning on graph-structured data",
+    "crumbs": [
+      "Home",
+      "Graphs in AI/ML"
+    ]
+  },
+  {
+    "objectID": "Graphs-in-AIML/Graphs_in_AIML.html#knowledge-graphs-kgs",
+    "href": "Graphs-in-AIML/Graphs_in_AIML.html#knowledge-graphs-kgs",
+    "title": "Module 5: Graphs in AI/ML",
+    "section": "Knowledge Graphs (KGs)",
+    "text": "Knowledge Graphs (KGs)\n\nWhat is a Knowledge Graph?\nA Knowledge Graph is a labelled, directed graph used to represent knowledge in terms of entities (nodes) and relationships (edges).\nExample structure:\n(Person) ---[lives_in]---&gt; (City)\n(Author) ---[wrote]------&gt; (Book)\n(Student) ---[enrolled]--&gt; (Course)\nAlan Turing) —[pioneer_of]→ (AI)\n(AI) —[includes]→ (Machine Learning)\n(ML) —[subset_of]→ (Deep Learning)\n\n\n\n\n\n\nKey Characteristics\n\n\n\n\nEntity-based representation\nSemantic relationship modelling\nSupports reasoning & inference\n\n\n\n\n\nReal Engineering Applications\n\n\n\nDomain\nApplication\nExample\n\n\n\n\nSearch Engines\nquery understanding\nGoogle Knowledge Graph\n\n\nHealthcare\ndisease–symptom inference\nbiomedical KG\n\n\nNLP / ChatGPT\nfact linking\nentity embeddings\n\n\nRecommender Systems\nproduct–user graph\nAmazon, Netflix\n\n\nAcademic Research\ncitation networks\nDBLP, Scopus\n\n\n\n\n\nMini Example in Python (NetworkX)\n\nimport networkx as nx\nimport matplotlib.pyplot as plt\n\nKG = nx.DiGraph()\nKG.add_edges_from([\n    (\"Alan Turing\", \"AI\", {\"relation\": \"pioneer_of\"}),\n    (\"AI\", \"Machine Learning\", {\"relation\": \"includes\"}),\n    (\"Machine Learning\", \"Deep Learning\", {\"relation\": \"subset_of\"}),\n])\n\npos = nx.spring_layout(KG)\nnx.draw(KG, pos, with_labels=True, node_size=2500)\nplt.show()",
+    "crumbs": [
+      "Home",
+      "Graphs in AI/ML"
+    ]
+  },
+  {
+    "objectID": "Graphs-in-AIML/Graphs_in_AIML.html#pagerank-algorithm",
+    "href": "Graphs-in-AIML/Graphs_in_AIML.html#pagerank-algorithm",
+    "title": "Module 5: Graphs in AI/ML",
+    "section": "PageRank Algorithm",
+    "text": "PageRank Algorithm\n\nIntuition\nPageRank assigns an “importance” score to each node based on the importance and number of incoming links. Think of a random surfer who follows outgoing links with probability d (damping factor, usually 0.85) and jumps to a random node with probability 1−d. Pages that are linked from many important pages get higher PageRank.\n\n\nCore formula\n\\[PR(v)=\\frac{1-d}{N}+d\\sum\\limits_{u\\in In(v)}\\frac{PR(u)}{Out(u)}\\]\nwhere:\n\n\\(PR(v)\\) is the PageRank of node \\(v\\)\n\\(d\\) is the damping factor (typically \\(d = 0.85\\))\n\\(N\\) is the total number of nodes\n\\(In(v)\\) represents nodes linking to \\(v\\)\n\\(Out(u)\\) represents the number of outgoing links from \\(u\\)\n\nThis is solved iteratively (power iteration) until convergence.\n\n\nExample code\n\nimport networkx as nx\n\nG = nx.DiGraph()\nedges = [('A','B'),('A','C'),('B','C'),('C','A'),('C','D'),('D','C')]\nG.add_edges_from(edges)\n\npr = nx.pagerank(G, alpha=0.85)\nprint(pr)\n\n{'A': 0.21991357059363242, 'B': 0.13096360941900992, 'C': 0.4292092493937253, 'D': 0.21991357059363242}\n\n\n\n\n\n\n\n\nUses / Applications\n\n\n\n\nSearch engines: rank web pages.\nRecommendation: rank items or users in bipartite graphs.\nCitation analysis: identify influential papers/authors.\nSocial networks: measure influence or authority.\nSpam/fraud detection: detect anomalous link patterns.\n\n\n\n\n\nGraph Neural Networks (GNNs)\nTraditional ML models such as CNNs and RNNs assume Euclidean structure (images, sequences). Graphs are non-Euclidean; therefore a new architecture is needed.\nGNNs generalize neural networks to graph-structured data using message passing.\n\n\n\n\n\n\nMessage Passing Update Rule\n\n\n\n\\[h_v(k+1)=\\sigma\\left(W_k\\sum\\limits_{u\\in N(v)}h_u(k)\\right)\\]\nwhere,\n\n\\(h_v^{(k)}\\) is the representation of node \\(v\\) after \\(k\\) layers\n\\(N(v)\\) represents neighbours\n\\(W_k\\) is a learnable weight matrix\n\\(\\sigma\\) is an activation function\n\n\n\n\n\nGNN usescases\n\n\n\nDomain\nExample\n\n\n\n\nSocial Networks\ncommunity detection, link prediction\n\n\nChemistry / Biology\ndrug discovery, molecular graph prediction\n\n\nTraffic Forecasting\ncongestion modelling\n\n\nCybersecurity\nanomaly detection\n\n\nFinance\nfraud & risk modelling\n\n\nRecommendation Systems\ndeep collaborative filtering",
+    "crumbs": [
+      "Home",
+      "Graphs in AI/ML"
+    ]
+  },
+  {
+    "objectID": "Graphs-in-AIML/Graphs_in_AIML.html#case-study-epidemic-spread-modelling",
+    "href": "Graphs-in-AIML/Graphs_in_AIML.html#case-study-epidemic-spread-modelling",
+    "title": "Module 5: Graphs in AI/ML",
+    "section": "Case Study — Epidemic Spread Modelling",
+    "text": "Case Study — Epidemic Spread Modelling\nDuring the outbreak of contagious diseases such as COVID-19, Influenza, or Nipah virus, rapid identification of individuals who play a critical role in spreading infection is essential for effective containment. Public health authorities model social interactions as graphs where nodes represent individuals and edges represent close contact events capable of transmitting disease. Given a simulated contact network of individuals in a community, determine:\n\nNodes with the highest risk of spreading infection (super-spreaders) using graph centrality metrics.\nThe minimal set of nodes to isolate or track for maximum reduction in infection propagation.\nVisualise the network and highlight highly influential individuals.\n\n\nimport networkx as nx\nimport matplotlib.pyplot as plt\n\nG = nx.barabasi_albert_graph(20, 2)\nnx.draw(G, with_labels=True, node_size=900)\nplt.show()\n\ncentrality = nx.betweenness_centrality(G)\nprint(sorted(centrality.items(), key=lambda x: x[1], reverse=True))\n\n\n\n\n\n\n\n\n[(3, 0.3043372319688109), (0, 0.2990531885268727), (4, 0.1524505708716235), (7, 0.09280144806460595), (5, 0.0875870231133389), (8, 0.08320105820105818), (2, 0.08218462823725982), (12, 0.05240879977722083), (9, 0.032651072124756333), (6, 0.021442495126705652), (13, 0.019980506822612085), (17, 0.015316067947646894), (11, 0.014083820662768027), (1, 0.013645224171539959), (15, 0.01301865775549986), (14, 0.008235867446393763), (10, 0.0), (16, 0.0), (18, 0.0), (19, 0.0)]",
+    "crumbs": [
+      "Home",
+      "Graphs in AI/ML"
+    ]
+  },
+  {
+    "objectID": "Graphs-in-AIML/Graphs_in_AIML.html#conclusion",
+    "href": "Graphs-in-AIML/Graphs_in_AIML.html#conclusion",
+    "title": "Module 5: Graphs in AI/ML",
+    "section": "Conclusion",
+    "text": "Conclusion\nGraphs have emerged as a foundational component in modern Artificial Intelligence and Machine Learning, enabling representation and analysis of complex relational data that cannot be captured effectively through traditional vector-based approaches. By leveraging graph structures, algorithms can model interconnected systems such as social networks, transportation systems, biological interactions, and financial transaction workflows with superior accuracy and interpretability.",
+    "crumbs": [
+      "Home",
+      "Graphs in AI/ML"
+    ]
+  },
+  {
+    "objectID": "Graphs-in-AIML/slides-ML.html#introduction",
+    "href": "Graphs-in-AIML/slides-ML.html#introduction",
+    "title": "Module 5: Graphs in AI/ML",
+    "section": "Introduction",
+    "text": "Introduction\nGraphs play an increasingly critical role in modern Artificial Intelligence and Machine Learning, enabling representation and reasoning over structured data with complex relationships. Unlike traditional ML models that handle grid-structured or tabular data, graphs naturally encode interconnected, relational and irregular structures.\nThe development of Graph Neural Networks (GNNs), including Graph Convolutional Networks (GCNs) and Graph Attention Networks (GATs), has opened new avenues for learning from structured dependencies rather than treating data points as independent entities. These models have demonstrated breakthrough performance in tasks such as node classification, link prediction, community detection, recommendation systems, and risk intelligence.\nFurthermore, real-world AI systems—such as Google’s ranking algorithms, fraud detection engines in banking, medical knowledge discovery systems, and smart city analytics—rely heavily on graph-based reasoning. As industry adoption accelerates, expertise in graph analytics and graph-based deep learning has become an essential skill for engineers, data scientists, and AI researchers.\nGraph-based approaches thus represent a powerful paradigm shift: from learning on isolated data points to learning from connected knowledge.\nMastering graph theory and graph ML prepares learners to solve scalable real-world problems and engage in research opportunities at the intersection of mathematics, computation, and intelligent systems.\nThis module introduces core graph-based AI models and algorithms: - Knowledge Graphs (KGs) for semantic reasoning and information organization - PageRank algorithm for ranking & recommendation - Graph Neural Networks (GNNs) for deep learning on graph-structured data"
+  },
+  {
+    "objectID": "Graphs-in-AIML/slides-ML.html#knowledge-graphs-kgs",
+    "href": "Graphs-in-AIML/slides-ML.html#knowledge-graphs-kgs",
+    "title": "Module 5: Graphs in AI/ML",
+    "section": "Knowledge Graphs (KGs)",
+    "text": "Knowledge Graphs (KGs)\nWhat is a Knowledge Graph?\nA Knowledge Graph is a labelled, directed graph used to represent knowledge in terms of entities (nodes) and relationships (edges).\nExample structure:\n(Person) ---[lives_in]---&gt; (City)\n(Author) ---[wrote]------&gt; (Book)\n(Student) ---[enrolled]--&gt; (Course)\nAlan Turing) —[pioneer_of]→ (AI)\n(AI) —[includes]→ (Machine Learning)\n(ML) —[subset_of]→ (Deep Learning)\n\n\n\n\n\n\nKey Characteristics\n\n\n\nEntity-based representation\nSemantic relationship modelling\nSupports reasoning & inference\n\n\n\n\nReal Engineering Applications\n\n\n\nDomain\nApplication\nExample\n\n\n\n\nSearch Engines\nquery understanding\nGoogle Knowledge Graph\n\n\nHealthcare\ndisease–symptom inference\nbiomedical KG\n\n\nNLP / ChatGPT\nfact linking\nentity embeddings\n\n\nRecommender Systems\nproduct–user graph\nAmazon, Netflix\n\n\nAcademic Research\ncitation networks\nDBLP, Scopus\n\n\n\nMini Example in Python (NetworkX)"
+  },
+  {
+    "objectID": "Graphs-in-AIML/slides-ML.html#pagerank-algorithm",
+    "href": "Graphs-in-AIML/slides-ML.html#pagerank-algorithm",
+    "title": "Module 5: Graphs in AI/ML",
+    "section": "PageRank Algorithm",
+    "text": "PageRank Algorithm\nIntuition\nPageRank assigns an “importance” score to each node based on the importance and number of incoming links. Think of a random surfer who follows outgoing links with probability d (damping factor, usually 0.85) and jumps to a random node with probability 1−d. Pages that are linked from many important pages get higher PageRank.\nCore formula\n\\[PR(v)=\\frac{1-d}{N}+d\\sum\\limits_{u\\in In(v)}\\frac{PR(u)}{Out(u)}\\]\nwhere:\n\n\\(PR(v)\\) is the PageRank of node \\(v\\)\n\\(d\\) is the damping factor (typically \\(d = 0.85\\))\n\\(N\\) is the total number of nodes\n\\(In(v)\\) represents nodes linking to \\(v\\)\n\\(Out(u)\\) represents the number of outgoing links from \\(u\\)\n\nThis is solved iteratively (power iteration) until convergence.\nExample code\n\n\n{'A': 0.21991357059363242, 'B': 0.13096360941900992, 'C': 0.4292092493937253, 'D': 0.21991357059363242}\n\n\n\n\n\n\n\n\nUses / Applications\n\n\n\nSearch engines: rank web pages.\nRecommendation: rank items or users in bipartite graphs.\nCitation analysis: identify influential papers/authors.\nSocial networks: measure influence or authority.\nSpam/fraud detection: detect anomalous link patterns.\n\n\n\n\nGraph Neural Networks (GNNs)\nTraditional ML models such as CNNs and RNNs assume Euclidean structure (images, sequences). Graphs are non-Euclidean; therefore a new architecture is needed.\nGNNs generalize neural networks to graph-structured data using message passing.\n\n\n\n\n\n\nMessage Passing Update Rule\n\n\n\\[h_v(k+1)=\\sigma\\left(W_k\\sum\\limits_{u\\in N(v)}h_u(k)\\right)\\]\nwhere,\n\n\\(h_v^{(k)}\\) is the representation of node \\(v\\) after \\(k\\) layers\n\\(N(v)\\) represents neighbours\n\\(W_k\\) is a learnable weight matrix\n\\(\\sigma\\) is an activation function\n\n\n\n\nGNN usescases\n\n\n\nDomain\nExample\n\n\n\n\nSocial Networks\ncommunity detection, link prediction\n\n\nChemistry / Biology\ndrug discovery, molecular graph prediction\n\n\nTraffic Forecasting\ncongestion modelling\n\n\nCybersecurity\nanomaly detection\n\n\nFinance\nfraud & risk modelling\n\n\nRecommendation Systems\ndeep collaborative filtering"
+  },
+  {
+    "objectID": "Graphs-in-AIML/slides-ML.html#case-study-epidemic-spread-modelling",
+    "href": "Graphs-in-AIML/slides-ML.html#case-study-epidemic-spread-modelling",
+    "title": "Module 5: Graphs in AI/ML",
+    "section": "Case Study — Epidemic Spread Modelling",
+    "text": "Case Study — Epidemic Spread Modelling\nDuring the outbreak of contagious diseases such as COVID-19, Influenza, or Nipah virus, rapid identification of individuals who play a critical role in spreading infection is essential for effective containment. Public health authorities model social interactions as graphs where nodes represent individuals and edges represent close contact events capable of transmitting disease. Given a simulated contact network of individuals in a community, determine:\n\nNodes with the highest risk of spreading infection (super-spreaders) using graph centrality metrics.\nThe minimal set of nodes to isolate or track for maximum reduction in infection propagation.\nVisualise the network and highlight highly influential individuals.\n\n\n\n\n\n\n\n\n\n\n[(3, 0.4340155945419103), (0, 0.3378167641325536), (4, 0.07602339181286549), (7, 0.06189083820662767), (9, 0.05253411306042884), (13, 0.05165692007797271), (6, 0.042884990253411304), (8, 0.040448343079922025), (5, 0.02651072124756335), (2, 0.02231968810916179), (11, 0.02144249512670565), (19, 0.01267056530214425), (14, 0.011403508771929825), (18, 0.011208576998050682), (1, 0.009746588693957114), (10, 0.003801169590643275), (12, 0.0), (15, 0.0), (16, 0.0), (17, 0.0)]"
+  },
+  {
+    "objectID": "Graphs-in-AIML/slides-ML.html#conclusion",
+    "href": "Graphs-in-AIML/slides-ML.html#conclusion",
+    "title": "Module 5: Graphs in AI/ML",
+    "section": "Conclusion",
+    "text": "Conclusion\nGraphs have emerged as a foundational component in modern Artificial Intelligence and Machine Learning, enabling representation and analysis of complex relational data that cannot be captured effectively through traditional vector-based approaches. By leveraging graph structures, algorithms can model interconnected systems such as social networks, transportation systems, biological interactions, and financial transaction workflows with superior accuracy and interpretability."
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "This site contains information about a workshop organised in Sreebudha College of Engineering (Autonomous) to introduce the students of fourth semester computer science to the applications of Graph Theory. This is part of the add-on program organized by the department.",
+    "crumbs": [
+      "Home",
+      "About"
+    ]
+  },
+  {
+    "objectID": "about.html#organizors",
+    "href": "about.html#organizors",
+    "title": "About",
+    "section": "Organizors",
+    "text": "Organizors\nDepartment of Mathematics, Sree Budha College of Engineering (Autonomous), Pattoor, Kerala.",
+    "crumbs": [
+      "Home",
+      "About"
+    ]
+  },
+  {
+    "objectID": "about.html#workshop-faculty",
+    "href": "about.html#workshop-faculty",
+    "title": "About",
+    "section": "Workshop Faculty",
+    "text": "Workshop Faculty\n\n\n\n\n\n\nSiju K S\n\n\n\n\n\n\n\nDr. Merina Aruja",
+    "crumbs": [
+      "Home",
+      "About"
+    ]
+  },
+  {
+    "objectID": "about.html#sidebar-image",
+    "href": "about.html#sidebar-image",
+    "title": "About",
+    "section": "Sidebar image",
+    "text": "Sidebar image\nThe sidebar image was generated by Microsoft Copilot with a prompt, “Transforming Classical Libraries to Digital Libraries with Open source.”",
+    "crumbs": [
+      "Home",
+      "About"
+    ]
+  },
+  {
+    "objectID": "feedback.html",
+    "href": "feedback.html",
+    "title": "Feedback Analysis",
+    "section": "",
+    "text": "We value your feedback! Please take a moment to provide your insights on the workshop. Your responses will help us improve and tailor future sessions to better meet your needs.\n\n\nPlease rate the following statements on a scale of 1 to 5, where 1 is “Strongly Disagree” and 5 is “Strongly Agree”:\n\nHow effective was the workshop in teaching you to use Quarto for websites, blogs, and technical writing?\n\n1\n2\n3\n4\n5\n\nHow clear was the instruction on the end-to-end machine learning workflow, from data preprocessing to model deployment?\n\n1\n2\n3\n4\n5\n\nHow beneficial was the hands-on approach to learning and applying machine learning techniques?\n\n1\n2\n3\n4\n5\n\nHow would you rate the knowledge and expertise of the resource person in the topics covered?\n\n1\n2\n3\n4\n5\n\nHow satisfactory was the support and assistance provided by the resource person during the workshop?\n\n1\n2\n3\n4\n5\n\n\nThank you for your feedback!\n\nYou can access the feedback form through the link below or scan the QR code to provide your responses:\nhttps://forms.gle/bHKwtrkV8JoN8KCc6"
+  },
+  {
+    "objectID": "feedback.html#workshop-feedback-questionnaire",
+    "href": "feedback.html#workshop-feedback-questionnaire",
+    "title": "Feedback Analysis",
+    "section": "",
+    "text": "We value your feedback! Please take a moment to provide your insights on the workshop. Your responses will help us improve and tailor future sessions to better meet your needs.\n\n\nPlease rate the following statements on a scale of 1 to 5, where 1 is “Strongly Disagree” and 5 is “Strongly Agree”:\n\nHow effective was the workshop in teaching you to use Quarto for websites, blogs, and technical writing?\n\n1\n2\n3\n4\n5\n\nHow clear was the instruction on the end-to-end machine learning workflow, from data preprocessing to model deployment?\n\n1\n2\n3\n4\n5\n\nHow beneficial was the hands-on approach to learning and applying machine learning techniques?\n\n1\n2\n3\n4\n5\n\nHow would you rate the knowledge and expertise of the resource person in the topics covered?\n\n1\n2\n3\n4\n5\n\nHow satisfactory was the support and assistance provided by the resource person during the workshop?\n\n1\n2\n3\n4\n5\n\n\nThank you for your feedback!\n\nYou can access the feedback form through the link below or scan the QR code to provide your responses:\nhttps://forms.gle/bHKwtrkV8JoN8KCc6"
+  },
+  {
+    "objectID": "feedback.html#response-analysis",
+    "href": "feedback.html#response-analysis",
+    "title": "Feedback Analysis",
+    "section": "Response Analysis",
+    "text": "Response Analysis\n\n\n\nQuestion Statistics:\n              Q1    Q2         Q3         Q4     Q5\ncount  25.000000  25.0  25.000000  25.000000  25.00\nmean    4.920000   4.6   4.680000   4.840000   4.96\nstd     0.276887   0.5   0.556776   0.374166   0.20"
+  },
+  {
+    "objectID": "Graph_algorithms/slides-ML.html#introduction",
+    "href": "Graph_algorithms/slides-ML.html#introduction",
+    "title": "Module 2: Shortest Path Algorithms & Routing Networks",
+    "section": "Introduction",
+    "text": "Introduction\nShortest path problems form the foundation of many modern computational systems including navigation software, logistics planning, robotics, networking protocols, and communication infrastructures. This module explores classical and modern shortest path algorithms used to determine optimal routing in graphs.\nA shortest path problem asks:\n\nGiven a weighted graph and two vertices, what is the minimum-cost path connecting them?\n\nFormally, for a graph\n\\[G = (V, E, w)\\]\nwith non-negative weights (w(u,v) ), find a path from (s) to (t) minimizing\n\\[ \\text{Cost}(P) = \\sum_{(u,v)\\in P} w(u,v). \\]"
+  },
+  {
+    "objectID": "Graph_algorithms/slides-ML.html#types-of-graphs-relevant-to-shortest-path",
+    "href": "Graph_algorithms/slides-ML.html#types-of-graphs-relevant-to-shortest-path",
+    "title": "Module 2: Shortest Path Algorithms & Routing Networks",
+    "section": "Types of Graphs Relevant to Shortest Path",
+    "text": "Types of Graphs Relevant to Shortest Path\n\n\n\n\n\n\n\n\nGraph Type\nDescription\nExample\n\n\n\n\nUnweighted Graph\nAll edges have equal cost\nSocial connections, BFS\n\n\nWeighted Graph\nCosts represent time/distance/money\nMaps, logistics\n\n\nDirected Graph\nOne-way movement\nInternet routing\n\n\nDynamic Graph\nWeights change with time\nTraffic congestion\n\n\nProbabilistic Graph\nCosts uncertain / stochastic\nAutonomous navigation"
+  },
+  {
+    "objectID": "Graph_algorithms/slides-ML.html#shortest-path-algorithms-overview",
+    "href": "Graph_algorithms/slides-ML.html#shortest-path-algorithms-overview",
+    "title": "Module 2: Shortest Path Algorithms & Routing Networks",
+    "section": "2. Shortest Path Algorithms: Overview",
+    "text": "2. Shortest Path Algorithms: Overview\n\n\n\n\n\n\n\n\n\nAlgorithm\nConditions\nTime Complexity\nApplications\n\n\n\n\nBFS (Breadth-First Search)\nUnweighted graphs\n(O(V+E))\nHop distance, degree separation\n\n\nDijkstra’s Algorithm\nNon-negative weights\n(O(EV))\nGPS routing, OSPF networking\n\n\nBellman–Ford\nNegative edges allowed\n(O(VE))\nTelecom delay optimization\n\n\nFloyd–Warshall\nAll-pairs shortest paths\n(O(V^3))\nMultipoint routing, clusters\n\n\nA*\nHeuristic search\nDepends on heuristic\nRobotics, gaming AI\n\n\n\nDijkstra’s Algorithm – Core Idea\nDijkstra introduced a greedy algorithm (1959) to compute shortest paths by iteratively expanding the least-cost node.\nPseudocode\n\nInitialize distances to ∞, distance[source] = 0\nInsert source into priority queue Q\nWhile Q is not empty:\nu = extract-min(Q)\nFor each neighbor v of u:\nIf dist[v] &gt; dist[u] + w(u,v):\ndist[v] = dist[u] + w(u,v)\nupdate Q\n\n\n\n\n\n\nKey Property\n\n\nWorks only for non-negative weights.\n\n\n\nHands-on Example Using NetworkX\n\n\n(['A', 'C', 'B', 'D'], 8)\n\n\nBellman–Ford Algorithm\nUnlike Dijkstra, Bellman–Ford can handle negative weights and detect negative cycles.\nRecurrence Relation\n\\[d[v]=min(d[v],d[u]+w(u,v))\\] Repeated for \\(V−1\\) iterations.\n\n\n\n\n\n\nApplications\n\n\n\nCurrency arbitrage (Forex)\nDelay-based telecom routing\nRisk-value optimization\n\n\n\n\nFloyd-Warshall Algorithm (All Pair Shortest Path)\nDynamic programming based:\n\\[D[i][j]=min{D[i][j],D[i][k]+D[k][j]}.\\]\n\n\n\n\n\n\nAPplications\n\n\n\nNetwork backbone routing tables\nScheduling large distributed systems\nTraffic signal control\n\n\n\n\nEngineering Applications\n\n\n\n\n\n\n\n\n\nEngineering Domain\nProblem\nModel\nSolution\n\n\n\n\nGPS Navigation\nFastest route\nWeighted directed graph\nDijkstra / A*\n\n\nInternet Routing\nPacket movement\nAutonomous systems graph\nOSPF / BGP shortest path\n\n\nRobotics\nCollision-free path\nGrid graph\nA* heuristic\n\n\nSmart Logistics\nDelivery optimization\nTime-cost graphs\nMulti-source Dijkstra\n\n\nAirline Networks\nMinimum-cost itinerary\nDAG\nDP shortest path\n\n\nPower Grids\nLoad flow optimization\nWeighted graph\nMin-cut / flow\n\n\n\nReal-world Demonstration Example\nCompute shortest path in a mini city graph\n\n\n['Kollam', 'Kottarakkara', 'Pathanamthitta', 'Ranni']"
+  },
+  {
+    "objectID": "Graph_algorithms/slides-ML.html#conclusion",
+    "href": "Graph_algorithms/slides-ML.html#conclusion",
+    "title": "Module 2: Shortest Path Algorithms & Routing Networks",
+    "section": "Conclusion",
+    "text": "Conclusion\nShortest path algorithms form the computational backbone of many real-world systems across engineering and technology. Beginning from classical BFS/DFS through Dijkstra and Bellman–Ford to modern heuristic search like A*, these techniques enable optimized and intelligent routing decisions essential for networks, transportation, logistics, robotics and smart cities.\n\nEfficient routing is not merely a theoretical challenge but a fundamental driver of intelligent engineering design."
+  },
+  {
+    "objectID": "Graph_algorithms/ML_lesson.html",
+    "href": "Graph_algorithms/ML_lesson.html",
+    "title": "Module 2: Shortest Path Algorithms & Routing Networks",
+    "section": "",
+    "text": "Shortest path problems form the foundation of many modern computational systems including navigation software, logistics planning, robotics, networking protocols, and communication infrastructures. This module explores classical and modern shortest path algorithms used to determine optimal routing in graphs.\nA shortest path problem asks:\n\nGiven a weighted graph and two vertices, what is the minimum-cost path connecting them?\n\nFormally, for a graph\n\\[G = (V, E, w)\\]\nwith non-negative weights (w(u,v) ), find a path from (s) to (t) minimizing\n\\[ \\text{Cost}(P) = \\sum_{(u,v)\\in P} w(u,v). \\]",
+    "crumbs": [
+      "Home",
+      "Graph Algorithms & Applications"
+    ]
+  },
+  {
+    "objectID": "Graph_algorithms/ML_lesson.html#introduction",
+    "href": "Graph_algorithms/ML_lesson.html#introduction",
+    "title": "Module 2: Shortest Path Algorithms & Routing Networks",
+    "section": "",
+    "text": "Shortest path problems form the foundation of many modern computational systems including navigation software, logistics planning, robotics, networking protocols, and communication infrastructures. This module explores classical and modern shortest path algorithms used to determine optimal routing in graphs.\nA shortest path problem asks:\n\nGiven a weighted graph and two vertices, what is the minimum-cost path connecting them?\n\nFormally, for a graph\n\\[G = (V, E, w)\\]\nwith non-negative weights (w(u,v) ), find a path from (s) to (t) minimizing\n\\[ \\text{Cost}(P) = \\sum_{(u,v)\\in P} w(u,v). \\]",
+    "crumbs": [
+      "Home",
+      "Graph Algorithms & Applications"
+    ]
+  },
+  {
+    "objectID": "Graph_algorithms/ML_lesson.html#types-of-graphs-relevant-to-shortest-path",
+    "href": "Graph_algorithms/ML_lesson.html#types-of-graphs-relevant-to-shortest-path",
+    "title": "Module 2: Shortest Path Algorithms & Routing Networks",
+    "section": "Types of Graphs Relevant to Shortest Path",
+    "text": "Types of Graphs Relevant to Shortest Path\n\n\n\n\n\n\n\n\nGraph Type\nDescription\nExample\n\n\n\n\nUnweighted Graph\nAll edges have equal cost\nSocial connections, BFS\n\n\nWeighted Graph\nCosts represent time/distance/money\nMaps, logistics\n\n\nDirected Graph\nOne-way movement\nInternet routing\n\n\nDynamic Graph\nWeights change with time\nTraffic congestion\n\n\nProbabilistic Graph\nCosts uncertain / stochastic\nAutonomous navigation",
+    "crumbs": [
+      "Home",
+      "Graph Algorithms & Applications"
+    ]
+  },
+  {
+    "objectID": "Graph_algorithms/ML_lesson.html#shortest-path-algorithms-overview",
+    "href": "Graph_algorithms/ML_lesson.html#shortest-path-algorithms-overview",
+    "title": "Module 2: Shortest Path Algorithms & Routing Networks",
+    "section": "2. Shortest Path Algorithms: Overview",
+    "text": "2. Shortest Path Algorithms: Overview\n\n\n\n\n\n\n\n\n\nAlgorithm\nConditions\nTime Complexity\nApplications\n\n\n\n\nBFS (Breadth-First Search)\nUnweighted graphs\n(O(V+E))\nHop distance, degree separation\n\n\nDijkstra’s Algorithm\nNon-negative weights\n(O(EV))\nGPS routing, OSPF networking\n\n\nBellman–Ford\nNegative edges allowed\n(O(VE))\nTelecom delay optimization\n\n\nFloyd–Warshall\nAll-pairs shortest paths\n(O(V^3))\nMultipoint routing, clusters\n\n\nA*\nHeuristic search\nDepends on heuristic\nRobotics, gaming AI\n\n\n\n\nDijkstra’s Algorithm – Core Idea\nDijkstra introduced a greedy algorithm (1959) to compute shortest paths by iteratively expanding the least-cost node.\n\nPseudocode\n\nInitialize distances to ∞, distance[source] = 0\nInsert source into priority queue Q\nWhile Q is not empty:\nu = extract-min(Q)\nFor each neighbor v of u:\nIf dist[v] &gt; dist[u] + w(u,v):\ndist[v] = dist[u] + w(u,v)\nupdate Q\n\n\n\n\n\n\nKey Property\n\n\n\nWorks only for non-negative weights.\n\n\n\n\nHands-on Example Using NetworkX\n\nimport networkx as nx\n\nG = nx.DiGraph()\nG.add_weighted_edges_from([\n    (\"A\",\"B\",4),(\"A\",\"C\",2),(\"C\",\"B\",1),(\"B\",\"D\",5),(\"C\",\"D\",8)\n])\n\npath = nx.dijkstra_path(G, source=\"A\", target=\"D\")\ndistance = nx.dijkstra_path_length(G, \"A\",\"D\")\n\npath, distance\n\n(['A', 'C', 'B', 'D'], 8)\n\n\n\n\n\nBellman–Ford Algorithm\nUnlike Dijkstra, Bellman–Ford can handle negative weights and detect negative cycles.\nRecurrence Relation\n\\[d[v]=min(d[v],d[u]+w(u,v))\\] Repeated for \\(V−1\\) iterations.\n\n\n\n\n\n\nApplications\n\n\n\n\nCurrency arbitrage (Forex)\nDelay-based telecom routing\nRisk-value optimization\n\n\n\n\n\nFloyd-Warshall Algorithm (All Pair Shortest Path)\nDynamic programming based:\n\\[D[i][j]=min{D[i][j],D[i][k]+D[k][j]}.\\]\n\n\n\n\n\n\nAPplications\n\n\n\n\nNetwork backbone routing tables\nScheduling large distributed systems\nTraffic signal control\n\n\n\n\n\nEngineering Applications\n\n\n\n\n\n\n\n\n\nEngineering Domain\nProblem\nModel\nSolution\n\n\n\n\nGPS Navigation\nFastest route\nWeighted directed graph\nDijkstra / A*\n\n\nInternet Routing\nPacket movement\nAutonomous systems graph\nOSPF / BGP shortest path\n\n\nRobotics\nCollision-free path\nGrid graph\nA* heuristic\n\n\nSmart Logistics\nDelivery optimization\nTime-cost graphs\nMulti-source Dijkstra\n\n\nAirline Networks\nMinimum-cost itinerary\nDAG\nDP shortest path\n\n\nPower Grids\nLoad flow optimization\nWeighted graph\nMin-cut / flow\n\n\n\n\n\nReal-world Demonstration Example\nCompute shortest path in a mini city graph\n\nimport networkx as nx\n\ncities = nx.Graph()\ncities.add_weighted_edges_from([\n    (\"Kollam\",\"Kottarakkara\",22),\n    (\"Kollam\",\"Adoor\",44),\n    (\"Kottarakkara\",\"Pathanamthitta\",31),\n    (\"Adoor\",\"Pathanamthitta\",22),\n    (\"Pathanamthitta\",\"Ranni\",15)\n])\n\nnx.dijkstra_path(cities, \"Kollam\", \"Ranni\")\n\n['Kollam', 'Kottarakkara', 'Pathanamthitta', 'Ranni']",
+    "crumbs": [
+      "Home",
+      "Graph Algorithms & Applications"
+    ]
+  },
+  {
+    "objectID": "Graph_algorithms/ML_lesson.html#conclusion",
+    "href": "Graph_algorithms/ML_lesson.html#conclusion",
+    "title": "Module 2: Shortest Path Algorithms & Routing Networks",
+    "section": "Conclusion",
+    "text": "Conclusion\nShortest path algorithms form the computational backbone of many real-world systems across engineering and technology. Beginning from classical BFS/DFS through Dijkstra and Bellman–Ford to modern heuristic search like A*, these techniques enable optimized and intelligent routing decisions essential for networks, transportation, logistics, robotics and smart cities.\n\nEfficient routing is not merely a theoretical challenge but a fundamental driver of intelligent engineering design.\n\nMachine learning represents a sophisticated approach to solving problems by leveraging data to inform and improve decision-making processes, contrasting sharply with traditional rule-based systems. Unlike rule-based learning, which relies on predefined rules and logic to make decisions, machine learning algorithms dynamically adapt and learn from patterns within data. This enables them to handle complex and variable inputs without explicit programming for every scenario. Essentially, machine learning is a richer computational translation of mathematical and statistical models, allowing for more flexible and accurate predictions by identifying patterns and insights that rule-based systems might overlook. A wonderful aspect of machine learning is its ability to store the learned patterns and knowledge, allowing models to be reused and refined over time for future predictions, thereby continuously enhancing their performance as more data becomes available.\nThe Classification of Machine Learning Algorithms is shown below.",
+    "crumbs": [
+      "Home",
+      "Graph Algorithms & Applications"
+    ]
+  },
+  {
+    "objectID": "slides.html#agenda",
+    "href": "slides.html#agenda",
+    "title": "Hands-on Session on Quarto",
+    "section": "Agenda",
+    "text": "Agenda\n\nIntroduction to Quarto\nGet Started\nHands-on\n\nListings\nTemplates and Customization\nPrograming"
+  },
+  {
+    "objectID": "slides.html#get-started",
+    "href": "slides.html#get-started",
+    "title": "Hands-on Session on Quarto",
+    "section": "Get Started",
+    "text": "Get Started\nDownloading Quarto\n\nDownload Quarto\n\nLinux\nMacOS\nWindows\n\nChoose your platform\n\nVS Code\nJupyter Notebook/Lab\nNeoVim\nRStudio"
+  },
+  {
+    "objectID": "slides.html#listings",
+    "href": "slides.html#listings",
+    "title": "Hands-on Session on Quarto",
+    "section": "Listings",
+    "text": "Listings\n\nListings enable you to automatically generate the contents of a page (or region of a page) from a list of Quarto documents or other custom data\nUseful to create blogs, newletters\nLink to the documentation: https://quarto.org/docs/websites/website-listings.html"
+  },
+  {
+    "objectID": "slides.html#templates-and-customization",
+    "href": "slides.html#templates-and-customization",
+    "title": "Hands-on Session on Quarto",
+    "section": "Templates and Customization",
+    "text": "Templates and Customization\n\nSearch bar\n\nhttps://quarto.org/docs/websites/website-search.html\n\nThemes\n\nhttps://quarto.org/docs/output-formats/html-themes.html\n\nTools\n\nhttps://quarto.org/docs/websites/website-tools.html"
+  },
+  {
+    "objectID": "slides.html#programing",
+    "href": "slides.html#programing",
+    "title": "Hands-on Session on Quarto",
+    "section": "Programing",
+    "text": "Programing\n\nQuarto also provides the option to embed some code on your website\nQuarto supports Python, R, Julia and Observable Javascript\nYou can create a code block delimiting using ```\nExample of code running: https://tailor-uob.github.io/training-material/cha_odm/odm.html"
+  },
+  {
+    "objectID": "slides.html#programing-1",
+    "href": "slides.html#programing-1",
+    "title": "Hands-on Session on Quarto",
+    "section": "Programing",
+    "text": "Programing\n\nAlso Quarto allows the creation of short codes.\nShortcodes are special markdown directives that generate various types of content. Quarto shortcodes are similar in form and function to Hugo shortcodes and WordPress shortcodes.\nDocumentation: https://quarto.org/docs/extensions/shortcodes.html"
+  },
+  {
+    "objectID": "hands_on.html",
+    "href": "hands_on.html",
+    "title": "Hands-on Session on Quarto",
+    "section": "",
+    "text": "Introduction to Quarto\nGet Started\nHands-on\n\nListings\nTemplates and Customization\nPrograming",
+    "crumbs": [
+      "Home",
+      "Hands-on Session on Quarto"
+    ]
+  },
+  {
+    "objectID": "hands_on.html#agenda",
+    "href": "hands_on.html#agenda",
+    "title": "Hands-on Session on Quarto",
+    "section": "",
+    "text": "Introduction to Quarto\nGet Started\nHands-on\n\nListings\nTemplates and Customization\nPrograming",
+    "crumbs": [
+      "Home",
+      "Hands-on Session on Quarto"
+    ]
+  },
+  {
+    "objectID": "hands_on.html#get-started",
+    "href": "hands_on.html#get-started",
+    "title": "Hands-on Session on Quarto",
+    "section": "Get Started",
+    "text": "Get Started\n\nDownloading Quarto\n\nDownload Quarto\n\nLinux\nMacOS\nWindows\n\nChoose your platform\n\nVS Code\nJupyter Notebook/Lab\nNeoVim\nRStudio\n\n\n\n\n\n\nDownload Quarto\n\nDownload Quarto: https://quarto.org/docs/get-started/\nWorkshop website: https://sijuswamy.github.io/CME-workshop-1/\n\n\nSetup\n\nTerminal + Text Editor (VS Code)\nVisual Studio Code has options to use quarto in a better user interface\n\n\n\nRun the command ‘quarto create project website ’\nAlternatively, ctrl+shift+p and create the quarto project\nAutomatically Quarto will create the following directory structure:\n\n_quarto.yml\nindex.qmd\nabout.qmd\nstyles.css\n\n\n\n\nStructure\n\n.yml files\n\nYAML is a human-readable data serialization language\nYAML is an official strict superset of JSON despite looking very different from JSON.\nTo create a YAML file, use either the .yaml or .yml file extension.\n\n.qmd files\n\nWork as markdown files, but they have a configuration section in yml on the top of the file\n\n\n\n\n_quarto.yml\n\nDefines the basic structure of the website.\nAll configurations are done using yml\nSome of the configurations:\n\nNavigation bar\nSide bar\nContents",
+    "crumbs": [
+      "Home",
+      "Hands-on Session on Quarto"
+    ]
+  },
+  {
+    "objectID": "hands_on.html#listings",
+    "href": "hands_on.html#listings",
+    "title": "Hands-on Session on Quarto",
+    "section": "Listings",
+    "text": "Listings\n\nListings enable you to automatically generate the contents of a page (or region of a page) from a list of Quarto documents or other custom data\nUseful to create blogs, newletters\nLink to the documentation: https://quarto.org/docs/websites/website-listings.html",
+    "crumbs": [
+      "Home",
+      "Hands-on Session on Quarto"
+    ]
+  },
+  {
+    "objectID": "hands_on.html#templates-and-customization",
+    "href": "hands_on.html#templates-and-customization",
+    "title": "Hands-on Session on Quarto",
+    "section": "Templates and Customization",
+    "text": "Templates and Customization\n\nSearch bar\n\nhttps://quarto.org/docs/websites/website-search.html\n\nThemes\n\nhttps://quarto.org/docs/output-formats/html-themes.html\n\nTools\n\nhttps://quarto.org/docs/websites/website-tools.html",
+    "crumbs": [
+      "Home",
+      "Hands-on Session on Quarto"
+    ]
+  },
+  {
+    "objectID": "hands_on.html#programing",
+    "href": "hands_on.html#programing",
+    "title": "Hands-on Session on Quarto",
+    "section": "Programing",
+    "text": "Programing\n\nQuarto also provides the option to embed some code on your website\nQuarto supports Python, R, Julia and Observable Javascript\nYou can create a code block delimiting using ```\nExample of code running: https://tailor-uob.github.io/training-material/cha_odm/odm.html",
+    "crumbs": [
+      "Home",
+      "Hands-on Session on Quarto"
+    ]
+  },
+  {
+    "objectID": "hands_on.html#programing-1",
+    "href": "hands_on.html#programing-1",
+    "title": "Hands-on Session on Quarto",
+    "section": "Programing",
+    "text": "Programing\n\nAlso Quarto allows the creation of short codes.\nShortcodes are special markdown directives that generate various types of content. Quarto shortcodes are similar in form and function to Hugo shortcodes and WordPress shortcodes.\nDocumentation: https://quarto.org/docs/extensions/shortcodes.html",
+    "crumbs": [
+      "Home",
+      "Hands-on Session on Quarto"
+    ]
+  },
+  {
+    "objectID": "introduction/index.html#introduction",
+    "href": "introduction/index.html#introduction",
+    "title": "Graph theory: From Eluer to AI",
+    "section": "Introduction",
+    "text": "Introduction\nGraph Theory forms a foundational pillar across modern Computer Science and Engineering. From the historic Königsberg Bridge Problem raised by Leonhard Euler in 1736 to today’s cutting-edge applications in Artificial Intelligence, Machine Learning, Cyber-security, VLSI, IoT, Intelligent Transportation, and Social Network Analytics, graph structures provide a natural mathematical way to represent relationships, connectivity, and optimization.\nThis session is designed to bridge the gap between Discrete Mathematics and real-world engineering applications, demonstrating how mathematical graph concepts translate into practical computational tools.",
+    "crumbs": [
+      "Home",
+      "Introduction"
+    ]
+  },
+  {
+    "objectID": "introduction/index.html#learning-objectives",
+    "href": "introduction/index.html#learning-objectives",
+    "title": "Graph theory: From Eluer to AI",
+    "section": "Learning Objectives",
+    "text": "Learning Objectives\nAt the end of this session, participants will be able to:\n\nUnderstand the evolution of graph theory from classical problems to modern computational applications.\nModel real scenarios as graphs and analyze connectivity, traversal, and optimization.\nExplore graph algorithms implemented through simulation and programming.\nRecognize the role of graph theory in AI, ML, and data-driven intelligent systems.\nDevelop intuition for advanced concepts such as graph coloring, network flows, and spectral graph theory.\n\nThis module introduces the historical evolution of graph theory, beginning with the classical foundations laid by Leonhard Euler (1736), and follows its transformation into a cornerstone of modern engineering and computational technologies.",
+    "crumbs": [
+      "Home",
+      "Introduction"
+    ]
+  },
+  {
+    "objectID": "introduction/index.html#historical-starting-point-the-königsberg-bridges-problem",
+    "href": "introduction/index.html#historical-starting-point-the-königsberg-bridges-problem",
+    "title": "Graph theory: From Eluer to AI",
+    "section": "Historical Starting Point: The Königsberg Bridges Problem",
+    "text": "Historical Starting Point: The Königsberg Bridges Problem\nThe earliest known problem leading to graph theory originated from the city of Königsberg (now Kaliningrad, Russia), divided by the river Pregel with seven bridges linking different land masses. Citizens wondered:\n\nIs there a walk through the city that crosses each bridge exactly once?\n\nEuler abstracted the problem by representing landmasses as vertices and bridges as edges, forming the world’s first mathematical graph.\n\nEuler’s Key Result\nA connected graph admits an Eulerian circuit if and only if every vertex has even degree.\nGeneral case: A graph contains an Eulerian path if exactly 0 or 2 vertices have odd degree.\nEuler’s solution marks the birth of topological graph theory and the first example of modelling reality with abstraction.",
+    "crumbs": [
+      "Home",
+      "Introduction"
+    ]
+  },
+  {
+    "objectID": "introduction/index.html#development-through-the-19th-20th-centuries",
+    "href": "introduction/index.html#development-through-the-19th-20th-centuries",
+    "title": "Graph theory: From Eluer to AI",
+    "section": "Development Through the 19th & 20th Centuries",
+    "text": "Development Through the 19th & 20th Centuries\n\n\n\n\n\n\n\n\nYear\nContributor\nContribution\n\n\n\n\n1847\nGustav Kirchhoff\nElectrical network theory & spanning trees in circuits\n\n\n1857\nArthur Cayley\nCounting labelled trees, chemical molecular structures\n\n\n1913\nGeorge D. Birkhoff\nChromatic polynomial & map colouring\n\n\n1936\nKuratowski\nCharacterization of planar graphs\n\n\n1959\nEdsger Dijkstra\nShortest path algorithm\n\n\n1959\nErdős & Rényi\nRandom graph theory\n\n\n1973\nHopcroft–Karp\nEfficient bipartite matching\n\n\n1998\nBrin & Page\nPageRank: web search based on eigenvector centrality\n\n\n2017–present\nKipf & Welling\nGraph Neural Networks (GNNs)",
+    "crumbs": [
+      "Home",
+      "Introduction"
+    ]
+  },
+  {
+    "objectID": "introduction/index.html#evolution-from-mathematical-theory-to-engineering",
+    "href": "introduction/index.html#evolution-from-mathematical-theory-to-engineering",
+    "title": "Graph theory: From Eluer to AI",
+    "section": "Evolution from Mathematical Theory to Engineering",
+    "text": "Evolution from Mathematical Theory to Engineering\nGraph theory transitioned from pure mathematics to an essential tool for computation and real-world problem solving. Today, nearly every complex engineering system is modelled using graph structures.\n\nWhy Engineers Need Graph Theory\nGraphs enable engineers to analyze, optimize, and predict system behavior.\n\n\n\n\n\n\n\n\n\nDomain\nEngineering Problem\nGraph Concept\nAlgorithmic Tool\n\n\n\n\nComputer Networks\nPacket routing, topology design\nWeighted graphs\nDijkstra / Bellman–Ford\n\n\nArtificial Intelligence\nKnowledge graphs, reasoning, GNNs\nDirected labelled graphs\nPageRank, embeddings\n\n\nVLSI & CAD\nCircuit layout & track minimisation\nGraph colouring\nGreedy, planar colouring\n\n\nTransport & Robotics\nNavigation, path planning\nShortest paths\nA*, BFS\n\n\nCybersecurity\nAttack spread modelling\nAttack graphs\nCentrality\n\n\nSocial Networks\nInfluence, community detection\nSmall-world graphs\nModularity, clustering\n\n\nBig Data\nLarge-scale graph analytics\nDistributed graphs\nMapReduce / Spark GraphX\n\n\nHealthcare\nDisease spread & medical networks\nDynamic graphs\nSIR modelling",
+    "crumbs": [
+      "Home",
+      "Introduction"
+    ]
+  },
+  {
+    "objectID": "introduction/index.html#key-ideas-that-form-the-foundations-of-graph-algorithms",
+    "href": "introduction/index.html#key-ideas-that-form-the-foundations-of-graph-algorithms",
+    "title": "Graph theory: From Eluer to AI",
+    "section": "Key Ideas That Form the Foundations of Graph Algorithms",
+    "text": "Key Ideas That Form the Foundations of Graph Algorithms\n\nTraversal: BFS, DFS for exploring nodes and connectivity\nOptimisation: Minimal spanning trees, flows, cut problems\nRanking & Influence: Centrality, PageRank\nScheduling & Resources: Graph colouring\nStructure Discovery: Communities & clustering\nLearning: GNNs for relational intelligence\n\nMathematically, a graph is defined as:\n\\[ G = (V, E) \\] where\n- \\(V\\) is a set of vertices,\n- \\(E\\) is a set of edges connecting pairs of vertices.",
+    "crumbs": [
+      "Home",
+      "Introduction"
+    ]
+  },
+  {
+    "objectID": "introduction/index.html#demonstration-representing-reality-through-graph-abstraction",
+    "href": "introduction/index.html#demonstration-representing-reality-through-graph-abstraction",
+    "title": "Graph theory: From Eluer to AI",
+    "section": "Demonstration: Representing Reality through Graph Abstraction",
+    "text": "Demonstration: Representing Reality through Graph Abstraction\n\nimport networkx as nx\nimport matplotlib.pyplot as plt\n\nG = nx.Graph()\nG.add_edges_from([(\"Island 1\",\"Island 2\"),(\"Island 1\",\"Island 3\"),\n                  (\"Island 2\",\"Island 3\"),(\"Island 3\",\"Island 4\"),\n                  (\"Island 4\",\"Island 1\")])\nnx.draw(G, with_labels=True)\nplt.show()",
+    "crumbs": [
+      "Home",
+      "Introduction"
+    ]
+  },
+  {
+    "objectID": "introduction/index.html#conclusion",
+    "href": "introduction/index.html#conclusion",
+    "title": "Graph theory: From Eluer to AI",
+    "section": "Conclusion",
+    "text": "Conclusion\nGraph Theory evolved from Euler’s solution to a historic puzzle into a powerful computational language for solving real-world problems. It now forms the mathematical backbone of modern engineering systems — from internet routing and GPS navigation to web search engines, cybersecurity, and intelligent AI models such as Graph Neural Networks.\n\nGraph Theory connects mathematical reasoning with engineering innovation, transforming abstract structures into practical solutions.",
+    "crumbs": [
+      "Home",
+      "Introduction"
+    ]
+  }
+]

@@ -1,0 +1,190 @@
+---
+title: "Module 2: Shortest Path Algorithms & Routing Networks"
+subtitle: <a href="slides-ML.html" target="_blank"></a>
+author: 
+  - name:
+      given: Siju
+      family: Swamy
+    orcid: 0009-0004-1983-5574
+    email: siju.swamy@saintgits.org
+    affiliations:
+      - name: Saintgits College of Engineering (Autonomous)
+        city: Kottayam
+        country: India
+        postal-code: 686532
+    attributes:
+        equal-contributor: False
+format:
+  html:
+    mermaid:
+      theme: dark
+    
+  revealjs:
+    output-file: slides-ML.html
+    width: 960
+    height: 700
+    css: assets/style.css
+    mermaid:
+      theme: dark
+jupyter: python3
+execute: 
+  enabled: true
+---
+
+## Introduction
+
+
+Shortest path problems form the foundation of many modern computational systems including **navigation software, logistics planning, robotics, networking protocols, and communication infrastructures**. This module explores classical and modern shortest path algorithms used to determine optimal routing in graphs.
+
+A shortest path problem asks:
+
+> *Given a weighted graph and two vertices, what is the minimum-cost path connecting them?*
+
+Formally, for a graph  
+$$G = (V, E, w)$$  
+with non-negative weights \(w(u,v) \ge 0\), find a path from \(s\) to \(t\) minimizing
+
+$$ \text{Cost}(P) = \sum_{(u,v)\in P} w(u,v). $$
+
+## Types of Graphs Relevant to Shortest Path
+
+
+| Graph Type | Description | Example |
+|------------|-------------|---------|
+| Unweighted Graph | All edges have equal cost | Social connections, BFS |
+| Weighted Graph | Costs represent time/distance/money | Maps, logistics |
+| Directed Graph | One-way movement | Internet routing |
+| Dynamic Graph | Weights change with time | Traffic congestion |
+| Probabilistic Graph | Costs uncertain / stochastic | Autonomous navigation |
+
+## 2. Shortest Path Algorithms: Overview
+
+| Algorithm | Conditions | Time Complexity | Applications |
+|-----------|------------|-----------------|--------------|
+| **BFS** (Breadth-First Search) | Unweighted graphs | \(O(V+E)\) | Hop distance, degree separation |
+| **Dijkstra’s Algorithm** | Non-negative weights | \(O(E\log V)\) | GPS routing, OSPF networking |
+| **Bellman–Ford** | Negative edges allowed | \(O(VE)\) | Telecom delay optimization |
+| **Floyd–Warshall** | All-pairs shortest paths | \(O(V^3)\) | Multipoint routing, clusters |
+| **A\*** | Heuristic search | Depends on heuristic | Robotics, gaming AI |
+
+### Dijkstra’s Algorithm – Core Idea
+
+Dijkstra introduced a greedy algorithm (1959) to compute shortest paths by iteratively expanding the least-cost node.
+
+#### Pseudocode
+
+```bash
+
+Initialize distances to ∞, distance[source] = 0
+Insert source into priority queue Q
+While Q is not empty:
+u = extract-min(Q)
+For each neighbor v of u:
+If dist[v] > dist[u] + w(u,v):
+dist[v] = dist[u] + w(u,v)
+update Q
+
+```
+
+:::{.callout-note}
+### Key Property
+Works only for **non-negative weights**.
+:::
+
+#### Hands-on Example Using `NetworkX`
+
+```{python}
+import networkx as nx
+
+G = nx.DiGraph()
+G.add_weighted_edges_from([
+    ("A","B",4),("A","C",2),("C","B",1),("B","D",5),("C","D",8)
+])
+
+path = nx.dijkstra_path(G, source="A", target="D")
+distance = nx.dijkstra_path_length(G, "A","D")
+
+path, distance
+```
+### Bellman–Ford Algorithm
+
+Unlike Dijkstra, Bellman–Ford can handle negative weights and detect negative cycles.
+
+Recurrence Relation
+
+$$d[v]=min(d[v],d[u]+w(u,v))$$
+Repeated for 
+$V−1$ iterations.
+
+:::{.callout-note}
+### Applications
+
+1. Currency arbitrage (Forex)
+
+2. Delay-based telecom routing
+
+3. Risk-value optimization
+:::
+
+### Floyd-Warshall Algorithm (All Pair Shortest Path)
+
+Dynamic programming based:
+
+$$D[i][j]=min{D[i][j],D[i][k]+D[k][j]}.$$
+
+
+:::{.callout-note}
+### APplications
+
+1. Network backbone routing tables
+
+2. Scheduling large distributed systems
+
+3. Traffic signal control
+:::
+
+### Engineering Applications
+
+| Engineering Domain | Problem                | Model                    | Solution                 |
+| ------------------ | ---------------------- | ------------------------ | ------------------------ |
+| GPS Navigation     | Fastest route          | Weighted directed graph  | Dijkstra / A*            |
+| Internet Routing   | Packet movement        | Autonomous systems graph | OSPF / BGP shortest path |
+| Robotics           | Collision-free path    | Grid graph               | A* heuristic             |
+| Smart Logistics    | Delivery optimization  | Time-cost graphs         | Multi-source Dijkstra    |
+| Airline Networks   | Minimum-cost itinerary | DAG                      | DP shortest path         |
+| Power Grids        | Load flow optimization | Weighted graph           | Min-cut / flow           |
+
+
+### Real-world Demonstration Example
+
+Compute shortest path in a mini city graph
+
+```{python}
+import networkx as nx
+
+cities = nx.Graph()
+cities.add_weighted_edges_from([
+    ("Kollam","Kottarakkara",22),
+    ("Kollam","Adoor",44),
+    ("Kottarakkara","Pathanamthitta",31),
+    ("Adoor","Pathanamthitta",22),
+    ("Pathanamthitta","Ranni",15)
+])
+
+nx.dijkstra_path(cities, "Kollam", "Ranni")
+
+```
+
+## Conclusion
+
+Shortest path algorithms form the computational backbone of many real-world systems across engineering and technology. Beginning from classical BFS/DFS through Dijkstra and Bellman–Ford to modern heuristic search like A*, these techniques enable optimized and intelligent routing decisions essential for networks, transportation, logistics, robotics and smart cities.
+
+> Efficient routing is not merely a theoretical challenge but a fundamental driver of intelligent engineering design.
+
+
+:::: {.content-hidden when-format="revealjs"}
+
+Machine learning represents a sophisticated approach to solving problems by leveraging data to inform and improve decision-making processes, contrasting sharply with traditional rule-based systems. Unlike rule-based learning, which relies on predefined rules and logic to make decisions, machine learning algorithms dynamically adapt and learn from patterns within data. This enables them to handle complex and variable inputs without explicit programming for every scenario. Essentially, machine learning is a richer computational translation of mathematical and statistical models, allowing for more flexible and accurate predictions by identifying patterns and insights that rule-based systems might overlook. A wonderful aspect of machine learning is its ability to store the learned patterns and knowledge, allowing models to be reused and refined over time for future predictions, thereby continuously enhancing their performance as more data becomes available.
+
+The Classification of Machine Learning Algorithms is shown below.
+::::

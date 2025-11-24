@@ -1,0 +1,533 @@
+[
+  {
+    "objectID": "ML/ML_lesson.html",
+    "href": "ML/ML_lesson.html",
+    "title": "End-to-End Machine Learning Project",
+    "section": "",
+    "text": "Machine learning represents a sophisticated approach to solving problems by leveraging data to inform and improve decision-making processes, contrasting sharply with traditional rule-based systems. Unlike rule-based learning, which relies on predefined rules and logic to make decisions, machine learning algorithms dynamically adapt and learn from patterns within data. This enables them to handle complex and variable inputs without explicit programming for every scenario. Essentially, machine learning is a richer computational translation of mathematical and statistical models, allowing for more flexible and accurate predictions by identifying patterns and insights that rule-based systems might overlook. A wonderful aspect of machine learning is its ability to store the learned patterns and knowledge, allowing models to be reused and refined over time for future predictions, thereby continuously enhancing their performance as more data becomes available.\nThe Classification of Machine Learning Algorithms is shown below.\n\n\n\n\n\ngraph TD\n    A[Machine Learning Algorithms] --&gt; B[Supervised Learning]\n    A --&gt; C[Unsupervised Learning]\n    A --&gt; D[Reinforcement Learning]\n\n    B --&gt; E[Classification]\n    B --&gt; F[Regression]\n\n    E --&gt; G[Decision Trees]\n    E --&gt; H[Random Forests]\n    E --&gt; I[Support Vector Machines]\n    E --&gt; J[Neural Networks]\n\n    F --&gt; K[Linear Regression]\n    F --&gt; L[Polynomial Regression]\n    F --&gt; M[Ridge Regression]\n\n    C --&gt; N[Clustering]\n    C --&gt; O[Dimensionality Reduction]\n\n    N --&gt; P[K-Means Clustering]\n    N --&gt; Q[Hierarchical Clustering]\n    N --&gt; R[DBSCAN]\n\n    O --&gt; S[Principal Component Analysis (PCA)]\n    O --&gt; T[Linear Discriminant Analysis (LDA)]\n\n    D --&gt; U[Q-Learning]\n    D --&gt; V[Deep Q-Networks (DQN)]\n    D --&gt; W[Policy Gradient Methods]\n\n    %% Styling %%\n    classDef main fill:#f5f5f5,stroke:#333,stroke-width:2px;\n    classDef supervised fill:#e6f7ff,stroke:#0056b3;\n    classDef unsupervised fill:#e6ffe6,stroke:#004d00;\n    classDef reinforcement fill:#fff5e6,stroke:#cc6600;\n\n    class A,main;\n    class B,C,D,supervised,unsupervised,reinforcement;\n    class E,F,supervised;\n    class N,O,unsupervised;\n    class U,V,W,reinforcement;",
+    "crumbs": [
+      "Home",
+      "ML Project"
+    ]
+  },
+  {
+    "objectID": "ML/ML_lesson.html#introduction-to-machine-learning",
+    "href": "ML/ML_lesson.html#introduction-to-machine-learning",
+    "title": "End-to-End Machine Learning Project",
+    "section": "",
+    "text": "Machine learning represents a sophisticated approach to solving problems by leveraging data to inform and improve decision-making processes, contrasting sharply with traditional rule-based systems. Unlike rule-based learning, which relies on predefined rules and logic to make decisions, machine learning algorithms dynamically adapt and learn from patterns within data. This enables them to handle complex and variable inputs without explicit programming for every scenario. Essentially, machine learning is a richer computational translation of mathematical and statistical models, allowing for more flexible and accurate predictions by identifying patterns and insights that rule-based systems might overlook. A wonderful aspect of machine learning is its ability to store the learned patterns and knowledge, allowing models to be reused and refined over time for future predictions, thereby continuously enhancing their performance as more data becomes available.\nThe Classification of Machine Learning Algorithms is shown below.\n\n\n\n\n\ngraph TD\n    A[Machine Learning Algorithms] --&gt; B[Supervised Learning]\n    A --&gt; C[Unsupervised Learning]\n    A --&gt; D[Reinforcement Learning]\n\n    B --&gt; E[Classification]\n    B --&gt; F[Regression]\n\n    E --&gt; G[Decision Trees]\n    E --&gt; H[Random Forests]\n    E --&gt; I[Support Vector Machines]\n    E --&gt; J[Neural Networks]\n\n    F --&gt; K[Linear Regression]\n    F --&gt; L[Polynomial Regression]\n    F --&gt; M[Ridge Regression]\n\n    C --&gt; N[Clustering]\n    C --&gt; O[Dimensionality Reduction]\n\n    N --&gt; P[K-Means Clustering]\n    N --&gt; Q[Hierarchical Clustering]\n    N --&gt; R[DBSCAN]\n\n    O --&gt; S[Principal Component Analysis (PCA)]\n    O --&gt; T[Linear Discriminant Analysis (LDA)]\n\n    D --&gt; U[Q-Learning]\n    D --&gt; V[Deep Q-Networks (DQN)]\n    D --&gt; W[Policy Gradient Methods]\n\n    %% Styling %%\n    classDef main fill:#f5f5f5,stroke:#333,stroke-width:2px;\n    classDef supervised fill:#e6f7ff,stroke:#0056b3;\n    classDef unsupervised fill:#e6ffe6,stroke:#004d00;\n    classDef reinforcement fill:#fff5e6,stroke:#cc6600;\n\n    class A,main;\n    class B,C,D,supervised,unsupervised,reinforcement;\n    class E,F,supervised;\n    class N,O,unsupervised;\n    class U,V,W,reinforcement;",
+    "crumbs": [
+      "Home",
+      "ML Project"
+    ]
+  },
+  {
+    "objectID": "ML/ML_lesson.html#end-to-end-machine-learning-project-classifying-the-iris-dataset",
+    "href": "ML/ML_lesson.html#end-to-end-machine-learning-project-classifying-the-iris-dataset",
+    "title": "End-to-End Machine Learning Project",
+    "section": "End-to-End Machine Learning Project: Classifying the Iris Dataset",
+    "text": "End-to-End Machine Learning Project: Classifying the Iris Dataset\nIn this project, we will walk through an end-to-end machine learning task using the Iris dataset. This comprehensive exercise will cover all stages of a machine learning pipeline, from data exploration to model deployment.",
+    "crumbs": [
+      "Home",
+      "ML Project"
+    ]
+  },
+  {
+    "objectID": "ML/ML_lesson.html#introduction-to-the-dataset",
+    "href": "ML/ML_lesson.html#introduction-to-the-dataset",
+    "title": "End-to-End Machine Learning Project",
+    "section": "1. Introduction to the Dataset",
+    "text": "1. Introduction to the Dataset\nThe Iris dataset is a classic dataset in machine learning, widely used for benchmarking classification algorithms. It consists of measurements from 150 iris flowers, with four features: Sepal Length, Sepal Width, Petal Length, and Petal Width. Each sample is labeled with one of three species: Iris-setosa, Iris-versicolor, and Iris-virginica.",
+    "crumbs": [
+      "Home",
+      "ML Project"
+    ]
+  },
+  {
+    "objectID": "ML/ML_lesson.html#objective",
+    "href": "ML/ML_lesson.html#objective",
+    "title": "End-to-End Machine Learning Project",
+    "section": "2. Objective",
+    "text": "2. Objective\nOur objective is to build a classification model that can accurately predict the species of an iris flower based on its measurements. We will explore the dataset, perform necessary preprocessing, and select an appropriate classification algorithm to achieve this goal.",
+    "crumbs": [
+      "Home",
+      "ML Project"
+    ]
+  },
+  {
+    "objectID": "ML/ML_lesson.html#data-exploration-and-preprocessing",
+    "href": "ML/ML_lesson.html#data-exploration-and-preprocessing",
+    "title": "End-to-End Machine Learning Project",
+    "section": "3. Data Exploration and Preprocessing",
+    "text": "3. Data Exploration and Preprocessing\n\nExploratory Data Analysis (EDA): We will begin by analyzing the dataset to understand its structure and characteristics. This includes visualizing distributions, checking for missing values, and examining class balance.\nData Cleaning: We will handle any missing values and ensure the data is ready for modeling. Basic preprocessing tasks will include feature scaling and normalization.",
+    "crumbs": [
+      "Home",
+      "ML Project"
+    ]
+  },
+  {
+    "objectID": "ML/ML_lesson.html#model-selection-and-training",
+    "href": "ML/ML_lesson.html#model-selection-and-training",
+    "title": "End-to-End Machine Learning Project",
+    "section": "4. Model Selection and Training",
+    "text": "4. Model Selection and Training\nBased on our data exploration, we will select a suitable classification model. For this project, we will use the RandomForestClassifier, a robust and versatile model that performs well with the Iris dataset.",
+    "crumbs": [
+      "Home",
+      "ML Project"
+    ]
+  },
+  {
+    "objectID": "ML/ML_lesson.html#model-evaluation",
+    "href": "ML/ML_lesson.html#model-evaluation",
+    "title": "End-to-End Machine Learning Project",
+    "section": "5. Model Evaluation",
+    "text": "5. Model Evaluation\nAfter training the model, we will evaluate its performance using various metrics such as accuracy and classification report. This will help us understand how well the model is performing and whether any improvements are needed.",
+    "crumbs": [
+      "Home",
+      "ML Project"
+    ]
+  },
+  {
+    "objectID": "ML/ML_lesson.html#deployment",
+    "href": "ML/ML_lesson.html#deployment",
+    "title": "End-to-End Machine Learning Project",
+    "section": "6. Deployment",
+    "text": "6. Deployment\nFinally, we will deploy our trained model using Streamlit, an open-source framework that allows us to create interactive web applications for real-time predictions. This will enable users to input flower measurements and receive predictions on the species.",
+    "crumbs": [
+      "Home",
+      "ML Project"
+    ]
+  },
+  {
+    "objectID": "ML/slides-ML.html#end-to-end-machine-learning-project-classifying-the-iris-dataset",
+    "href": "ML/slides-ML.html#end-to-end-machine-learning-project-classifying-the-iris-dataset",
+    "title": "End-to-End Machine Learning Project",
+    "section": "End-to-End Machine Learning Project: Classifying the Iris Dataset",
+    "text": "End-to-End Machine Learning Project: Classifying the Iris Dataset\nIn this project, we will walk through an end-to-end machine learning task using the Iris dataset. This comprehensive exercise will cover all stages of a machine learning pipeline, from data exploration to model deployment."
+  },
+  {
+    "objectID": "ML/slides-ML.html#introduction-to-the-dataset",
+    "href": "ML/slides-ML.html#introduction-to-the-dataset",
+    "title": "End-to-End Machine Learning Project",
+    "section": "1. Introduction to the Dataset",
+    "text": "1. Introduction to the Dataset\nThe Iris dataset is a classic dataset in machine learning, widely used for benchmarking classification algorithms. It consists of measurements from 150 iris flowers, with four features: Sepal Length, Sepal Width, Petal Length, and Petal Width. Each sample is labeled with one of three species: Iris-setosa, Iris-versicolor, and Iris-virginica."
+  },
+  {
+    "objectID": "ML/slides-ML.html#objective",
+    "href": "ML/slides-ML.html#objective",
+    "title": "End-to-End Machine Learning Project",
+    "section": "2. Objective",
+    "text": "2. Objective\nOur objective is to build a classification model that can accurately predict the species of an iris flower based on its measurements. We will explore the dataset, perform necessary preprocessing, and select an appropriate classification algorithm to achieve this goal."
+  },
+  {
+    "objectID": "ML/slides-ML.html#data-exploration-and-preprocessing",
+    "href": "ML/slides-ML.html#data-exploration-and-preprocessing",
+    "title": "End-to-End Machine Learning Project",
+    "section": "3. Data Exploration and Preprocessing",
+    "text": "3. Data Exploration and Preprocessing\n\nExploratory Data Analysis (EDA): We will begin by analyzing the dataset to understand its structure and characteristics. This includes visualizing distributions, checking for missing values, and examining class balance.\nData Cleaning: We will handle any missing values and ensure the data is ready for modeling. Basic preprocessing tasks will include feature scaling and normalization."
+  },
+  {
+    "objectID": "ML/slides-ML.html#model-selection-and-training",
+    "href": "ML/slides-ML.html#model-selection-and-training",
+    "title": "End-to-End Machine Learning Project",
+    "section": "4. Model Selection and Training",
+    "text": "4. Model Selection and Training\nBased on our data exploration, we will select a suitable classification model. For this project, we will use the RandomForestClassifier, a robust and versatile model that performs well with the Iris dataset."
+  },
+  {
+    "objectID": "ML/slides-ML.html#model-evaluation",
+    "href": "ML/slides-ML.html#model-evaluation",
+    "title": "End-to-End Machine Learning Project",
+    "section": "5. Model Evaluation",
+    "text": "5. Model Evaluation\nAfter training the model, we will evaluate its performance using various metrics such as accuracy and classification report. This will help us understand how well the model is performing and whether any improvements are needed."
+  },
+  {
+    "objectID": "ML/slides-ML.html#deployment",
+    "href": "ML/slides-ML.html#deployment",
+    "title": "End-to-End Machine Learning Project",
+    "section": "6. Deployment",
+    "text": "6. Deployment\nFinally, we will deploy our trained model using Streamlit, an open-source framework that allows us to create interactive web applications for real-time predictions. This will enable users to input flower measurements and receive predictions on the species."
+  },
+  {
+    "objectID": "introduction/index.html",
+    "href": "introduction/index.html",
+    "title": "Introduction to Literate Programming with Quarto",
+    "section": "",
+    "text": "Introduction\nWelcome to Day 1 of our workshop! Today, we embark on an exploration of literate programming through the powerful open-source tool, Quarto. Literate programming is a methodology that integrates code and documentation, allowing for clearer, more maintainable, and more insightful technical writing. By the end of today, you’ll gain hands-on experience with Quarto, learning how to craft high-quality technical documents, build interactive web pages, and create engaging blogs. Our sessions are designed to provide both theoretical knowledge and practical skills, equipping you with the tools to effectively communicate your code and ideas. Let’s dive into the world of literate programming and see how Quarto can transform your documentation practices.",
+    "crumbs": [
+      "Home",
+      "Introduction"
+    ]
+  },
+  {
+    "objectID": "introduction/index.html#day-1-unleashing-literate-programming-with-quarto",
+    "href": "introduction/index.html#day-1-unleashing-literate-programming-with-quarto",
+    "title": "Introduction to Literate Programming with Quarto",
+    "section": "",
+    "text": "Introduction\nWelcome to Day 1 of our workshop! Today, we embark on an exploration of literate programming through the powerful open-source tool, Quarto. Literate programming is a methodology that integrates code and documentation, allowing for clearer, more maintainable, and more insightful technical writing. By the end of today, you’ll gain hands-on experience with Quarto, learning how to craft high-quality technical documents, build interactive web pages, and create engaging blogs. Our sessions are designed to provide both theoretical knowledge and practical skills, equipping you with the tools to effectively communicate your code and ideas. Let’s dive into the world of literate programming and see how Quarto can transform your documentation practices.",
+    "crumbs": [
+      "Home",
+      "Introduction"
+    ]
+  },
+  {
+    "objectID": "introduction/index.html#getting-started",
+    "href": "introduction/index.html#getting-started",
+    "title": "Introduction to Literate Programming with Quarto",
+    "section": "Getting started",
+    "text": "Getting started\n\nGet started documentation: quarto.org/docs/get-started/\nOpen-source repository in GitHub: Quarto-cli\nCreate a project with quarto create project\n\nType: default, website, blog, manuscript, book, confluence\n\nBuild project with quarto render\nPreview with quarto preview (it autobuilds and updates when changes in the source files are detected).",
+    "crumbs": [
+      "Home",
+      "Introduction"
+    ]
+  },
+  {
+    "objectID": "introduction/index.html#integrated-development-environments",
+    "href": "introduction/index.html#integrated-development-environments",
+    "title": "Introduction to Literate Programming with Quarto",
+    "section": "Integrated Development Environments",
+    "text": "Integrated Development Environments\nThe separation of the source code and the publishable outputs is something that all Integrated Development Environments (IDEs) provide. These are tools for writing computer programs that commonly require a compilation phase which is usually integrated in the same tool. The idea of authoring tools that can create generic input artefacts that are later combined by a formatting tool is very similar to the common process followed in programming compiled programming languages. This has facilitate the adoption of IDEs as authoring tools. Microsoft Visual Studio and Posit Workbench (formerly RStudio) have tools to work with the Quarto environment. Both of them provide options for collaborative and contemporaneous editing.",
+    "crumbs": [
+      "Home",
+      "Introduction"
+    ]
+  },
+  {
+    "objectID": "introduction/index.html#key-points-about-quarto",
+    "href": "introduction/index.html#key-points-about-quarto",
+    "title": "Introduction to Literate Programming with Quarto",
+    "section": "Key points about Quarto",
+    "text": "Key points about Quarto\n\nQuarto is a formatting tool\nuses pandoc to convert the input artefacts to various outputs.\nsupports plain text markdown, Jupyter notebooks and an augmented markdown,\nsupports dynamic content with Python, R, Julia and Observable programming languages.\nis integrated in multiple IDEs: Visual Studio, Posit Connect (former RMarkdown), Atlassian Confluence, …",
+    "crumbs": [
+      "Home",
+      "Introduction"
+    ]
+  },
+  {
+    "objectID": "introduction/slides-quarto.html#step-1-install-python",
+    "href": "introduction/slides-quarto.html#step-1-install-python",
+    "title": "Setting Up of Quarto",
+    "section": "Step 1: Install Python",
+    "text": "Step 1: Install Python\n\nDownload and Install Python\n\nGo to the official Python website.\nDownload the latest stable version of Python suitable for your operating system (Windows, macOS, or Linux).\nRun the installer and ensure you check the box to “Add Python to PATH” during installation.\nFollow the on-screen instructions to complete the installation."
+  },
+  {
+    "objectID": "introduction/slides-quarto.html#step-2-install-visual-studio-code-vs-code",
+    "href": "introduction/slides-quarto.html#step-2-install-visual-studio-code-vs-code",
+    "title": "Setting Up of Quarto",
+    "section": "Step 2: Install Visual Studio Code (VS Code)",
+    "text": "Step 2: Install Visual Studio Code (VS Code)\n\nDownload and Install Visual Studio Code (VS Code)\n\nVisit the official VS Code website.\nDownload the installer for your operating system.\nRun the installer and follow the prompts to install VS Code.\nAfter installation, open VS Code and install the recommended extensions:\n\nPython Extension: Search for “Python” in the Extensions view (Ctrl+Shift+X) and install it.\nQuarto Extension: Search for “Quarto” in the Extensions view and install it."
+  },
+  {
+    "objectID": "introduction/slides-quarto.html#step-3-install-quarto-cli",
+    "href": "introduction/slides-quarto.html#step-3-install-quarto-cli",
+    "title": "Setting Up of Quarto",
+    "section": "Step 3: Install Quarto CLI",
+    "text": "Step 3: Install Quarto CLI\n\nDownload and Install Quarto CLI\n\nVisit the Quarto CLI download page.\nDownload the latest stable release of Quarto CLI for your operating system.\nRun the installer and follow the on-screen instructions to complete the installation.\nAfter installation, verify that Quarto CLI is correctly installed by opening a command line interface (Terminal on macOS/Linux, Command Prompt or PowerShell on Windows) and typing:\nquarto --version"
+  },
+  {
+    "objectID": "introduction/slides-quarto.html#step-4-install-git-for-cicd",
+    "href": "introduction/slides-quarto.html#step-4-install-git-for-cicd",
+    "title": "Setting Up of Quarto",
+    "section": "Step 4: Install Git for CI/CD",
+    "text": "Step 4: Install Git for CI/CD\n\nDownload and Install Git\n\nVisit the official Git website.\nDownload the installer for your operating system.\nRun the installer and follow the prompts. You can use the default settings for most options.\nEnsure Git is added to your system PATH by checking the appropriate option during installation.\n\nConfigure Git\n\nOpen your command line interface (Terminal on macOS/Linux, Command Prompt or PowerShell on Windows).\nConfigure your Git username and email:\ngit config --global user.name \"Your Name\"\ngit config --global user.email \"your.email@example.com\"\nVerify the installation by checking the Git version:\ngit --version"
+  },
+  {
+    "objectID": "introduction/slides-quarto.html#literate-programming-workflow",
+    "href": "introduction/slides-quarto.html#literate-programming-workflow",
+    "title": "Setting Up of Quarto",
+    "section": "Literate Programming Workflow",
+    "text": "Literate Programming Workflow\n\n\n\n\n\n---\n Literate Programming Workflow\n---\ngraph TD\n    A[Python] --&gt;|Code Execution| B[Quarto CLI]\n    B --&gt;|Document Rendering| C[Technical Documents]\n    B --&gt;|Document Rendering| D[Blogs]\n    B --&gt;|Document Rendering| E[Websites]\n    E --&gt;|Host| F[GitHub Pages]\n    G[Git] --&gt;|Version Control| C\n    G --&gt;|Version Control| D\n    G --&gt;|Version Control| E\n    G --&gt;|CI/CD| F\n\n    subgraph Development\n        A\n        B\n        G\n    end\n\n    subgraph Output\n        C\n        D\n        E\n        F\n    end\n\n    style Development fill:#f9f,stroke:#333,stroke-width:2px\n    style Output fill:#ccf,stroke:#333,stroke-width:2px"
+  },
+  {
+    "objectID": "introduction/slides-quarto.html#creating-your-personal-website",
+    "href": "introduction/slides-quarto.html#creating-your-personal-website",
+    "title": "Setting Up of Quarto",
+    "section": "Creating Your Personal Website",
+    "text": "Creating Your Personal Website"
+  },
+  {
+    "objectID": "introduction/slides-quarto.html#step-1-clone-the-website-template-respository-from-github",
+    "href": "introduction/slides-quarto.html#step-1-clone-the-website-template-respository-from-github",
+    "title": "Setting Up of Quarto",
+    "section": "Step 1: Clone the Website template respository from Github",
+    "text": "Step 1: Clone the Website template respository from Github\nCopy the following Github repo url and clone using Vscode source control.\nhttps://github.com/sijuswamy/Website-Template"
+  },
+  {
+    "objectID": "introduction/slides-quarto.html#step-2-open-the-folder-in-the-vscode-and-change-and-update-the-necessary-details-and-content.",
+    "href": "introduction/slides-quarto.html#step-2-open-the-folder-in-the-vscode-and-change-and-update-the-necessary-details-and-content.",
+    "title": "Setting Up of Quarto",
+    "section": "Step 2: Open the folder in the VScode and change and update the necessary details and content.",
+    "text": "Step 2: Open the folder in the VScode and change and update the necessary details and content.\nUse any of the following options to create your personal website designed in Quarto.\n# preview as html\nquarto preview index.qmd\n\n# preview as pdf\nquarto preview index.qmd --to pdf\n\n# preview a jupyter notebook\nquarto preview index.ipynb\nRendering\nYou can use quarto render command line options to control caching behavior without changing the document’s code. Use options to force the use of caching on all chunks, disable the use of caching on all chunks (even if it’s specified in options), or to force a refresh of the cache even if it has not been invalidated:\n# use a cache (even if not enabled in options)\nquarto render example.qmd --cache \n\n# don't use a cache (even if enabled in options)\nquarto render example.qmd --no-cache \n\n# use a cache and force a refresh \nquarto render example.qmd --cache-refresh"
+  },
+  {
+    "objectID": "hands_on.html",
+    "href": "hands_on.html",
+    "title": "Hands-on Session on Quarto",
+    "section": "",
+    "text": "Introduction to Quarto\nGet Started\nHands-on\n\nListings\nTemplates and Customization\nPrograming",
+    "crumbs": [
+      "Home",
+      "Hands-on Session on Quarto"
+    ]
+  },
+  {
+    "objectID": "hands_on.html#agenda",
+    "href": "hands_on.html#agenda",
+    "title": "Hands-on Session on Quarto",
+    "section": "",
+    "text": "Introduction to Quarto\nGet Started\nHands-on\n\nListings\nTemplates and Customization\nPrograming",
+    "crumbs": [
+      "Home",
+      "Hands-on Session on Quarto"
+    ]
+  },
+  {
+    "objectID": "hands_on.html#get-started",
+    "href": "hands_on.html#get-started",
+    "title": "Hands-on Session on Quarto",
+    "section": "Get Started",
+    "text": "Get Started\n\nDownloading Quarto\n\nDownload Quarto\n\nLinux\nMacOS\nWindows\n\nChoose your platform\n\nVS Code\nJupyter Notebook/Lab\nNeoVim\nRStudio\n\n\n\n\n\n\nDownload Quarto\n\nDownload Quarto: https://quarto.org/docs/get-started/\nWorkshop website: https://intelligentsystemslaboratory.github.io/quarto_workshop/\n\n\nSetup\n\nTerminal + Text Editor (VS Code)\nVisual Studio Code has options to use quarto in a better user interface\n\n\n\nRun the command ‘quarto create project website ’\nAlternatively, ctrl+shift+p and create the quarto project\nAutomatically Quarto will create the following directory structure:\n\n_quarto.yml\nindex.qmd\nabout.qmd\nstyles.css\n\n\n\n\nStructure\n\n.yml files\n\nYAML is a human-readable data serialization language\nYAML is an official strict superset of JSON despite looking very different from JSON.\nTo create a YAML file, use either the .yaml or .yml file extension.\n\n.qmd files\n\nWork as markdown files, but they have a configuration section in yml on the top of the file\n\n\n\n\n_quarto.yml\n\nDefines the basic structure of the website.\nAll configurations are done using yml\nSome of the configurations:\n\nNavigation bar\nSide bar\nContents",
+    "crumbs": [
+      "Home",
+      "Hands-on Session on Quarto"
+    ]
+  },
+  {
+    "objectID": "hands_on.html#listings",
+    "href": "hands_on.html#listings",
+    "title": "Hands-on Session on Quarto",
+    "section": "Listings",
+    "text": "Listings\n\nListings enable you to automatically generate the contents of a page (or region of a page) from a list of Quarto documents or other custom data\nUseful to create blogs, newletters\nLink to the documentation: https://quarto.org/docs/websites/website-listings.html\nListings example: https://intelligentsystemslaboratory.github.io/personal_page/blog.html",
+    "crumbs": [
+      "Home",
+      "Hands-on Session on Quarto"
+    ]
+  },
+  {
+    "objectID": "hands_on.html#templates-and-customization",
+    "href": "hands_on.html#templates-and-customization",
+    "title": "Hands-on Session on Quarto",
+    "section": "Templates and Customization",
+    "text": "Templates and Customization\n\nSearch bar\n\nhttps://quarto.org/docs/websites/website-search.html\n\nThemes\n\nhttps://quarto.org/docs/output-formats/html-themes.html\n\nTools\n\nhttps://quarto.org/docs/websites/website-tools.html",
+    "crumbs": [
+      "Home",
+      "Hands-on Session on Quarto"
+    ]
+  },
+  {
+    "objectID": "hands_on.html#programing",
+    "href": "hands_on.html#programing",
+    "title": "Hands-on Session on Quarto",
+    "section": "Programing",
+    "text": "Programing\n\nQuarto also provides the option to embed some code on your website\nQuarto supports Python, R, Julia and Observable Javascript\nYou can create a code block delimiting using ```\nExample of code running: https://tailor-uob.github.io/training-material/cha_odm/odm.html",
+    "crumbs": [
+      "Home",
+      "Hands-on Session on Quarto"
+    ]
+  },
+  {
+    "objectID": "hands_on.html#programing-1",
+    "href": "hands_on.html#programing-1",
+    "title": "Hands-on Session on Quarto",
+    "section": "Programing",
+    "text": "Programing\n\nAlso Quarto allows the creation of short codes.\nShortcodes are special markdown directives that generate various types of content. Quarto shortcodes are similar in form and function to Hugo shortcodes and WordPress shortcodes.\nDocumentation: https://quarto.org/docs/extensions/shortcodes.html",
+    "crumbs": [
+      "Home",
+      "Hands-on Session on Quarto"
+    ]
+  },
+  {
+    "objectID": "slides.html#agenda",
+    "href": "slides.html#agenda",
+    "title": "Hands-on Session on Quarto",
+    "section": "Agenda",
+    "text": "Agenda\n\nIntroduction to Quarto\nGet Started\nHands-on\n\nListings\nTemplates and Customization\nPrograming"
+  },
+  {
+    "objectID": "slides.html#get-started",
+    "href": "slides.html#get-started",
+    "title": "Hands-on Session on Quarto",
+    "section": "Get Started",
+    "text": "Get Started\nDownloading Quarto\n\nDownload Quarto\n\nLinux\nMacOS\nWindows\n\nChoose your platform\n\nVS Code\nJupyter Notebook/Lab\nNeoVim\nRStudio"
+  },
+  {
+    "objectID": "slides.html#listings",
+    "href": "slides.html#listings",
+    "title": "Hands-on Session on Quarto",
+    "section": "Listings",
+    "text": "Listings\n\nListings enable you to automatically generate the contents of a page (or region of a page) from a list of Quarto documents or other custom data\nUseful to create blogs, newletters\nLink to the documentation: https://quarto.org/docs/websites/website-listings.html\nListings example: https://intelligentsystemslaboratory.github.io/personal_page/blog.html"
+  },
+  {
+    "objectID": "slides.html#templates-and-customization",
+    "href": "slides.html#templates-and-customization",
+    "title": "Hands-on Session on Quarto",
+    "section": "Templates and Customization",
+    "text": "Templates and Customization\n\nSearch bar\n\nhttps://quarto.org/docs/websites/website-search.html\n\nThemes\n\nhttps://quarto.org/docs/output-formats/html-themes.html\n\nTools\n\nhttps://quarto.org/docs/websites/website-tools.html"
+  },
+  {
+    "objectID": "slides.html#programing",
+    "href": "slides.html#programing",
+    "title": "Hands-on Session on Quarto",
+    "section": "Programing",
+    "text": "Programing\n\nQuarto also provides the option to embed some code on your website\nQuarto supports Python, R, Julia and Observable Javascript\nYou can create a code block delimiting using ```\nExample of code running: https://tailor-uob.github.io/training-material/cha_odm/odm.html"
+  },
+  {
+    "objectID": "slides.html#programing-1",
+    "href": "slides.html#programing-1",
+    "title": "Hands-on Session on Quarto",
+    "section": "Programing",
+    "text": "Programing\n\nAlso Quarto allows the creation of short codes.\nShortcodes are special markdown directives that generate various types of content. Quarto shortcodes are similar in form and function to Hugo shortcodes and WordPress shortcodes.\nDocumentation: https://quarto.org/docs/extensions/shortcodes.html"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "This site contains information about a workshop organised in Saintgits College of Engineering (Autonomous) to introduce the Students in Minor in Computational Mathematics to the new opensource publishing system. This is part of the add-on program organized by the Department of Computer Science & Engineering.",
+    "crumbs": [
+      "Home",
+      "About"
+    ]
+  },
+  {
+    "objectID": "about.html#workshop-organisers",
+    "href": "about.html#workshop-organisers",
+    "title": "About",
+    "section": "Workshop organisers",
+    "text": "Workshop organisers\n\n\n\n\n\n\n\n\n\nSiju K S\n\n\n\n\n\n\n\nJobin Jose",
+    "crumbs": [
+      "Home",
+      "About"
+    ]
+  },
+  {
+    "objectID": "about.html#sidebar-image",
+    "href": "about.html#sidebar-image",
+    "title": "About",
+    "section": "Sidebar image",
+    "text": "Sidebar image\nThe sidebar image was generated by Microsoft Copilot with a prompt, “Transforming Classical Libraries to Digital Libraries with Open source.”",
+    "crumbs": [
+      "Home",
+      "About"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Quarto Hands on Workshop",
+    "section": "",
+    "text": "About the Workshop\nWe are pleased to announce that the Department of Computer Science and Engineering, in collaboration with the Department of Mathematics, is hosting a two-day workshop to highlight the transformative power of open-source tools in literate programming and machine learning.\n\n\nAbout Quarto\nThe Quarto publication system is a versatile and powerful tool designed for creating dynamic documents, presentations, websites, and more. It seamlessly integrates text, code, and outputs, making it an ideal choice for data scientists, researchers, and educators who need to combine narrative with analysis. Quarto supports a wide range of programming languages, including R, Python, and Julia, allowing users to embed live code within their documents. Its flexibility extends to output formats as well, enabling the production of HTML, PDF, Word documents, and more, all from a single source file. By leveraging Markdown and advanced features such as citations and cross-referencing, Quarto facilitates the creation of professional and reproducible documents that cater to diverse audiences and purposes.\nJoin us for this hands-on introductory tutorial to the Quarto publishing system. You will learn how to use Quarto to set up a personal academic website, advertise your work, build a blogging environment, as well as create slides, pdf’s or other online materials. At the end of the session you will have the main structure for your personal website, hosted for free in GitHub and with a simple and automatic deployment workflow using GitHub actions. We will provide use case examples and a step-by-step guide to follow along the session.\n\nAgenda\n\n9:00 Introduction to Literate Programming\n9.10 Testimonials\n9.20 Introduction to Quarto\n9:25 Get Started\n9.50 Break\nHands-on\n\n10:00 Installation and system set-up\n11:00 Website Design\n12.30 Lunch Break\n01.20 Blog Design\n02.30 Hosting Sites\n03:30 Break\n03.45 Personalizing Websites & Blogs\n04.20 Day 1 concluding session\n\n\n\n\nReserve your spot.\nPlaces are limited, please register by filling out the form below. The form will be closed when no more spots are available.\nhttps://forms.gle/wyGmPozDT1y3MPuE7",
+    "crumbs": [
+      "Home"
+    ]
+  },
+  {
+    "objectID": "introduction/setup.html",
+    "href": "introduction/setup.html",
+    "title": "Setting Up of Quarto",
+    "section": "",
+    "text": "Before diving into literate programming with Quarto, ensure that your development environment is properly set up. Follow these steps to install and configure the necessary tools:",
+    "crumbs": [
+      "Home",
+      "Setting Up of Quarto"
+    ]
+  },
+  {
+    "objectID": "introduction/setup.html#introduction",
+    "href": "introduction/setup.html#introduction",
+    "title": "Setting Up of Quarto",
+    "section": "",
+    "text": "Before diving into literate programming with Quarto, ensure that your development environment is properly set up. Follow these steps to install and configure the necessary tools:",
+    "crumbs": [
+      "Home",
+      "Setting Up of Quarto"
+    ]
+  },
+  {
+    "objectID": "introduction/setup.html#step-1-install-python",
+    "href": "introduction/setup.html#step-1-install-python",
+    "title": "Setting Up of Quarto",
+    "section": "Step 1: Install Python",
+    "text": "Step 1: Install Python\nPython is essential for this workshop as it is integral to Quarto for executing code within documents, accessing a wide range of libraries and tools for data analysis and machine learning, and enabling script execution. It also integrates seamlessly with Visual Studio Code, our recommended IDE, to enhance coding efficiency and support advanced machine learning tasks. By installing Python, you set up a powerful environment that supports both technical documentation and complex computational projects.\n\nDownload and Install Python\n\nGo to the official Python website.\nDownload the latest stable version of Python suitable for your operating system (Windows, macOS, or Linux).\nRun the installer and ensure you check the box to “Add Python to PATH” during installation.\nFollow the on-screen instructions to complete the installation.",
+    "crumbs": [
+      "Home",
+      "Setting Up of Quarto"
+    ]
+  },
+  {
+    "objectID": "introduction/setup.html#step-2-install-visual-studio-code-vs-code",
+    "href": "introduction/setup.html#step-2-install-visual-studio-code-vs-code",
+    "title": "Setting Up of Quarto",
+    "section": "Step 2: Install Visual Studio Code (VS Code)",
+    "text": "Step 2: Install Visual Studio Code (VS Code)\n\nDownload and Install Visual Studio Code (VS Code)\n\nVisit the official VS Code website.\nDownload the installer for your operating system.\nRun the installer and follow the prompts to install VS Code.\nAfter installation, open VS Code and install the recommended extensions:\n\nPython Extension: Search for “Python” in the Extensions view (Ctrl+Shift+X) and install it.\nQuarto Extension: Search for “Quarto” in the Extensions view and install it.",
+    "crumbs": [
+      "Home",
+      "Setting Up of Quarto"
+    ]
+  },
+  {
+    "objectID": "introduction/setup.html#step-3-install-quarto-cli",
+    "href": "introduction/setup.html#step-3-install-quarto-cli",
+    "title": "Setting Up of Quarto",
+    "section": "Step 3: Install Quarto CLI",
+    "text": "Step 3: Install Quarto CLI\nQuarto CLI is crucial as it allows you to create, render, and manage Quarto documents and projects. Quarto CLI integrates seamlessly with your development environment, enabling you to compile literate programming documents that combine code and narrative effectively. It supports various output formats, including HTML, PDF, and slides, and facilitates the integration of code with documentation. By installing Quarto CLI, you equip yourself with the necessary tools to manage and execute Quarto projects efficiently, making it a key component of your setup for this workshop.\n\nDownload and Install Quarto CLI\n\nVisit the Quarto CLI download page.\nDownload the latest stable release of Quarto CLI for your operating system.\nRun the installer and follow the on-screen instructions to complete the installation.\nAfter installation, verify that Quarto CLI is correctly installed by opening a command line interface (Terminal on macOS/Linux, Command Prompt or PowerShell on Windows) and typing:\nquarto --version",
+    "crumbs": [
+      "Home",
+      "Setting Up of Quarto"
+    ]
+  },
+  {
+    "objectID": "introduction/setup.html#step-4-install-git-for-cicd",
+    "href": "introduction/setup.html#step-4-install-git-for-cicd",
+    "title": "Setting Up of Quarto",
+    "section": "Step 4: Install Git for CI/CD",
+    "text": "Step 4: Install Git for CI/CD\nGit is essential for version control and collaborative development, enabling you to track changes in your code, manage different versions of your projects, and collaborate effectively with others. It supports continuous integration and deployment (CI/CD) workflows, which are crucial for maintaining and deploying code systematically. Additionally, Git integrates with GitHub, allowing you to host and publish websites using GitHub Pages, providing a seamless way to share and showcase your projects online. By installing Git, you ensure that you can manage and synchronize your work efficiently, maintain a history of changes, collaborate seamlessly, and leverage GitHub Pages for web hosting throughout the workshop.\n\nDownload and Install Git\n\nVisit the official Git website.\nDownload the installer for your operating system.\nRun the installer and follow the prompts. You can use the default settings for most options.\nEnsure Git is added to your system PATH by checking the appropriate option during installation.\n\nConfigure Git\n\nOpen your command line interface (Terminal on macOS/Linux, Command Prompt or PowerShell on Windows).\nConfigure your Git username and email:\ngit config --global user.name \"Your Name\"\ngit config --global user.email \"your.email@example.com\"\nVerify the installation by checking the Git version:\ngit --version\n\n\n\n\n\n\n\n\nNote\n\n\n\nIf you are in a fresh Python 3 environment, installing the jupyter package will provide everything required to execute Jupyter kernels with Quarto:\npython3 -m pip install jupyter\n\n\nThe publishing workflow is the process in which external resources are prepared and collated together with the help of an authoring tool and subsequently rendered with a formatting tool to generate a publishable output that can be delivered in various forms. This is visualised by the following figure.",
+    "crumbs": [
+      "Home",
+      "Setting Up of Quarto"
+    ]
+  },
+  {
+    "objectID": "introduction/setup.html#literate-programming-workflow",
+    "href": "introduction/setup.html#literate-programming-workflow",
+    "title": "Setting Up of Quarto",
+    "section": "Literate Programming Workflow",
+    "text": "Literate Programming Workflow\n\n\n\n\n\n---\n Literate Programming Workflow\n---\ngraph TD\n    A[Python] --&gt;|Code Execution| B[Quarto CLI]\n    B --&gt;|Document Rendering| C[Technical Documents]\n    B --&gt;|Document Rendering| D[Blogs]\n    B --&gt;|Document Rendering| E[Websites]\n    E --&gt;|Host| F[GitHub Pages]\n    G[Git] --&gt;|Version Control| C\n    G --&gt;|Version Control| D\n    G --&gt;|Version Control| E\n    G --&gt;|CI/CD| F\n\n    subgraph Development\n        A\n        B\n        G\n    end\n\n    subgraph Output\n        C\n        D\n        E\n        F\n    end\n\n    style Development fill:#f9f,stroke:#333,stroke-width:2px\n    style Output fill:#ccf,stroke:#333,stroke-width:2px",
+    "crumbs": [
+      "Home",
+      "Setting Up of Quarto"
+    ]
+  },
+  {
+    "objectID": "introduction/setup.html#creating-your-personal-website",
+    "href": "introduction/setup.html#creating-your-personal-website",
+    "title": "Setting Up of Quarto",
+    "section": "Creating Your Personal Website",
+    "text": "Creating Your Personal Website\nIn the digital era, a personal website is an essential tool for engineering students looking to showcase their skills, projects, and achievements. It acts as an online portfolio, a platform for sharing insights, and a way to make a professional impression. Creating your own website involves several key steps, from planning and design to development and hosting. This guide will walk you through the process of designing a user-friendly site, building it with the right tools, testing and optimizing its performance, and finally, hosting it for the world to see. Whether you want to present your academic projects, share your resume, or maintain a blog, a well-crafted personal website can enhance your visibility and open up new opportunities in your engineering career.",
+    "crumbs": [
+      "Home",
+      "Setting Up of Quarto"
+    ]
+  },
+  {
+    "objectID": "introduction/setup.html#step-1-clone-the-website-template-respository-from-github",
+    "href": "introduction/setup.html#step-1-clone-the-website-template-respository-from-github",
+    "title": "Setting Up of Quarto",
+    "section": "Step 1: Clone the Website template respository from Github",
+    "text": "Step 1: Clone the Website template respository from Github\nCopy the following Github repo url and clone using Vscode source control.\nhttps://github.com/sijuswamy/Website-Template",
+    "crumbs": [
+      "Home",
+      "Setting Up of Quarto"
+    ]
+  },
+  {
+    "objectID": "introduction/setup.html#step-2-open-the-folder-in-the-vscode-and-change-and-update-the-necessary-details-and-content.",
+    "href": "introduction/setup.html#step-2-open-the-folder-in-the-vscode-and-change-and-update-the-necessary-details-and-content.",
+    "title": "Setting Up of Quarto",
+    "section": "Step 2: Open the folder in the VScode and change and update the necessary details and content.",
+    "text": "Step 2: Open the folder in the VScode and change and update the necessary details and content.\nYou can author Quarto documents that include Python code using any text or notebook editor. No matter what editing tool you use, you’ll always run quarto preview first to setup a live preview of changes in your document. Live preview is available for both HTML and PDF output. For example:\nUse any of the following options to create your personal website designed in Quarto.\n# preview as html\nquarto preview index.qmd\n\n# preview as pdf\nquarto preview index.qmd --to pdf\n\n# preview a jupyter notebook\nquarto preview index.ipynb\n\nRendering\nYou can use quarto render command line options to control caching behavior without changing the document’s code. Use options to force the use of caching on all chunks, disable the use of caching on all chunks (even if it’s specified in options), or to force a refresh of the cache even if it has not been invalidated:\n# use a cache (even if not enabled in options)\nquarto render example.qmd --cache \n\n# don't use a cache (even if enabled in options)\nquarto render example.qmd --no-cache \n\n# use a cache and force a refresh \nquarto render example.qmd --cache-refresh",
+    "crumbs": [
+      "Home",
+      "Setting Up of Quarto"
+    ]
+  }
+]

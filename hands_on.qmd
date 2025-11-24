@@ -1,0 +1,125 @@
+---
+title: "Hands-on Session on Quarto"
+author: "siju.swamy@saintgits.org"
+format:
+    html: default
+    revealjs:
+        theme: simple
+        output-file: slides.html
+        width: 960
+        height: 700
+jupyter: python3
+
+---
+
+## Agenda
+
+- Introduction to Quarto
+- Get Started 
+- Hands-on
+    - Listings
+    - Templates and Customization
+    - Programing
+
+
+## Get Started
+
+### Downloading Quarto
+
+- Download Quarto
+    - Linux
+    - MacOS
+    - Windows
+
+- Choose your platform
+    - VS Code
+    - Jupyter Notebook/Lab
+    - NeoVim
+    - RStudio
+
+---
+
+![](images/geting_started.png){.absolute top=75}
+
+---
+
+- Download Quarto
+
+Download Quarto: [https://quarto.org/docs/get-started/](https://quarto.org/docs/get-started/)
+
+Workshop website: [https://sijuswamy.github.io/CME-workshop-1/](https://sijuswamy.github.io/CME-workshop-1/)
+
+
+### Setup
+
+- Terminal + Text Editor (VS Code)
+
+- Visual Studio Code has options to use quarto in a better user interface
+
+---
+
+- Run the command 'quarto create project website <mysite>'
+
+- Alternatively, ctrl+shift+p and create the quarto project
+
+- Automatically Quarto will create the following directory structure:
+    - _quarto.yml
+    - index.qmd
+    - about.qmd
+    - styles.css
+
+### Structure
+
+- .yml files
+    - YAML is a human-readable data serialization language
+    - YAML is an official strict superset of JSON despite looking very different from JSON.
+    - To create a YAML file, use either the .yaml or .yml file extension.
+
+- .qmd files
+    - Work as markdown files, but they have a configuration section in yml on the top of the file
+
+---
+
+- _quarto.yml
+    - Defines the basic structure of the website.
+    - All configurations are done using yml
+    - Some of the configurations:
+        - Navigation bar
+        - Side bar
+        - Contents 
+
+## Listings {.smaller}
+
+- Listings enable you to automatically generate the contents of a page (or region of a page) from a list of Quarto documents or other custom data
+
+- Useful to create blogs, newletters
+
+- Link to the documentation: [https://quarto.org/docs/websites/website-listings.html](https://quarto.org/docs/websites/website-listings.html)
+
+
+## Templates and Customization
+
+- Search bar
+    - [https://quarto.org/docs/websites/website-search.html](https://quarto.org/docs/websites/website-search.html)
+- Themes
+    - [https://quarto.org/docs/output-formats/html-themes.html](https://quarto.org/docs/output-formats/html-themes.html)
+- Tools
+    - [https://quarto.org/docs/websites/website-tools.html](https://quarto.org/docs/websites/website-tools.html)
+
+## Programing
+
+- Quarto also provides the option to embed some code on your website
+
+- Quarto supports Python, R, Julia and Observable Javascript
+
+- You can create a code block delimiting using ```
+
+- Example of code running: [https://tailor-uob.github.io/training-material/cha_odm/odm.html](https://tailor-uob.github.io/training-material/cha_odm/odm.html)
+
+## Programing
+
+- Also Quarto allows the creation of short codes.
+
+- Shortcodes are special markdown directives that generate various types of content. Quarto shortcodes are similar in form and function to Hugo shortcodes and WordPress shortcodes.
+
+- Documentation: [https://quarto.org/docs/extensions/shortcodes.html](https://quarto.org/docs/extensions/shortcodes.html)

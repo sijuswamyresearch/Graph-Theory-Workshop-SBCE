@@ -1,0 +1,107 @@
+---
+title: "Graph Theory: From Euler to AI"
+subtitle: "Applications, Algorithms & Engineering Use Cases"
+
+author: 
+  - name:
+      given: Siju
+      family: Swamy
+    orcid: 0009-0004-1983-5574
+    email: siju.swamy@saintgits.org
+    affiliations:
+      - name: Saintgits College of Engineering (Autonomous)
+        city: Kottayam
+        country: India
+        postal-code: 686532
+  - name: Merina Aruja
+    email: merina.aruja@saintgits.org
+    affiliations:
+      - name: Saintgits College of Engineering (Autonomous)
+        city: Kottayam
+        country: India
+        postal-code: 686532
+---
+
+## About the Workshop
+
+We are pleased to announce that the Department of Mathematics, is hosting a hands-on workshop to highlight the transformative power of graph theory in engineering.
+
+Graph Theory is fundamental to modern engineering intelligence systems. Originating from Euler’s solution to the Königsberg Bridge Problem, graph theory now drives advanced technologies including Artificial Intelligence, Machine Learning, Cybersecurity, Network Routing, Smart Transportation and Compiler Optimization. This expert session explores the evolution of graph theory through interactive demonstrations, 
+live coding, simulation examples and real-world engineering applications.
+
+
+
+### Agenda
+
+:::: {.columns}
+
+::: {.column width="45%"}
+**Half-Day Workshop**
+
+- 9:00 **Inaugural & Introduction**
+    - Relevance of Graph Theory in Engineering & Computing
+
+- 9:20 **Session 1 — Evolution of Graph Theory**
+    - Königsberg Bridge Problem to Modern Networks
+    - Graph Types & Representations
+    - Real-world Motivation
+
+- 10:05 **Session 2 — Graph Algorithms & Network Optimisation**
+    - Shortest Path (Dijkstra, A*)
+    - Routing & Transportation Networks Case Study
+    - **Hands-On:** Shortest Path Visualizer (Python + NetworkX)
+
+- 10:55 Break
+
+- 11:05 **Session 3 — Graph Colouring for Scheduling & Resource Allocation**
+    - Chromatic Number, Greedy & DSATUR Algorithm
+    - Real Timetable Scheduling Case Study
+    - **Hands-On:** Graph Colouring App (Python + NetworkX)
+
+- 11:50 **Session 4 — Graphs in AI & Machine Learning**
+    - Graph Neural Networks (GCN / GAT)
+    - Karate Club Dataset Demonstration
+    - Research & Industry Applications
+
+- 12:30 **Feedback & Conclusion**
+    - Open Discussion
+    - Project / Further Reading Recommendations
+
+:::
+
+::: {.column width="10%"}
+:::
+
+::: {.column width="45%"}
+**Hands-On Tools & Technologies**
+
+- Python, Jupyter Notebook
+- NetworkX & Matplotlib
+- PyTorch Geometric / DGL (demo only)
+- Quarto for Documentation & GitHub Pages Deployment
+- Sample project repositories & templates
+
+**Expected Deliverables**
+
+- Working examples: Routing, Scheduling, GCN model
+- Visualisation of real graph datasets
+- Course project roadmap
+:::
+
+::::
+
+
+
+
+
+
+### Feed back form. 
+
+We would greatly appreciate it if you could take a few moments to complete our feedback form.
+
+Please click the link below or scan the QR code to access the feedback form:
+
+<https://forms.gle/bHKwtrkV8JoN8KCc6>
+
+
+{{< qrcode https://forms.gle/bHKwtrkV8JoN8KCc6 >}}

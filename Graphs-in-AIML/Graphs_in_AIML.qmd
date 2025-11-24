@@ -1,0 +1,220 @@
+---
+title: "Module 5: Graphs in AI/ML"
+subtitle: <a href="slides-ML.html" target="_blank"></a>
+author: 
+  - name:
+      given: Siju
+      family: Swamy
+    orcid: 0009-0004-1983-5574
+    email: siju.swamy@saintgits.org
+    affiliations:
+      - name: Saintgits College of Engineering (Autonomous)
+        city: Kottayam
+        country: India
+        postal-code: 686532
+    attributes:
+        equal-contributor: False
+format:
+  html:
+    mermaid:
+      theme: dark
+    
+  revealjs:
+    output-file: slides-ML.html
+    width: 960
+    height: 700
+    css: assets/style.css
+    mermaid:
+      theme: dark
+jupyter: python3
+execute: 
+  enabled: true
+---
+
+>Module outcomes:
+
+Upon completion of this module, learners will be able to:
+
+- Understand how graph structures naturally model relationships, dependencies, and interactions in real-world datasets.
+- Explain the role of graph-based learning compared to traditional machine learning methods that assume IID (Independent & Identically Distributed) data.
+- Describe and interpret major graph-based ML approaches such as *Graph Neural Networks (GNNs)*, *Graph Convolutional Networks (GCNs)*, and *Graph Attention Networks (GATs)*.
+- Analyse the working principle of *PageRank* and its importance in ranking, recommendation, and influence modelling.
+- Apply graph analytics to solve real-world problems such as community detection, recommendation systems, fraud detection, and biological network analysis.
+- Implement basic graph-based ML tasks using Python libraries such as `NetworkX`, `PyTorch Geometric`, or `DGL`.
+- Build small proof-of-concept models using publicly available graph datasets (e.g., Cora citation network, Karate club dataset).
+- Understand research opportunities, scalability challenges, and future directions in graph-based machine learning.
+
+
+## Introduction
+
+Graphs play an increasingly critical role in modern *Artificial Intelligence and Machine Learning*, enabling representation and reasoning over structured data with complex relationships. Unlike traditional ML models that handle grid-structured or tabular data, graphs naturally encode *interconnected, relational and irregular structures*.
+
+The development of Graph Neural Networks (GNNs), including Graph Convolutional Networks (GCNs) and Graph Attention Networks (GATs), has opened new avenues for learning from structured dependencies rather than treating data points as independent entities. These models have demonstrated breakthrough performance in tasks such as node classification, link prediction, community detection, recommendation systems, and risk intelligence.
+
+Furthermore, real-world AI systems—such as Google’s ranking algorithms, fraud detection engines in banking, medical knowledge discovery systems, and smart city analytics—rely heavily on graph-based reasoning. As industry adoption accelerates, expertise in graph analytics and graph-based deep learning has become an essential skill for engineers, data scientists, and AI researchers.
+
+Graph-based approaches thus represent a powerful paradigm shift:  *from learning on isolated data points to learning from connected knowledge.*  
+Mastering graph theory and graph ML prepares learners to solve scalable real-world problems and engage in research opportunities at the intersection of mathematics, computation, and intelligent systems.
+
+This module introduces core graph-based AI models and algorithms:
+- *Knowledge Graphs (KGs)* for semantic reasoning and information organization
+- *PageRank algorithm* for ranking & recommendation
+- *Graph Neural Networks (GNNs)* for deep learning on graph-structured data
+
+## Knowledge Graphs (KGs)
+
+### What is a Knowledge Graph?
+
+A *Knowledge Graph* is a labelled, directed graph used to represent knowledge in terms of *entities (nodes)* and *relationships (edges)*.
+
+Example structure:
+
+```bash
+(Person) ---[lives_in]---> (City)
+(Author) ---[wrote]------> (Book)
+(Student) ---[enrolled]--> (Course)
+Alan Turing) —[pioneer_of]→ (AI)
+(AI) —[includes]→ (Machine Learning)
+(ML) —[subset_of]→ (Deep Learning)
+```
+
+:::{.callout-note}
+### Key Characteristics
+- **Entity-based representation**
+- **Semantic relationship modelling**
+- **Supports reasoning & inference**
+:::
+
+### Real Engineering Applications
+
+| Domain | Application | Example |
+|--------|------------|----------|
+| Search Engines | query understanding | Google Knowledge Graph |
+| Healthcare | disease–symptom inference | biomedical KG |
+| NLP / ChatGPT | fact linking | entity embeddings |
+| Recommender Systems | product–user graph | Amazon, Netflix |
+| Academic Research | citation networks | DBLP, Scopus |
+
+### Mini Example in Python (NetworkX)
+
+```{python}
+import networkx as nx
+import matplotlib.pyplot as plt
+
+KG = nx.DiGraph()
+KG.add_edges_from([
+    ("Alan Turing", "AI", {"relation": "pioneer_of"}),
+    ("AI", "Machine Learning", {"relation": "includes"}),
+    ("Machine Learning", "Deep Learning", {"relation": "subset_of"}),
+])
+
+pos = nx.spring_layout(KG)
+nx.draw(KG, pos, with_labels=True, node_size=2500)
+plt.show()
+```
+
+## PageRank Algorithm
+
+### Intuition
+
+PageRank assigns an "importance" score to each node based on the importance and number of incoming links. Think of a random surfer who follows outgoing links with probability d (damping factor, usually 0.85) and jumps to a random node with probability 1−d. Pages that are linked from many important pages get higher PageRank.
+
+### Core formula
+
+$$PR(v)=\frac{1-d}{N}+d\sum\limits_{u\in In(v)}\frac{PR(u)}{Out(u)}$$
+
+where:
+
+- $PR(v)$ is the PageRank of node $v$
+- $d$ is the damping factor (typically $d = 0.85$)
+- $N$ is the total number of nodes
+- $In(v)$ represents nodes linking to $v$
+- $Out(u)$ represents the number of outgoing links from $u$
+
+This is solved iteratively (power iteration) until convergence.
+
+### Example code
+
+```{python}
+import networkx as nx
+
+G = nx.DiGraph()
+edges = [('A','B'),('A','C'),('B','C'),('C','A'),('C','D'),('D','C')]
+G.add_edges_from(edges)
+
+pr = nx.pagerank(G, alpha=0.85)
+print(pr)
+```
+
+
+:::{.callout-note}
+### Uses / Applications
+- Search engines: rank web pages.
+- Recommendation: rank items or users in bipartite graphs.
+- Citation analysis: identify influential papers/authors.
+- Social networks: measure influence or authority.
+- Spam/fraud detection: detect anomalous link patterns.
+:::
+
+### Graph Neural Networks (GNNs)
+
+Traditional ML models such as CNNs and RNNs assume Euclidean structure (images, sequences).
+Graphs are non-Euclidean; therefore a new architecture is needed.
+
+GNNs generalize neural networks to graph-structured data using message passing.
+
+:::{.callout-note}
+### Message Passing Update Rule
+
+$$h_v(k+1)=\sigma\left(W_k\sum\limits_{u\in N(v)}h_u(k)\right)$$
+
+where,
+
+- $h_v^{(k)}$ is the representation of node $v$ after $k$ layers
+
+- $N(v)$ represents neighbours
+
+- $W_k$ is a learnable weight matrix
+
+- $\sigma$ is an activation function
+
+:::
+
+### GNN usescases
+
+| Domain                 | Example                                    |
+| ---------------------- | ------------------------------------------ |
+| Social Networks        | community detection, link prediction       |
+| Chemistry / Biology    | drug discovery, molecular graph prediction |
+| Traffic Forecasting    | congestion modelling                       |
+| Cybersecurity          | anomaly detection                          |
+| Finance                | fraud & risk modelling                     |
+| Recommendation Systems | deep collaborative filtering               |
+
+## Case Study — Epidemic Spread Modelling
+
+During the outbreak of contagious diseases such as COVID-19, Influenza, or Nipah virus, rapid identification of individuals who play a critical role in spreading infection is essential for effective containment. Public health authorities model social interactions as graphs where nodes represent individuals and edges represent close contact events capable of transmitting disease. Given a simulated contact network of individuals in a community, determine:
+
+1. Nodes with the highest risk of spreading infection (super-spreaders) using graph centrality metrics.
+
+2. The minimal set of nodes to isolate or track for maximum reduction in infection propagation.
+
+3. Visualise the network and highlight highly influential individuals.
+
+```{python}
+import networkx as nx
+import matplotlib.pyplot as plt
+
+G = nx.barabasi_albert_graph(20, 2)
+nx.draw(G, with_labels=True, node_size=900)
+plt.show()
+
+centrality = nx.betweenness_centrality(G)
+print(sorted(centrality.items(), key=lambda x: x[1], reverse=True))
+```
+
+## Conclusion
+
+Graphs have emerged as a foundational component in modern Artificial Intelligence and Machine Learning, enabling representation and analysis of complex relational data that cannot be captured effectively through traditional vector-based approaches. By leveraging graph structures, algorithms can model interconnected systems such as social networks, transportation systems, biological interactions, and financial transaction workflows with superior accuracy and interpretability.
+
+

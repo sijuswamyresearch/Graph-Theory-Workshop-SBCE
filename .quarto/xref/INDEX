@@ -1,0 +1,52 @@
+{
+  "about.qmd": {
+    "about.html": "21efb1d2"
+  },
+  "hands_on.qmd": {
+    "hands_on.html": "e9bd3bec",
+    "slides.html": "05429f4b"
+  },
+  "index.qmd": {
+    "index.html": "a186422c"
+  },
+  "introduction/index.qmd": {
+    "index.html": "79e0f0ec",
+    "slides-quarto.html": "b6a15a90"
+  },
+  "introduction/setup.qmd": {
+    "setup.html": "3c4b637f",
+    "slides-quarto.html": "fcbff97e"
+  },
+  "ML/ML_lesson.qmd": {
+    "ML_lesson.html": "f4431509",
+    "slides-quarto.html": "b0bed45b",
+    "slides-ML.html": "d5df31a5"
+  },
+  "introduction/setup/index.qmd": {
+    "index.html": "6c0c413f",
+    "slides-quarto.html": "fc4c104a"
+  },
+  "setup/index.qmd": {
+    "index.html": "1bbcccb6",
+    "slides-quarto.html": "400ee2f3"
+  },
+  "feedback.qmd": {
+    "feedback.html": "b6683dd3"
+  },
+  "introduction/Hands-on-Demos/Networkx_demo.qmd": {
+    "Networkx_demo.html": "8ba4324a",
+    "slides-ML.html": "751c1387"
+  },
+  "Graph_algorithms/ML_lesson.qmd": {
+    "ML_lesson.html": "a5bd5762",
+    "slides-ML.html": "5f2651a0"
+  },
+  "Hands-on-Demos/Networkx_demo.qmd": {
+    "Networkx_demo.html": "bb19734e",
+    "slides-ML.html": "a8f9198a"
+  },
+  "Graphs-in-AIML/Graphs_in_AIML.qmd": {
+    "Graphs_in_AIML.html": "89322286",
+    "slides-ML.html": "87af9492"
+  }
+}
