@@ -184,7 +184,5 @@ Shortest path algorithms form the computational backbone of many real-world syst
 
 :::: {.content-hidden when-format="revealjs"}
 
-Machine learning represents a sophisticated approach to solving problems by leveraging data to inform and improve decision-making processes, contrasting sharply with traditional rule-based systems. Unlike rule-based learning, which relies on predefined rules and logic to make decisions, machine learning algorithms dynamically adapt and learn from patterns within data. This enables them to handle complex and variable inputs without explicit programming for every scenario. Essentially, machine learning is a richer computational translation of mathematical and statistical models, allowing for more flexible and accurate predictions by identifying patterns and insights that rule-based systems might overlook. A wonderful aspect of machine learning is its ability to store the learned patterns and knowledge, allowing models to be reused and refined over time for future predictions, thereby continuously enhancing their performance as more data becomes available.
-
-The Classification of Machine Learning Algorithms is shown below.
+Content beyond slides goes here:
 ::::
