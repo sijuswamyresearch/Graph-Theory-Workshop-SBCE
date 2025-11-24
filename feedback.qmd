@@ -16,35 +16,35 @@ We value your feedback! Please take a moment to provide your insights on the wor
 
 Please rate the following statements on a scale of 1 to 5, where 1 is "Strongly Disagree" and 5 is "Strongly Agree":
 
-1. **How effective was the workshop in teaching you to use Quarto for websites, blogs, and technical writing?**
+1. **The workshop objectives were clearly defined and effectively communicated.**
    - [ ] 1
    - [ ] 2
    - [ ] 3
    - [ ] 4
    - [ ] 5
 
-2. **How clear was the instruction on the end-to-end machine learning workflow, from data preprocessing to model deployment?**
+2. **The workshop enhanced my understanding of the practical applications of Graph Theory in engineering and computing?**
    - [ ] 1
    - [ ] 2
    - [ ] 3
    - [ ] 4
    - [ ] 5
 
-3. **How beneficial was the hands-on approach to learning and applying machine learning techniques?**
+3. **The hands-on sessions and demonstrations using Python and NetworkX were helpful for practical learning.**
    - [ ] 1
    - [ ] 2
    - [ ] 3
    - [ ] 4
    - [ ] 5
 
-4. **How would you rate the knowledge and expertise of the resource person in the topics covered?**
+4. **The content was well-structured, and the pace of delivery was appropriate.**
    - [ ] 1
    - [ ] 2
    - [ ] 3
    - [ ] 4
    - [ ] 5
 
-5. **How satisfactory was the support and assistance provided by the resource person during the workshop?**
+5. **I feel more confident in applying graph-based reasoning to real-world problem-solving after attending this workshop.**
    - [ ] 1
    - [ ] 2
    - [ ] 3
@@ -57,15 +57,15 @@ Thank you for your feedback!
 
 You can access the feedback form through the link below or scan the QR code to provide your responses:
 
-<https://forms.gle/bHKwtrkV8JoN8KCc6>
+<https://forms.gle/AD6vuxrPoohj7iz16>
 
 
-{{< qrcode https://forms.gle/bHKwtrkV8JoN8KCc6 >}}
+{{< qrcode https://forms.gle/AD6vuxrPoohj7iz16 >}}
 
 
 ## Response Analysis
 
-```{python}
+```python
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns

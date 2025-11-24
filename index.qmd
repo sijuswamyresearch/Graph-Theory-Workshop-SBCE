@@ -101,7 +101,7 @@ We would greatly appreciate it if you could take a few moments to complete our f
 
 Please click the link below or scan the QR code to access the feedback form:
 
-<https://forms.gle/bHKwtrkV8JoN8KCc6>
+<https://forms.gle/AD6vuxrPoohj7iz16>
 
 
-{{< qrcode https://forms.gle/bHKwtrkV8JoN8KCc6 >}}
+{{< qrcode https://forms.gle/AD6vuxrPoohj7iz16 >}}

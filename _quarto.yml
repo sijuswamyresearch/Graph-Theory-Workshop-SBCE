@@ -3,8 +3,8 @@ project:
   output-dir: docs
 website:
   title: "Workshop on Graph Theory"
-  site-url: https://sijuswamy.github.io/CME-workshop-1/
-  repo-url: https://github.com/sijuswamy/CME-workshop-1
+  site-url: https://github.com/sijuswamyresearch/Graph-Theory-Workshop-SBCE
+  repo-url: https://github.com/sijuswamyresearch/Graph-Theory-Workshop-SBCE
   repo-branch: main
   repo-actions: [issue]
   navbar:
