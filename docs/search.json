@@ -186,33 +186,77 @@
     ]
   },
   {
-    "objectID": "Hands-on-Demos/Networkx_demo.html",
-    "href": "Hands-on-Demos/Networkx_demo.html",
-    "title": "Module 4 — Hands-on Demonstrations using Python & NetworkX",
-    "section": "",
-    "text": "This module introduces practical graph modelling and algorithm execution using Python and the NetworkX library. Students will learn to construct real and simulated graphs, visualize structure, compute metrics, and explore algorithms such as shortest paths, centrality, and colouring.\nThe objective is to bridge theoretical understanding from discrete mathematics to real-world implementations in engineering problems such as network routing, urban mobility, scheduling, and social network analytics.",
-    "crumbs": [
-      "Home",
-      "Hands-on Demos"
-    ]
-  },
-  {
     "objectID": "Hands-on-Demos/Networkx_demo.html#introduction",
     "href": "Hands-on-Demos/Networkx_demo.html#introduction",
-    "title": "Module 4 — Hands-on Demonstrations using Python & NetworkX",
-    "section": "",
-    "text": "This module introduces practical graph modelling and algorithm execution using Python and the NetworkX library. Students will learn to construct real and simulated graphs, visualize structure, compute metrics, and explore algorithms such as shortest paths, centrality, and colouring.\nThe objective is to bridge theoretical understanding from discrete mathematics to real-world implementations in engineering problems such as network routing, urban mobility, scheduling, and social network analytics.",
+    "title": "Module 3 — Hands-on Demonstrations using Python & NetworkX",
+    "section": "Introduction",
+    "text": "Introduction\nThis module introduces practical graph modelling and algorithm execution using Python and the NetworkX library. Students will learn to construct real and simulated graphs, visualize structure, compute metrics, and explore algorithms such as shortest paths, centrality, and colouring.\nThe objective is to bridge theoretical understanding from discrete mathematics to real-world implementations in engineering problems such as network routing, urban mobility, scheduling, and social network analytics.",
     "crumbs": [
       "Home",
       "Hands-on Demos"
     ]
   },
   {
-    "objectID": "Hands-on-Demos/Networkx_demo.html#module-objectives",
-    "href": "Hands-on-Demos/Networkx_demo.html#module-objectives",
-    "title": "Module 4 — Hands-on Demonstrations using Python & NetworkX",
-    "section": "Module Objectives",
-    "text": "Module Objectives\nAfter completing this module, students are expected to be able to:\n\nConstruct graphs from real-world datasets\nApply algorithms for shortest paths, spanning trees, and colouring\nAnalyse networks using centrality measures\nPerform visual and interpretative data-driven studies",
+    "objectID": "Hands-on-Demos/Networkx_demo.html#learning-objectives",
+    "href": "Hands-on-Demos/Networkx_demo.html#learning-objectives",
+    "title": "Module 3 — Hands-on Demonstrations using Python & NetworkX",
+    "section": "Learning Objectives",
+    "text": "Learning Objectives\nBy the end of this module, students will be able to:\n\nConstruct complex graphs directly from dataframes/datasets.\nApply algorithms: Dijkstra (Routing), Kruskal/Prim (MST), and Greedy Colouring.\nAnalyse network robustness using Degree and Betweenness centrality.\nPerform visual data-driven studies to interpret network structure.",
+    "crumbs": [
+      "Home",
+      "Hands-on Demos"
+    ]
+  },
+  {
+    "objectID": "Hands-on-Demos/Networkx_demo.html#constructing-graphs-from-real-world-data",
+    "href": "Hands-on-Demos/Networkx_demo.html#constructing-graphs-from-real-world-data",
+    "title": "Module 3 — Hands-on Demonstrations using Python & NetworkX",
+    "section": "Constructing Graphs from Real-World Data",
+    "text": "Constructing Graphs from Real-World Data\nReal-world data rarely comes in neat adjacency matrices. In engineering and data science, network data usually exists in CSV files, SQL databases, or Excel sheets.\nTo bridge this gap, we utilize data handling libraries (like Pandas) to load datasets representing entities (nodes) and connections (edges). For our case study, we simulate a dataset of 8 cities and the construction cost (in millions) to build high-voltage lines between them.\nThe graph is constructed by mapping:\n\nSource/Target columns \\(\\rightarrow\\) Edges\nCost/Type columns \\(\\rightarrow\\) Edge Attributes (Weights)\n\n\nimport networkx as nx\nimport pandas as pd\nimport matplotlib.pyplot as plt\n\n# 1. Simulate a \"Real-World\" Dataset (e.g., imported from CSV)\ndata = {\n    'Source': ['City_A', 'City_A', 'City_B', 'City_B', 'City_C', 'City_D', 'City_E', 'City_F', 'City_G'],\n    'Target': ['City_B', 'City_C', 'City_D', 'City_E', 'City_F', 'City_E', 'City_G', 'City_G', 'City_H'],\n    'Cost':   [10,       15,       12,       15,       10,       5,        8,        20,       12],  # Edge Weight\n    'Type':   ['Fiber',  'Copper', 'Fiber',  'Copper', 'Fiber',  'Fiber',  'Copper', 'Fiber',  'Copper'] # Attribute\n}\n\ndf = pd.DataFrame(data)\n\n# 2. Construct the Graph directly from the DataFrame\n# This is the industry-standard way to load graphs\nG = nx.from_pandas_edgelist(df, source='Source', target='Target', edge_attr=['Cost', 'Type'])\n\nprint(f\"Graph Successfully Constructed!\")\nprint(f\"Nodes (Cities): {G.number_of_nodes()}\")\nprint(f\"Edges (Power Lines): {G.number_of_edges()}\")\n\n# Quick Visualization\nplt.figure(figsize=(10, 6))\npos = nx.spring_layout(G, seed=42)\nnx.draw(G, pos, with_labels=True, node_color='lightgreen', node_size=1200, font_weight='bold')\nnx.draw_networkx_edge_labels(G, pos, edge_labels=nx.get_edge_attributes(G, 'Cost'))\nplt.title(\"Regional Power Grid Topology\")\nplt.show()\n\nGraph Successfully Constructed!\nNodes (Cities): 8\nEdges (Power Lines): 9",
+    "crumbs": [
+      "Home",
+      "Hands-on Demos"
+    ]
+  },
+  {
+    "objectID": "Hands-on-Demos/Networkx_demo.html#optimization-algorithms-spanning-trees-routing",
+    "href": "Hands-on-Demos/Networkx_demo.html#optimization-algorithms-spanning-trees-routing",
+    "title": "Module 3 — Hands-on Demonstrations using Python & NetworkX",
+    "section": "Optimization Algorithms: Spanning Trees & Routing",
+    "text": "Optimization Algorithms: Spanning Trees & Routing\nOnce the graph is built, we can apply standard optimization algorithms to save costs and improve efficiency.\n\nMinimum Spanning Tree (MST)\nThe Scenario: We need to connect all cities with power lines to ensure everyone has electricity, but we want to minimize the total construction cost. We do not need redundant loops; we just need basic connectivity.\nThe Solution: We apply Kruskal’s or Prim’s Algorithm. This algorithm identifies a subset of edges that connects all vertices together, without any cycles, and with the minimum possible total edge weight. By comparing the total cost of the full network versus the MST, engineers can quantify potential infrastructure savings.\nAlgorithm: Kruskal’s or Prim’s Algorithm (implemented via minimum_spanning_tree).\n\n# Calculate the Minimum Spanning Tree\nmst = nx.minimum_spanning_tree(G, weight='Cost')\n\n# Calculate Total Savings\ntotal_cost = df['Cost'].sum()\nmst_cost = sum(d['Cost'] for u, v, d in mst.edges(data=True))\n\nprint(f\"Total Network Cost: ${total_cost}M\")\nprint(f\"Optimized MST Cost: ${mst_cost}M\")\nprint(f\"Savings: ${total_cost - mst_cost}M\")\n\n# Visualizing the MST vs Original Graph\nplt.figure(figsize=(10, 6))\n# Draw original faint edges\nnx.draw_networkx_edges(G, pos, alpha=0.2, style='dashed')\n# Draw MST edges boldly\nnx.draw(mst, pos, with_labels=True, node_color='gold', node_size=1200, width=3, edge_color='blue')\nplt.title(\"Optimized Infrastructure (Minimum Spanning Tree)\")\nplt.show()\n\nTotal Network Cost: $107M\nOptimized MST Cost: $72M\nSavings: $35M\n\n\n\n\n\n\n\n\n\n\n\nShortest Path (Routing)\nThe Scenario: A maintenance team needs to travel from City_A to City_H as quickly as possible to fix a fault.\nThe Solution: We apply Dijkstra’s Algorithm. Unlike the MST (which optimizes the whole network), Dijkstra focuses on the optimal route between two specific points. It accounts for the accumulated “cost” (distance, time, or money) along the path.\n\n# Compute Shortest Path\nsource, target = 'City_A', 'City_H'\npath = nx.dijkstra_path(G, source, target, weight='Cost')\nlength = nx.dijkstra_path_length(G, source, target, weight='Cost')\n\nprint(f\"Optimal Route from {source} to {target}: {path}\")\nprint(f\"Total Travel Cost: {length}\")\n\nOptimal Route from City_A to City_H: ['City_A', 'City_B', 'City_E', 'City_G', 'City_H']\nTotal Travel Cost: 45",
+    "crumbs": [
+      "Home",
+      "Hands-on Demos"
+    ]
+  },
+  {
+    "objectID": "Hands-on-Demos/Networkx_demo.html#resource-allocation-graph-colouring",
+    "href": "Hands-on-Demos/Networkx_demo.html#resource-allocation-graph-colouring",
+    "title": "Module 3 — Hands-on Demonstrations using Python & NetworkX",
+    "section": "Resource Allocation: Graph Colouring",
+    "text": "Resource Allocation: Graph Colouring\nThe Scenario: We need to assign maintenance schedules to these cities. Adjacent cities cannot be maintained on the same day because shutting down two connected nodes simultaneously might destabilize the grid. What is the minimum number of days required to complete the schedule?\nThe Solution: We apply Greedy Graph Colouring.\n\nThe Rule: No two connected nodes can have the same “color” (value).\nThe Result: The algorithm assigns a time slot to every city. The total number of unique colors used (the Chromatic Number) tells us the minimum days required for the full cycle.\n\nAlgorithm: Greedy Graph Colouring.\n\n# Apply Greedy Coloring\nstrategies = nx.coloring.greedy_color(G, strategy='largest_first')\n\nprint(\"--- Maintenance Schedule (Graph Colouring) ---\")\nfor node, color in strategies.items():\n    print(f\"{node}: Day {color + 1}\")\n\n# Calculate Chromatic Number (Min days needed)\nmin_days = max(strategies.values()) + 1\nprint(f\"\\nMinimum days required for full cycle: {min_days}\")\n\n# Visualizing the Schedule\ncolors = [strategies[n] for n in G.nodes()]\nplt.figure(figsize=(8, 5))\nnx.draw(G, pos, node_color=colors, cmap=plt.cm.Set3, with_labels=True, node_size=1200)\nplt.title(f\"Conflict-Free Schedule (Requires {min_days} Days)\")\nplt.show()\n\n--- Maintenance Schedule (Graph Colouring) ---\nCity_B: Day 1\nCity_E: Day 2\nCity_G: Day 1\nCity_A: Day 2\nCity_C: Day 1\nCity_D: Day 3\nCity_F: Day 2\nCity_H: Day 2\n\nMinimum days required for full cycle: 3",
+    "crumbs": [
+      "Home",
+      "Hands-on Demos"
+    ]
+  },
+  {
+    "objectID": "Hands-on-Demos/Networkx_demo.html#network-analysis-centrality-measures",
+    "href": "Hands-on-Demos/Networkx_demo.html#network-analysis-centrality-measures",
+    "title": "Module 3 — Hands-on Demonstrations using Python & NetworkX",
+    "section": "Network Analysis: Centrality Measures",
+    "text": "Network Analysis: Centrality Measures\nThe Scenario: We need to secure the network against attacks or random failures. We must answer two questions: 1. Which city is the biggest “Hub”? 2. Which city is the most critical “Bridge”?\nThe Solution: We calculate Centrality Measures.\n\nDegree Centrality: Measures how many direct connections a node has. In our grid, this identifies the central distribution hubs.\nBetweenness Centrality: Measures how often a node acts as a bridge along the shortest path between two other nodes. This identifies Single Points of Failure. If a node with high Betweenness fails, the network is likely to split into disconnected islands.\n\n\n# 1. Compute Centralities\ndegree_cent = nx.degree_centrality(G)\nbetweenness_cent = nx.betweenness_centrality(G, weight='Cost')\n\n# 2. Advanced Visualization: Data-Driven Plotting\nplt.figure(figsize=(12, 8))\n\n# Get the current axes explicitly so we can refer to it later\nax = plt.gca()\n\n# Size of node = Degree (How connected it is)\nnode_sizes = [v * 5000 for v in degree_cent.values()]\n\n# Color of node = Betweenness (How critical it is)\nnode_colors = list(betweenness_cent.values())\n\n# Draw the nodes\nnodes = nx.draw_networkx_nodes(G, pos, node_size=node_sizes, node_color=node_colors, \n                               cmap=plt.cm.Reds, edgecolors='black', ax=ax)\n\n# Draw edges and labels\nnx.draw_networkx_edges(G, pos, width=1.5, alpha=0.6, ax=ax)\nnx.draw_networkx_labels(G, pos, font_color='black', font_weight='bold', ax=ax)\n\n# --- FIX START ---\n# Create the ScalarMappable\nvmin = min(node_colors)\nvmax = max(node_colors)\nsm = plt.cm.ScalarMappable(cmap=plt.cm.Reds, norm=plt.Normalize(vmin=vmin, vmax=vmax))\nsm.set_array([]) \n\n# Pass the 'ax' argument so matplotlib knows where to put the bar\nplt.colorbar(sm, ax=ax, label=\"Betweenness Centrality (Vulnerability)\")\n# --- FIX END ---\n\nplt.title(\"Vulnerability Analysis: Bigger = More Connections, Redder = More Critical\")\nplt.axis('off')\nplt.show()\n\n# Interpretative Output\ncritical_node = max(betweenness_cent, key=betweenness_cent.get)\nprint(f\"CRITICAL ALERT: {critical_node} controls the highest flow in the network.\")\n\n\n\n\n\n\n\n\nCRITICAL ALERT: City_G controls the highest flow in the network.",
+    "crumbs": [
+      "Home",
+      "Hands-on Demos"
+    ]
+  },
+  {
+    "objectID": "Hands-on-Demos/Networkx_demo.html#interpretative-study-summary",
+    "href": "Hands-on-Demos/Networkx_demo.html#interpretative-study-summary",
+    "title": "Module 3 — Hands-on Demonstrations using Python & NetworkX",
+    "section": "Interpretative Study: Summary",
+    "text": "Interpretative Study: Summary\nBy combining these algorithms, we can derive actionable engineering insights from raw data:\n\n\n\n\n\n\n\n\nAnalysis Type\nMetric/Algorithm\nEngineering Insight from Data\n\n\n\n\nConnectivity\nData Ingestion\nThe network structure reveals the physical density of the grid.\n\n\nOptimization\nMST\nIdentifies which power lines are essential and which are redundant “backup” lines.\n\n\nScheduling\nColouring\nDetermines the minimum resources (time slots, frequency channels) needed to avoid conflicts.\n\n\nVulnerability\nBetweenness\nPinpoints the exact city that, if disabled, causes the maximum disruption to the grid.",
     "crumbs": [
       "Home",
       "Hands-on Demos"
@@ -221,23 +265,58 @@
   {
     "objectID": "Hands-on-Demos/slides-ML.html#introduction",
     "href": "Hands-on-Demos/slides-ML.html#introduction",
-    "title": "Module 4 — Hands-on Demonstrations using Python & NetworkX",
+    "title": "Module 3 — Hands-on Demonstrations using Python & NetworkX",
     "section": "Introduction",
     "text": "Introduction\nThis module introduces practical graph modelling and algorithm execution using Python and the NetworkX library. Students will learn to construct real and simulated graphs, visualize structure, compute metrics, and explore algorithms such as shortest paths, centrality, and colouring.\nThe objective is to bridge theoretical understanding from discrete mathematics to real-world implementations in engineering problems such as network routing, urban mobility, scheduling, and social network analytics."
   },
   {
-    "objectID": "Hands-on-Demos/slides-ML.html#module-objectives",
-    "href": "Hands-on-Demos/slides-ML.html#module-objectives",
-    "title": "Module 4 — Hands-on Demonstrations using Python & NetworkX",
-    "section": "Module Objectives",
-    "text": "Module Objectives\nAfter completing this module, students are expected to be able to:\n\nConstruct graphs from real-world datasets\nApply algorithms for shortest paths, spanning trees, and colouring\nAnalyse networks using centrality measures\nPerform visual and interpretative data-driven studies"
+    "objectID": "Hands-on-Demos/slides-ML.html#learning-objectives",
+    "href": "Hands-on-Demos/slides-ML.html#learning-objectives",
+    "title": "Module 3 — Hands-on Demonstrations using Python & NetworkX",
+    "section": "Learning Objectives",
+    "text": "Learning Objectives\nBy the end of this module, students will be able to:\n\nConstruct complex graphs directly from dataframes/datasets.\nApply algorithms: Dijkstra (Routing), Kruskal/Prim (MST), and Greedy Colouring.\nAnalyse network robustness using Degree and Betweenness centrality.\nPerform visual data-driven studies to interpret network structure."
+  },
+  {
+    "objectID": "Hands-on-Demos/slides-ML.html#constructing-graphs-from-real-world-data",
+    "href": "Hands-on-Demos/slides-ML.html#constructing-graphs-from-real-world-data",
+    "title": "Module 3 — Hands-on Demonstrations using Python & NetworkX",
+    "section": "Constructing Graphs from Real-World Data",
+    "text": "Constructing Graphs from Real-World Data\nReal-world data rarely comes in neat adjacency matrices. In engineering and data science, network data usually exists in CSV files, SQL databases, or Excel sheets.\nTo bridge this gap, we utilize data handling libraries (like Pandas) to load datasets representing entities (nodes) and connections (edges). For our case study, we simulate a dataset of 8 cities and the construction cost (in millions) to build high-voltage lines between them.\nThe graph is constructed by mapping:\n\nSource/Target columns \\(\\rightarrow\\) Edges\nCost/Type columns \\(\\rightarrow\\) Edge Attributes (Weights)\n\n\n\nGraph Successfully Constructed!\nNodes (Cities): 8\nEdges (Power Lines): 9"
+  },
+  {
+    "objectID": "Hands-on-Demos/slides-ML.html#optimization-algorithms-spanning-trees-routing",
+    "href": "Hands-on-Demos/slides-ML.html#optimization-algorithms-spanning-trees-routing",
+    "title": "Module 3 — Hands-on Demonstrations using Python & NetworkX",
+    "section": "Optimization Algorithms: Spanning Trees & Routing",
+    "text": "Optimization Algorithms: Spanning Trees & Routing\nOnce the graph is built, we can apply standard optimization algorithms to save costs and improve efficiency.\nMinimum Spanning Tree (MST)\nThe Scenario: We need to connect all cities with power lines to ensure everyone has electricity, but we want to minimize the total construction cost. We do not need redundant loops; we just need basic connectivity.\nThe Solution: We apply Kruskal’s or Prim’s Algorithm. This algorithm identifies a subset of edges that connects all vertices together, without any cycles, and with the minimum possible total edge weight. By comparing the total cost of the full network versus the MST, engineers can quantify potential infrastructure savings.\nAlgorithm: Kruskal’s or Prim’s Algorithm (implemented via minimum_spanning_tree).\n\n\nTotal Network Cost: $107M\nOptimized MST Cost: $72M\nSavings: $35M\n\n\n\n\n\n\n\n\n\nShortest Path (Routing)\nThe Scenario: A maintenance team needs to travel from City_A to City_H as quickly as possible to fix a fault.\nThe Solution: We apply Dijkstra’s Algorithm. Unlike the MST (which optimizes the whole network), Dijkstra focuses on the optimal route between two specific points. It accounts for the accumulated “cost” (distance, time, or money) along the path.\n\n\nOptimal Route from City_A to City_H: ['City_A', 'City_B', 'City_E', 'City_G', 'City_H']\nTotal Travel Cost: 45"
+  },
+  {
+    "objectID": "Hands-on-Demos/slides-ML.html#resource-allocation-graph-colouring",
+    "href": "Hands-on-Demos/slides-ML.html#resource-allocation-graph-colouring",
+    "title": "Module 3 — Hands-on Demonstrations using Python & NetworkX",
+    "section": "Resource Allocation: Graph Colouring",
+    "text": "Resource Allocation: Graph Colouring\nThe Scenario: We need to assign maintenance schedules to these cities. Adjacent cities cannot be maintained on the same day because shutting down two connected nodes simultaneously might destabilize the grid. What is the minimum number of days required to complete the schedule?\nThe Solution: We apply Greedy Graph Colouring.\n\nThe Rule: No two connected nodes can have the same “color” (value).\nThe Result: The algorithm assigns a time slot to every city. The total number of unique colors used (the Chromatic Number) tells us the minimum days required for the full cycle.\n\nAlgorithm: Greedy Graph Colouring.\n\n\n--- Maintenance Schedule (Graph Colouring) ---\nCity_B: Day 1\nCity_E: Day 2\nCity_G: Day 1\nCity_A: Day 2\nCity_C: Day 1\nCity_D: Day 3\nCity_F: Day 2\nCity_H: Day 2\n\nMinimum days required for full cycle: 3"
+  },
+  {
+    "objectID": "Hands-on-Demos/slides-ML.html#network-analysis-centrality-measures",
+    "href": "Hands-on-Demos/slides-ML.html#network-analysis-centrality-measures",
+    "title": "Module 3 — Hands-on Demonstrations using Python & NetworkX",
+    "section": "Network Analysis: Centrality Measures",
+    "text": "Network Analysis: Centrality Measures\nThe Scenario: We need to secure the network against attacks or random failures. We must answer two questions: 1. Which city is the biggest “Hub”? 2. Which city is the most critical “Bridge”?\nThe Solution: We calculate Centrality Measures.\n\nDegree Centrality: Measures how many direct connections a node has. In our grid, this identifies the central distribution hubs.\nBetweenness Centrality: Measures how often a node acts as a bridge along the shortest path between two other nodes. This identifies Single Points of Failure. If a node with high Betweenness fails, the network is likely to split into disconnected islands.\n\n\n\n\n\n\n\n\n\n\nCRITICAL ALERT: City_G controls the highest flow in the network."
+  },
+  {
+    "objectID": "Hands-on-Demos/slides-ML.html#interpretative-study-summary",
+    "href": "Hands-on-Demos/slides-ML.html#interpretative-study-summary",
+    "title": "Module 3 — Hands-on Demonstrations using Python & NetworkX",
+    "section": "Interpretative Study: Summary",
+    "text": "Interpretative Study: Summary\nBy combining these algorithms, we can derive actionable engineering insights from raw data:\n\n\n\n\n\n\n\n\nAnalysis Type\nMetric/Algorithm\nEngineering Insight from Data\n\n\n\n\nConnectivity\nData Ingestion\nThe network structure reveals the physical density of the grid.\n\n\nOptimization\nMST\nIdentifies which power lines are essential and which are redundant “backup” lines.\n\n\nScheduling\nColouring\nDetermines the minimum resources (time slots, frequency channels) needed to avoid conflicts.\n\n\nVulnerability\nBetweenness\nPinpoints the exact city that, if disabled, causes the maximum disruption to the grid."
   },
   {
     "objectID": "Graphs-in-AIML/Graphs_in_AIML.html",
     "href": "Graphs-in-AIML/Graphs_in_AIML.html",
-    "title": "Module 5: Graphs in AI/ML",
+    "title": "Module 4: Graphs in AI/ML",
     "section": "",
-    "text": "Module outcomes:\nUpon completion of this module, learners will be able to:",
+    "text": "Upon completion of this module, learners will be able to:",
     "crumbs": [
       "Home",
       "Graphs in AI/ML"
@@ -246,7 +325,7 @@
   {
     "objectID": "Graphs-in-AIML/Graphs_in_AIML.html#introduction",
     "href": "Graphs-in-AIML/Graphs_in_AIML.html#introduction",
-    "title": "Module 5: Graphs in AI/ML",
+    "title": "Module 4: Graphs in AI/ML",
     "section": "Introduction",
     "text": "Introduction\nGraphs play an increasingly critical role in modern Artificial Intelligence and Machine Learning, enabling representation and reasoning over structured data with complex relationships. Unlike traditional ML models that handle grid-structured or tabular data, graphs naturally encode interconnected, relational and irregular structures.\nThe development of Graph Neural Networks (GNNs), including Graph Convolutional Networks (GCNs) and Graph Attention Networks (GATs), has opened new avenues for learning from structured dependencies rather than treating data points as independent entities. These models have demonstrated breakthrough performance in tasks such as node classification, link prediction, community detection, recommendation systems, and risk intelligence.\nFurthermore, real-world AI systems—such as Google’s ranking algorithms, fraud detection engines in banking, medical knowledge discovery systems, and smart city analytics—rely heavily on graph-based reasoning. As industry adoption accelerates, expertise in graph analytics and graph-based deep learning has become an essential skill for engineers, data scientists, and AI researchers.\nGraph-based approaches thus represent a powerful paradigm shift: from learning on isolated data points to learning from connected knowledge.\nMastering graph theory and graph ML prepares learners to solve scalable real-world problems and engage in research opportunities at the intersection of mathematics, computation, and intelligent systems.\nThis module introduces core graph-based AI models and algorithms: - Knowledge Graphs (KGs) for semantic reasoning and information organization - PageRank algorithm for ranking & recommendation - Graph Neural Networks (GNNs) for deep learning on graph-structured data",
     "crumbs": [
@@ -257,7 +336,7 @@
   {
     "objectID": "Graphs-in-AIML/Graphs_in_AIML.html#knowledge-graphs-kgs",
     "href": "Graphs-in-AIML/Graphs_in_AIML.html#knowledge-graphs-kgs",
-    "title": "Module 5: Graphs in AI/ML",
+    "title": "Module 4: Graphs in AI/ML",
     "section": "Knowledge Graphs (KGs)",
     "text": "Knowledge Graphs (KGs)\n\nWhat is a Knowledge Graph?\nA Knowledge Graph is a labelled, directed graph used to represent knowledge in terms of entities (nodes) and relationships (edges).\nExample structure:\n(Person) ---[lives_in]---&gt; (City)\n(Author) ---[wrote]------&gt; (Book)\n(Student) ---[enrolled]--&gt; (Course)\nAlan Turing) —[pioneer_of]→ (AI)\n(AI) —[includes]→ (Machine Learning)\n(ML) —[subset_of]→ (Deep Learning)\n\n\n\n\n\n\nKey Characteristics\n\n\n\n\nEntity-based representation\nSemantic relationship modelling\nSupports reasoning & inference\n\n\n\n\n\nReal Engineering Applications\n\n\n\nDomain\nApplication\nExample\n\n\n\n\nSearch Engines\nquery understanding\nGoogle Knowledge Graph\n\n\nHealthcare\ndisease–symptom inference\nbiomedical KG\n\n\nNLP / ChatGPT\nfact linking\nentity embeddings\n\n\nRecommender Systems\nproduct–user graph\nAmazon, Netflix\n\n\nAcademic Research\ncitation networks\nDBLP, Scopus\n\n\n\n\n\nMini Example in Python (NetworkX)\n\nimport networkx as nx\nimport matplotlib.pyplot as plt\n\nKG = nx.DiGraph()\nKG.add_edges_from([\n    (\"Alan Turing\", \"AI\", {\"relation\": \"pioneer_of\"}),\n    (\"AI\", \"Machine Learning\", {\"relation\": \"includes\"}),\n    (\"Machine Learning\", \"Deep Learning\", {\"relation\": \"subset_of\"}),\n])\n\npos = nx.spring_layout(KG)\nnx.draw(KG, pos, with_labels=True, node_size=2500)\nplt.show()",
     "crumbs": [
@@ -268,7 +347,7 @@
   {
     "objectID": "Graphs-in-AIML/Graphs_in_AIML.html#pagerank-algorithm",
     "href": "Graphs-in-AIML/Graphs_in_AIML.html#pagerank-algorithm",
-    "title": "Module 5: Graphs in AI/ML",
+    "title": "Module 4: Graphs in AI/ML",
     "section": "PageRank Algorithm",
     "text": "PageRank Algorithm\n\nIntuition\nPageRank assigns an “importance” score to each node based on the importance and number of incoming links. Think of a random surfer who follows outgoing links with probability d (damping factor, usually 0.85) and jumps to a random node with probability 1−d. Pages that are linked from many important pages get higher PageRank.\n\n\nCore formula\n\\[PR(v)=\\frac{1-d}{N}+d\\sum\\limits_{u\\in In(v)}\\frac{PR(u)}{Out(u)}\\]\nwhere:\n\n\\(PR(v)\\) is the PageRank of node \\(v\\)\n\\(d\\) is the damping factor (typically \\(d = 0.85\\))\n\\(N\\) is the total number of nodes\n\\(In(v)\\) represents nodes linking to \\(v\\)\n\\(Out(u)\\) represents the number of outgoing links from \\(u\\)\n\nThis is solved iteratively (power iteration) until convergence.\n\n\nExample code\n\nimport networkx as nx\n\nG = nx.DiGraph()\nedges = [('A','B'),('A','C'),('B','C'),('C','A'),('C','D'),('D','C')]\nG.add_edges_from(edges)\n\npr = nx.pagerank(G, alpha=0.85)\nprint(pr)\n\n{'A': 0.21991357059363242, 'B': 0.13096360941900992, 'C': 0.4292092493937253, 'D': 0.21991357059363242}\n\n\n\n\n\n\n\n\nUses / Applications\n\n\n\n\nSearch engines: rank web pages.\nRecommendation: rank items or users in bipartite graphs.\nCitation analysis: identify influential papers/authors.\nSocial networks: measure influence or authority.\nSpam/fraud detection: detect anomalous link patterns.\n\n\n\n\n\nGraph Neural Networks (GNNs)\nTraditional ML models such as CNNs and RNNs assume Euclidean structure (images, sequences). Graphs are non-Euclidean; therefore a new architecture is needed.\nGNNs generalize neural networks to graph-structured data using message passing.\n\n\n\n\n\n\nMessage Passing Update Rule\n\n\n\n\\[h_v(k+1)=\\sigma\\left(W_k\\sum\\limits_{u\\in N(v)}h_u(k)\\right)\\]\nwhere,\n\n\\(h_v^{(k)}\\) is the representation of node \\(v\\) after \\(k\\) layers\n\\(N(v)\\) represents neighbours\n\\(W_k\\) is a learnable weight matrix\n\\(\\sigma\\) is an activation function\n\n\n\n\n\nGNN usescases\n\n\n\nDomain\nExample\n\n\n\n\nSocial Networks\ncommunity detection, link prediction\n\n\nChemistry / Biology\ndrug discovery, molecular graph prediction\n\n\nTraffic Forecasting\ncongestion modelling\n\n\nCybersecurity\nanomaly detection\n\n\nFinance\nfraud & risk modelling\n\n\nRecommendation Systems\ndeep collaborative filtering",
     "crumbs": [
@@ -279,9 +358,9 @@
   {
     "objectID": "Graphs-in-AIML/Graphs_in_AIML.html#case-study-epidemic-spread-modelling",
     "href": "Graphs-in-AIML/Graphs_in_AIML.html#case-study-epidemic-spread-modelling",
-    "title": "Module 5: Graphs in AI/ML",
+    "title": "Module 4: Graphs in AI/ML",
     "section": "Case Study — Epidemic Spread Modelling",
-    "text": "Case Study — Epidemic Spread Modelling\nDuring the outbreak of contagious diseases such as COVID-19, Influenza, or Nipah virus, rapid identification of individuals who play a critical role in spreading infection is essential for effective containment. Public health authorities model social interactions as graphs where nodes represent individuals and edges represent close contact events capable of transmitting disease. Given a simulated contact network of individuals in a community, determine:\n\nNodes with the highest risk of spreading infection (super-spreaders) using graph centrality metrics.\nThe minimal set of nodes to isolate or track for maximum reduction in infection propagation.\nVisualise the network and highlight highly influential individuals.\n\n\nimport networkx as nx\nimport matplotlib.pyplot as plt\n\nG = nx.barabasi_albert_graph(20, 2)\nnx.draw(G, with_labels=True, node_size=900)\nplt.show()\n\ncentrality = nx.betweenness_centrality(G)\nprint(sorted(centrality.items(), key=lambda x: x[1], reverse=True))\n\n\n\n\n\n\n\n\n[(0, 0.598635477582846), (1, 0.14460688758934373), (16, 0.07150747238466536), (7, 0.0714749837556855), (8, 0.060916179337231965), (5, 0.054256010396361264), (9, 0.037037037037037035), (6, 0.029044834307992214), (10, 0.020825211176088366), (3, 0.017056530214424947), (2, 0.016309291747888238), (17, 0.016309291747888238), (4, 0.015172189733593243), (19, 0.010591293047433397), (11, 0.005847953216374269), (13, 0.0029239766081871343), (14, 0.0029239766081871343), (12, 0.0), (15, 0.0), (18, 0.0)]",
+    "text": "Case Study — Epidemic Spread Modelling\nDuring the outbreak of contagious diseases such as COVID-19, Influenza, or Nipah virus, rapid identification of individuals who play a critical role in spreading infection is essential for effective containment. Public health authorities model social interactions as graphs where nodes represent individuals and edges represent close contact events capable of transmitting disease. Given a simulated contact network of individuals in a community, determine:\n\nNodes with the highest risk of spreading infection (super-spreaders) using graph centrality metrics.\nThe minimal set of nodes to isolate or track for maximum reduction in infection propagation.\nVisualise the network and highlight highly influential individuals.\n\n\nimport networkx as nx\nimport matplotlib.pyplot as plt\n\nG = nx.barabasi_albert_graph(20, 2)\nnx.draw(G, with_labels=True, node_size=900)\nplt.show()\n\ncentrality = nx.betweenness_centrality(G)\nprint(sorted(centrality.items(), key=lambda x: x[1], reverse=True))\n\n\n\n\n\n\n\n\n[(0, 0.5154970760233918), (4, 0.254775828460039), (5, 0.14951267056530215), (2, 0.06822612085769979), (8, 0.060916179337231965), (3, 0.04454191033138401), (12, 0.04035087719298246), (15, 0.0384990253411306), (6, 0.03216374269005848), (14, 0.0253411306042885), (9, 0.013645224171539959), (17, 0.013157894736842105), (16, 0.008966861598440545), (7, 0.006822612085769979), (11, 0.005360623781676413), (18, 0.0029239766081871343), (1, 0.0), (10, 0.0), (13, 0.0), (19, 0.0)]",
     "crumbs": [
       "Home",
       "Graphs in AI/ML"
@@ -290,7 +369,7 @@
   {
     "objectID": "Graphs-in-AIML/Graphs_in_AIML.html#conclusion",
     "href": "Graphs-in-AIML/Graphs_in_AIML.html#conclusion",
-    "title": "Module 5: Graphs in AI/ML",
+    "title": "Module 4: Graphs in AI/ML",
     "section": "Conclusion",
     "text": "Conclusion\nGraphs have emerged as a foundational component in modern Artificial Intelligence and Machine Learning, enabling representation and analysis of complex relational data that cannot be captured effectively through traditional vector-based approaches. By leveraging graph structures, algorithms can model interconnected systems such as social networks, transportation systems, biological interactions, and financial transaction workflows with superior accuracy and interpretability.",
     "crumbs": [
@@ -301,35 +380,35 @@
   {
     "objectID": "Graphs-in-AIML/slides-ML.html#introduction",
     "href": "Graphs-in-AIML/slides-ML.html#introduction",
-    "title": "Module 5: Graphs in AI/ML",
+    "title": "Module 4: Graphs in AI/ML",
     "section": "Introduction",
     "text": "Introduction\nGraphs play an increasingly critical role in modern Artificial Intelligence and Machine Learning, enabling representation and reasoning over structured data with complex relationships. Unlike traditional ML models that handle grid-structured or tabular data, graphs naturally encode interconnected, relational and irregular structures.\nThe development of Graph Neural Networks (GNNs), including Graph Convolutional Networks (GCNs) and Graph Attention Networks (GATs), has opened new avenues for learning from structured dependencies rather than treating data points as independent entities. These models have demonstrated breakthrough performance in tasks such as node classification, link prediction, community detection, recommendation systems, and risk intelligence.\nFurthermore, real-world AI systems—such as Google’s ranking algorithms, fraud detection engines in banking, medical knowledge discovery systems, and smart city analytics—rely heavily on graph-based reasoning. As industry adoption accelerates, expertise in graph analytics and graph-based deep learning has become an essential skill for engineers, data scientists, and AI researchers.\nGraph-based approaches thus represent a powerful paradigm shift: from learning on isolated data points to learning from connected knowledge.\nMastering graph theory and graph ML prepares learners to solve scalable real-world problems and engage in research opportunities at the intersection of mathematics, computation, and intelligent systems.\nThis module introduces core graph-based AI models and algorithms: - Knowledge Graphs (KGs) for semantic reasoning and information organization - PageRank algorithm for ranking & recommendation - Graph Neural Networks (GNNs) for deep learning on graph-structured data"
   },
   {
     "objectID": "Graphs-in-AIML/slides-ML.html#knowledge-graphs-kgs",
     "href": "Graphs-in-AIML/slides-ML.html#knowledge-graphs-kgs",
-    "title": "Module 5: Graphs in AI/ML",
+    "title": "Module 4: Graphs in AI/ML",
     "section": "Knowledge Graphs (KGs)",
     "text": "Knowledge Graphs (KGs)\nWhat is a Knowledge Graph?\nA Knowledge Graph is a labelled, directed graph used to represent knowledge in terms of entities (nodes) and relationships (edges).\nExample structure:\n(Person) ---[lives_in]---&gt; (City)\n(Author) ---[wrote]------&gt; (Book)\n(Student) ---[enrolled]--&gt; (Course)\nAlan Turing) —[pioneer_of]→ (AI)\n(AI) —[includes]→ (Machine Learning)\n(ML) —[subset_of]→ (Deep Learning)\n\n\n\n\n\n\nKey Characteristics\n\n\n\nEntity-based representation\nSemantic relationship modelling\nSupports reasoning & inference\n\n\n\n\nReal Engineering Applications\n\n\n\nDomain\nApplication\nExample\n\n\n\n\nSearch Engines\nquery understanding\nGoogle Knowledge Graph\n\n\nHealthcare\ndisease–symptom inference\nbiomedical KG\n\n\nNLP / ChatGPT\nfact linking\nentity embeddings\n\n\nRecommender Systems\nproduct–user graph\nAmazon, Netflix\n\n\nAcademic Research\ncitation networks\nDBLP, Scopus\n\n\n\nMini Example in Python (NetworkX)"
   },
   {
     "objectID": "Graphs-in-AIML/slides-ML.html#pagerank-algorithm",
     "href": "Graphs-in-AIML/slides-ML.html#pagerank-algorithm",
-    "title": "Module 5: Graphs in AI/ML",
+    "title": "Module 4: Graphs in AI/ML",
     "section": "PageRank Algorithm",
     "text": "PageRank Algorithm\nIntuition\nPageRank assigns an “importance” score to each node based on the importance and number of incoming links. Think of a random surfer who follows outgoing links with probability d (damping factor, usually 0.85) and jumps to a random node with probability 1−d. Pages that are linked from many important pages get higher PageRank.\nCore formula\n\\[PR(v)=\\frac{1-d}{N}+d\\sum\\limits_{u\\in In(v)}\\frac{PR(u)}{Out(u)}\\]\nwhere:\n\n\\(PR(v)\\) is the PageRank of node \\(v\\)\n\\(d\\) is the damping factor (typically \\(d = 0.85\\))\n\\(N\\) is the total number of nodes\n\\(In(v)\\) represents nodes linking to \\(v\\)\n\\(Out(u)\\) represents the number of outgoing links from \\(u\\)\n\nThis is solved iteratively (power iteration) until convergence.\nExample code\n\n\n{'A': 0.21991357059363242, 'B': 0.13096360941900992, 'C': 0.4292092493937253, 'D': 0.21991357059363242}\n\n\n\n\n\n\n\n\nUses / Applications\n\n\n\nSearch engines: rank web pages.\nRecommendation: rank items or users in bipartite graphs.\nCitation analysis: identify influential papers/authors.\nSocial networks: measure influence or authority.\nSpam/fraud detection: detect anomalous link patterns.\n\n\n\n\nGraph Neural Networks (GNNs)\nTraditional ML models such as CNNs and RNNs assume Euclidean structure (images, sequences). Graphs are non-Euclidean; therefore a new architecture is needed.\nGNNs generalize neural networks to graph-structured data using message passing.\n\n\n\n\n\n\nMessage Passing Update Rule\n\n\n\\[h_v(k+1)=\\sigma\\left(W_k\\sum\\limits_{u\\in N(v)}h_u(k)\\right)\\]\nwhere,\n\n\\(h_v^{(k)}\\) is the representation of node \\(v\\) after \\(k\\) layers\n\\(N(v)\\) represents neighbours\n\\(W_k\\) is a learnable weight matrix\n\\(\\sigma\\) is an activation function\n\n\n\n\nGNN usescases\n\n\n\nDomain\nExample\n\n\n\n\nSocial Networks\ncommunity detection, link prediction\n\n\nChemistry / Biology\ndrug discovery, molecular graph prediction\n\n\nTraffic Forecasting\ncongestion modelling\n\n\nCybersecurity\nanomaly detection\n\n\nFinance\nfraud & risk modelling\n\n\nRecommendation Systems\ndeep collaborative filtering"
   },
   {
     "objectID": "Graphs-in-AIML/slides-ML.html#case-study-epidemic-spread-modelling",
     "href": "Graphs-in-AIML/slides-ML.html#case-study-epidemic-spread-modelling",
-    "title": "Module 5: Graphs in AI/ML",
+    "title": "Module 4: Graphs in AI/ML",
     "section": "Case Study — Epidemic Spread Modelling",
-    "text": "Case Study — Epidemic Spread Modelling\nDuring the outbreak of contagious diseases such as COVID-19, Influenza, or Nipah virus, rapid identification of individuals who play a critical role in spreading infection is essential for effective containment. Public health authorities model social interactions as graphs where nodes represent individuals and edges represent close contact events capable of transmitting disease. Given a simulated contact network of individuals in a community, determine:\n\nNodes with the highest risk of spreading infection (super-spreaders) using graph centrality metrics.\nThe minimal set of nodes to isolate or track for maximum reduction in infection propagation.\nVisualise the network and highlight highly influential individuals.\n\n\n\n\n\n\n\n\n\n\n[(5, 0.28558897243107767), (7, 0.25992759676970195), (4, 0.20884154831523252), (0, 0.17517404622667782), (6, 0.12578668894458367), (3, 0.09508493455861876), (8, 0.0365079365079365), (9, 0.029935950988582562), (18, 0.01627680311890838), (19, 0.012865497076023392), (17, 0.010233918128654972), (15, 0.009746588693957114), (10, 0.007365636313004733), (13, 0.007365636313004733), (1, 0.0), (2, 0.0), (11, 0.0), (12, 0.0), (14, 0.0), (16, 0.0)]"
+    "text": "Case Study — Epidemic Spread Modelling\nDuring the outbreak of contagious diseases such as COVID-19, Influenza, or Nipah virus, rapid identification of individuals who play a critical role in spreading infection is essential for effective containment. Public health authorities model social interactions as graphs where nodes represent individuals and edges represent close contact events capable of transmitting disease. Given a simulated contact network of individuals in a community, determine:\n\nNodes with the highest risk of spreading infection (super-spreaders) using graph centrality metrics.\nThe minimal set of nodes to isolate or track for maximum reduction in infection propagation.\nVisualise the network and highlight highly influential individuals.\n\n\n\n\n\n\n\n\n\n\n[(0, 0.3464912280701754), (3, 0.293859649122807), (6, 0.19395711500974658), (4, 0.17738791423001948), (1, 0.07846003898635477), (7, 0.07456140350877194), (5, 0.07212475633528265), (9, 0.0341130604288499), (13, 0.031189083820662766), (2, 0.023391812865497075), (14, 0.016081871345029235), (12, 0.009259259259259259), (8, 0.0), (10, 0.0), (11, 0.0), (15, 0.0), (16, 0.0), (17, 0.0), (18, 0.0), (19, 0.0)]"
   },
   {
     "objectID": "Graphs-in-AIML/slides-ML.html#conclusion",
     "href": "Graphs-in-AIML/slides-ML.html#conclusion",
-    "title": "Module 5: Graphs in AI/ML",
+    "title": "Module 4: Graphs in AI/ML",
     "section": "Conclusion",
     "text": "Conclusion\nGraphs have emerged as a foundational component in modern Artificial Intelligence and Machine Learning, enabling representation and analysis of complex relational data that cannot be captured effectively through traditional vector-based approaches. By leveraging graph structures, algorithms can model interconnected systems such as social networks, transportation systems, biological interactions, and financial transaction workflows with superior accuracy and interpretability."
   },
@@ -427,22 +506,11 @@
     "text": "Conclusion\nShortest path algorithms form the computational backbone of many real-world systems across engineering and technology. Beginning from classical BFS/DFS through Dijkstra and Bellman–Ford to modern heuristic search like A*, these techniques enable optimized and intelligent routing decisions essential for networks, transportation, logistics, robotics and smart cities.\n\nEfficient routing is not merely a theoretical challenge but a fundamental driver of intelligent engineering design."
   },
   {
-    "objectID": "Graph_algorithms/ML_lesson.html",
-    "href": "Graph_algorithms/ML_lesson.html",
-    "title": "Module 2: Shortest Path Algorithms & Routing Networks",
-    "section": "",
-    "text": "Shortest path problems form the foundation of many modern computational systems including navigation software, logistics planning, robotics, networking protocols, and communication infrastructures. This module explores classical and modern shortest path algorithms used to determine optimal routing in graphs.\nA shortest path problem asks:\n\nGiven a weighted graph and two vertices, what is the minimum-cost path connecting them?\n\nFormally, for a graph\n\\[G = (V, E, w)\\]\nwith non-negative weights (w(u,v) ), find a path from (s) to (t) minimizing\n\\[ \\text{Cost}(P) = \\sum_{(u,v)\\in P} w(u,v). \\]",
-    "crumbs": [
-      "Home",
-      "Graph Algorithms & Applications"
-    ]
-  },
-  {
     "objectID": "Graph_algorithms/ML_lesson.html#introduction",
     "href": "Graph_algorithms/ML_lesson.html#introduction",
     "title": "Module 2: Shortest Path Algorithms & Routing Networks",
-    "section": "",
-    "text": "Shortest path problems form the foundation of many modern computational systems including navigation software, logistics planning, robotics, networking protocols, and communication infrastructures. This module explores classical and modern shortest path algorithms used to determine optimal routing in graphs.\nA shortest path problem asks:\n\nGiven a weighted graph and two vertices, what is the minimum-cost path connecting them?\n\nFormally, for a graph\n\\[G = (V, E, w)\\]\nwith non-negative weights (w(u,v) ), find a path from (s) to (t) minimizing\n\\[ \\text{Cost}(P) = \\sum_{(u,v)\\in P} w(u,v). \\]",
+    "section": "Introduction",
+    "text": "Introduction\nShortest path problems form the foundation of many modern computational systems including navigation software, logistics planning, robotics, networking protocols, and communication infrastructures. This module explores classical and modern shortest path algorithms used to determine optimal routing in graphs.\nA shortest path problem asks:\n\nGiven a weighted graph and two vertices, what is the minimum-cost path connecting them?\n\nFormally, for a graph\n\\[G = (V, E, w)\\]\nwith non-negative weights (w(u,v) ), find a path from (s) to (t) minimizing\n\\[ \\text{Cost}(P) = \\sum_{(u,v)\\in P} w(u,v). \\]",
     "crumbs": [
       "Home",
       "Graph Algorithms & Applications"

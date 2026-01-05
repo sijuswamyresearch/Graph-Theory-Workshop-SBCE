@@ -10,7 +10,7 @@
   <meta name="generator" content="quarto-1.7.31">
 
   <meta name="author" content="Siju Swamy">
-  <title>Workshop on Graph Theory – Module 4 — Hands-on Demonstrations using Python &amp; NetworkX</title>
+  <title>Workshop on Graph Theory – Module 3 — Hands-on Demonstrations using Python &amp; NetworkX</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -128,7 +128,7 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Module 4 — Hands-on Demonstrations using Python &amp; NetworkX</h1>
+  <h1 class="title">Module 3 — Hands-on Demonstrations using Python &amp; NetworkX</h1>
   <p class="subtitle"><a href="slides-ML.html" target="_blank"></a></p>
 
 <div class="quarto-title-authors">
@@ -146,20 +146,174 @@ Siju Swamy
 </div>
 
 </section>
+<section class="slide level2">
+
+<div style="width: 100%; text-align: center;">
+<p><img src="Module_3.jpg" alt="A descriptive text for the image" style="width: 100%; height: auto; max-width: 1000px; display: block; margin: 0 auto;"></p>
+</div>
+</section>
 <section id="introduction" class="slide level2">
 <h2>Introduction</h2>
 <p>This module introduces practical graph modelling and algorithm execution using <code>Python</code> and the <code>NetworkX</code> library. Students will learn to construct real and simulated graphs, visualize structure, compute metrics, and explore algorithms such as <em>shortest paths, centrality, and colouring</em>.</p>
 <p>The objective is to bridge theoretical understanding from discrete mathematics to real-world implementations in engineering problems such as <em>network routing, urban mobility, scheduling, and social network analytics</em>.</p>
 </section>
-<section id="module-objectives" class="slide level2">
-<h2>Module Objectives</h2>
-<p>After completing this module, students are expected to be able to:</p>
+<section id="learning-objectives" class="slide level2">
+<h2>Learning Objectives</h2>
+<p>By the end of this module, students will be able to:</p>
 <ul>
-<li>Construct graphs from real-world datasets</li>
-<li>Apply algorithms for shortest paths, spanning trees, and colouring</li>
-<li>Analyse networks using centrality measures</li>
-<li>Perform visual and interpretative data-driven studies</li>
+<li><strong>Construct</strong> complex graphs directly from dataframes/datasets.</li>
+<li><strong>Apply</strong> algorithms: Dijkstra (Routing), Kruskal/Prim (MST), and Greedy Colouring.</li>
+<li><strong>Analyse</strong> network robustness using Degree and Betweenness centrality.</li>
+<li><strong>Perform</strong> visual data-driven studies to interpret network structure.</li>
 </ul>
+</section>
+<section id="constructing-graphs-from-real-world-data" class="slide level2">
+<h2>Constructing Graphs from Real-World Data</h2>
+<p>Real-world data rarely comes in neat adjacency matrices. In engineering and data science, network data usually exists in <strong>CSV files</strong>, <strong>SQL databases</strong>, or <strong>Excel sheets</strong>.</p>
+<p>To bridge this gap, we utilize data handling libraries (like Pandas) to load datasets representing entities (nodes) and connections (edges). For our case study, we simulate a dataset of <strong>8 cities</strong> and the <strong>construction cost</strong> (in millions) to build high-voltage lines between them.</p>
+<p>The graph is constructed by mapping:</p>
+<ul>
+<li><strong>Source/Target columns</strong> <span class="math inline">\(\rightarrow\)</span> Edges</li>
+<li><strong>Cost/Type columns</strong> <span class="math inline">\(\rightarrow\)</span> Edge Attributes (Weights)</li>
+</ul>
+<div id="18215849" class="cell" data-execution_count="1">
+<div class="cell-output cell-output-stdout">
+<pre><code>Graph Successfully Constructed!
+Nodes (Cities): 8
+Edges (Power Lines): 9</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><img data-src="Networkx_demo_files/figure-revealjs/cell-2-output-2.png" width="979" height="615"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="optimization-algorithms-spanning-trees-routing" class="slide level2">
+<h2>Optimization Algorithms: Spanning Trees &amp; Routing</h2>
+<p>Once the graph is built, we can apply standard optimization algorithms to save costs and improve efficiency.</p>
+<h3 id="minimum-spanning-tree-mst">Minimum Spanning Tree (MST)</h3>
+<p><strong>The Scenario:</strong> We need to connect <em>all</em> cities with power lines to ensure everyone has electricity, but we want to minimize the total construction cost. We do not need redundant loops; we just need basic connectivity.</p>
+<p><strong>The Solution:</strong> We apply <strong>Kruskal’s or Prim’s Algorithm</strong>. This algorithm identifies a subset of edges that connects all vertices together, without any cycles, and with the minimum possible total edge weight. By comparing the total cost of the full network versus the MST, engineers can quantify potential infrastructure savings.</p>
+<p><strong>Algorithm:</strong> Kruskal’s or Prim’s Algorithm (implemented via minimum_spanning_tree).</p>
+<div id="a27b3613" class="cell" data-execution_count="2">
+<div class="cell-output cell-output-stdout">
+<pre><code>Total Network Cost: $107M
+Optimized MST Cost: $72M
+Savings: $35M</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><img data-src="Networkx_demo_files/figure-revealjs/cell-3-output-2.png" width="763" height="483"></p>
+</figure>
+</div>
+</div>
+</div>
+<h3 id="shortest-path-routing">Shortest Path (Routing)</h3>
+<p><strong>The Scenario:</strong> A maintenance team needs to travel from <code>City_A</code> to <code>City_H</code> as quickly as possible to fix a fault.</p>
+<p><strong>The Solution:</strong> We apply <strong>Dijkstra’s Algorithm</strong>. Unlike the MST (which optimizes the <em>whole</em> network), Dijkstra focuses on the optimal route between <em>two specific points</em>. It accounts for the accumulated “cost” (distance, time, or money) along the path.</p>
+<div id="f9796bad" class="cell" data-execution_count="3">
+<div class="cell-output cell-output-stdout">
+<pre><code>Optimal Route from City_A to City_H: ['City_A', 'City_B', 'City_E', 'City_G', 'City_H']
+Total Travel Cost: 45</code></pre>
+</div>
+</div>
+</section>
+<section id="resource-allocation-graph-colouring" class="slide level2">
+<h2>Resource Allocation: Graph Colouring</h2>
+<p><strong>The Scenario:</strong> We need to assign maintenance schedules to these cities. Adjacent cities cannot be maintained on the same day because shutting down two connected nodes simultaneously might destabilize the grid. What is the minimum number of days required to complete the schedule?</p>
+<p><strong>The Solution:</strong> We apply <strong>Greedy Graph Colouring</strong>.</p>
+<ul>
+<li><strong>The Rule:</strong> No two connected nodes can have the same “color” (value).</li>
+<li><strong>The Result:</strong> The algorithm assigns a time slot to every city. The total number of unique colors used (the <em>Chromatic Number</em>) tells us the minimum days required for the full cycle.</li>
+</ul>
+<p><strong>Algorithm:</strong> Greedy Graph Colouring.</p>
+<div id="9bde10aa" class="cell" data-execution_count="4">
+<div class="cell-output cell-output-stdout">
+<pre><code>--- Maintenance Schedule (Graph Colouring) ---
+City_B: Day 1
+City_E: Day 2
+City_G: Day 1
+City_A: Day 2
+City_C: Day 1
+City_D: Day 3
+City_F: Day 2
+City_H: Day 2
+
+Minimum days required for full cycle: 3</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><img data-src="Networkx_demo_files/figure-revealjs/cell-5-output-2.png" width="787" height="519"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="network-analysis-centrality-measures" class="slide level2">
+<h2>Network Analysis: Centrality Measures</h2>
+<p><strong>The Scenario:</strong> We need to secure the network against attacks or random failures. We must answer two questions: 1. Which city is the biggest “Hub”? 2. Which city is the most critical “Bridge”?</p>
+<p><strong>The Solution:</strong> We calculate <strong>Centrality Measures</strong>.</p>
+<ul>
+<li><strong>Degree Centrality:</strong> Measures how many direct connections a node has. In our grid, this identifies the central distribution hubs.</li>
+<li><strong>Betweenness Centrality:</strong> Measures how often a node acts as a bridge along the shortest path between two other nodes. This identifies <strong>Single Points of Failure</strong>. If a node with high Betweenness fails, the network is likely to split into disconnected islands.</li>
+</ul>
+<div id="240d00a5" class="cell" data-execution_count="5">
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><img data-src="Networkx_demo_files/figure-revealjs/cell-6-output-1.png" width="865" height="639"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>CRITICAL ALERT: City_G controls the highest flow in the network.</code></pre>
+</div>
+</div>
+</section>
+<section id="interpretative-study-summary" class="slide level2">
+<h2>Interpretative Study: Summary</h2>
+<p>By combining these algorithms, we can derive actionable engineering insights from raw data:</p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Analysis Type</th>
+<th style="text-align: left;">Metric/Algorithm</th>
+<th style="text-align: left;">Engineering Insight from Data</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Connectivity</strong></td>
+<td style="text-align: left;">Data Ingestion</td>
+<td style="text-align: left;">The network structure reveals the physical density of the grid.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Optimization</strong></td>
+<td style="text-align: left;">MST</td>
+<td style="text-align: left;">Identifies which power lines are essential and which are redundant “backup” lines.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Scheduling</strong></td>
+<td style="text-align: left;">Colouring</td>
+<td style="text-align: left;">Determines the minimum resources (time slots, frequency channels) needed to avoid conflicts.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Vulnerability</strong></td>
+<td style="text-align: left;">Betweenness</td>
+<td style="text-align: left;">Pinpoints the exact city that, if disabled, causes the maximum disruption to the grid.</td>
+</tr>
+</tbody>
+</table>
 
 
 </section>

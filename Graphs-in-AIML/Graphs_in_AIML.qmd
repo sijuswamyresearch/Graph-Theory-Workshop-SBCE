@@ -1,5 +1,5 @@
 ---
-title: "Module 5: Graphs in AI/ML"
+title: "Module 4: Graphs in AI/ML"
 subtitle: <a href="slides-ML.html" target="_blank"></a>
 author: 
   - name:
@@ -30,6 +30,12 @@ jupyter: python3
 execute: 
   enabled: true
 ---
+
+<div style="width: 100%; text-align: center;">
+  <img src="Graphs_in_AI.jpg" 
+       alt="A descriptive text for the image" 
+       style="width: 100%; height: auto; max-width: 1000px; display: block; margin: 0 auto;">
+</div>
 
 >Module outcomes:
 

@@ -31,6 +31,12 @@ execute:
   enabled: true
 ---
 
+<div style="width: 100%; text-align: center;">
+  <img src="ML_lesson.jpg" 
+       alt="A descriptive text for the image" 
+       style="width: 100%; height: auto; max-width: 1000px; display: block; margin: 0 auto;">
+</div>
+
 ## Introduction
 
 

@@ -31,6 +31,12 @@ jupyter: python3
 :::: {.content-hidden when-format="revealjs"}
 ## Module 1: Applications of Graph Theory in Engineering & Emerging Technologies
 
+<div style="width: 100%; text-align: center;">
+  <img src="Introduction.jpg" 
+       alt="A descriptive text for the image" 
+       style="width: 100%; height: auto; max-width: 1000px; display: block; margin: 0 auto;">
+</div>
+
 ## Introduction
 
 Graph Theory forms a foundational pillar across modern Computer Science and Engineering. 
