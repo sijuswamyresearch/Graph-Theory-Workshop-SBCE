@@ -71,7 +71,7 @@ This module introduces core graph-based AI models and algorithms:
 
 ### What is a Knowledge Graph?
 
-A *Knowledge Graph* is a labelled, directed graph used to represent knowledge in terms of *entities (nodes)* and *relationships (edges)*.
+A *Knowledge Graph* is a labelled, directed graph used to represent knowledge in terms of *entities (nodes)* and *relationships (edges)*. A Knowledge Graph is a massive collection of `Subject-Predicate-Object` triples. This is the standard format for resource description (like RDF in the Semantic Web)
 
 Example structure:
 
@@ -84,12 +84,32 @@ Alan Turing) —[pioneer_of]→ (AI)
 (ML) —[subset_of]→ (Deep Learning)
 ```
 
+For example in the Alan-- Turing-- Pioneer_of -- AI:
+
+- *Subject:* The node you are describing (e.g., "Alan Turing").
+
+- *Predicate:* The specific relationship edge (e.g., "pioneer_of").
+
+- *Object:* The target node or literal value (e.g., "Artificial Intelligence").
+
+>**Why Triples Matter:** Triples standardize knowledge so machines can parse it without ambiguity. Instead of vague text like "Turing started AI," the triple (Alan Turing, pioneer_of, AI) is structured data.
+
 :::{.callout-note}
 ### Key Characteristics
 - **Entity-based representation**
 - **Semantic relationship modelling**
 - **Supports reasoning & inference**
 :::
+
+### How KGs Enable "Reasoning" (Inference)
+
+The biggest advantage of a KG over a relational database is the ability to infer new knowledge that isn't explicitly stored.Example of Inference:Imagine your KG has these two facts:(Elon Musk, CEO_of, Tesla)(Tesla, located_in, Texas)A standard database only knows those two facts. A Knowledge Graph with reasoning rules can infer a third fact:Inferred Fact: (Elon Musk, works_in, Texas)This is done via transitive properties defined in the graph's schema (ontology). If $A \to B$ and $B \to C$, the system knows $A \to C$. This is crucial for AI assistants (like Siri or Google Assistant) to answer multi-hop questions.
+
+### The Concept of Embeddings (Bridging KGs to Deep Learning)
+How do you feed a node like "Alan Turing" into a Neural Network? You can't feed text.
+
+We convert nodes into Knowledge Graph Embeddings (KGEs). These are dense vector representations (e.g., an array of 128 numbers) that capture the semantic meaning of the node based on its position in the graph. Nodes with similar roles end up closer together in vector space. Models like TransE or RotatE are used to learn these embeddings.
+
 
 ### Real Engineering Applications
 
@@ -121,6 +141,11 @@ plt.show()
 
 ## PageRank Algorithm
 
+### The "Revolution" Before the Algorithm
+Before Google's PageRank (circa 1998), search engines primarily used keyword matching (e.g., AltaVista). If you searched for "car," they looked for pages where the word "car" appeared the most times. This was easily spammed.
+
+Larry Page and Sergey Brin's insight was that the web structure itself was a voting system. A link from page A to page B is a "vote of confidence" from A to B.
+
 ### Intuition
 
 PageRank assigns an "importance" score to each node based on the importance and number of incoming links. Think of a random surfer who follows outgoing links with probability d (damping factor, usually 0.85) and jumps to a random node with probability 1−d. Pages that are linked from many important pages get higher PageRank.
@@ -138,6 +163,20 @@ where:
 - $Out(u)$ represents the number of outgoing links from $u$
 
 This is solved iteratively (power iteration) until convergence.
+
+>*Discussion:* The formula contains a crucial constant, $d$ (usually 0.85), called the damping factor.Why is it there?
+
+It solves two major problems in graph traversal:
+- *Spider Traps (Sinks):* Imagine a group of websites that link to each other but never link out to the rest of the web. Without $d$, the "random surfer" would get stuck inside that group forever, and their PageRank would accumulate infinitely.
+
+- *Dead Ends:* Pages with no outgoing links.The term $\frac{1-d}{N}$ represents the "teleportation" probability. It means: "There is a 15% chance ($1-0.85$) that the surfer gets bored of following links and just types a random new URL into their browser." This ensures the surfer never gets stuck and every page has a baseline non-zero probability of being visited.
+
+### How it's Calculated?- *Power Iteration:*
+
+Students should know that PageRank isn't calculated in one shot. It's an iterative process.
+- *Initialization:* Every node starts with an equal PageRank score of $1/N$.Iteration 1: Every node passes its current score, divided by its outgoing links, to its neighbors.
+- *Update:* Every node recalculates its new score based on what it received (using the formula).
+- *Repeat:* Steps 2 and 3 are repeated. The scores will change drastically at first, but eventually, they "converge" (stop changing significantly). This stable state is the final PageRank.
 
 ### Example code
 
@@ -164,8 +203,16 @@ print(pr)
 
 ### Graph Neural Networks (GNNs)
 
+Why can't we just use a standard Convolutional Neural Network (CNN), which works great on images?
+
+- Images are Grids: An image pixel always has exactly 8 neighbors (up, down, left, right, diagonals). A CNN filter of size $3 \times 3$ always fits perfectly.
+- Graphs are Irregular: In a social network, one person might have 5 friends, another might have 5,000. There is no fixed "grid." A standard CNN filter cannot slide over a graph.
+- Permutation Invariance: In a graph, the order of nodes doesn't matter. If you reorder the adjacency matrix, it's still the same graph. Standard neural nets depend on a fixed input order.
+
+:::{.callout-note}
 Traditional ML models such as CNNs and RNNs assume Euclidean structure (images, sequences).
-Graphs are non-Euclidean; therefore a new architecture is needed.
+Graphs are non-Euclidean; therefore a new architecture is needed. GNNs solve this by being designed specifically for irregular neighbor structures.
+:::
 
 GNNs generalize neural networks to graph-structured data using message passing.
 
@@ -185,6 +232,40 @@ where,
 - $\sigma$ is an activation function
 
 :::
+
+Imagine Node $V$ trying to update its understanding of the world.
+
+- Step 1: (Message Computation) Every neighbor ($u \in N(v)$) prepares a "message" to send to node $V$. This message is usually the neighbor's current features transformed by a learnable weight matrix.
+   - Analogy: Your friends write down their opinions on a topic.
+   
+- Step 2: Aggregation (The Crucial Step) Node $V$ receives messages from all its neighbors. Since the number of neighbors varies, $V$ needs a way to combine them into a fixed-size representation.
+  - Common Aggregators: Sum, Mean, or Max.
+  - Analogy: You read all your friends' opinions and take the average opinion to summarize what your social circle thinks. 
+  - Mathematically, this is the $\sum\limits_{u\in N(v)}$ part of the formula.
+
+- Step 3: (Update) Node $V$ takes the aggregated neighborhood information and combines it with its own previous information to generate its new state.
+   - Analogy: You combine your friends' average opinion with your own previous beliefs to form a new opinion.
+   - Mathematically, this is the $\sigma(W_k \cdot [\text{aggregated\_info}])$ part.
+
+### Major Variants: GCN vs. GAT
+
+The two most famous variants differ in how they aggregate messages in Step 2.
+
+>**Graph Convolutional Networks (GCN):**
+
+- Mechanism: It takes a simple average (mean) of neighbor messages.
+
+- Philosophy: "All my neighbors are equally important; I'll just take the consensus."
+
+- Pros/Cons: Simple and fast, but sometimes over-smooths information.
+
+>**Graph Attention Networks (GAT):**
+
+- Mechanism: It uses an attention mechanism to learn which neighbors are more important. It computes a weighted average, where the weights are learned during training.
+
+- Philosophy: "Neighbor A is an expert on this topic, so I'll listen to them twice as much as Neighbor B."
+
+- Pros/Cons: More powerful and accurate, but computationally heavier.
 
 ### GNN usescases
 
@@ -207,6 +288,15 @@ During the outbreak of contagious diseases such as COVID-19, Influenza, or Nipah
 
 3. Visualise the network and highlight highly influential individuals.
 
+:::{.callout-note}
+The current case study calculates centrality. To fit this module better, link it to AI/ML concepts.
+
+- **Current state (Analytics):** We used mathematical formulas (Betweenness Centrality) defined by humans to find super-spreaders.
+
+- **The AI/ML Perspective (Future thought):** In a real-world scenario, "risk" isn't just about topology. It's also about node features (age, occupation, vaccination status). A GNN could take both the graph structure and the individual node features to learn a far more accurate prediction of who is likely to become a super-spreader, even perhaps identifying risky nodes that don't look central in a simple topology view.
+:::
+
+
 ```{python}
 import networkx as nx
 import matplotlib.pyplot as plt
@@ -217,6 +307,69 @@ plt.show()
 
 centrality = nx.betweenness_centrality(G)
 print(sorted(centrality.items(), key=lambda x: x[1], reverse=True))
+```
+
+```{python}
+import networkx as nx
+import matplotlib.pyplot as plt
+import matplotlib.colors as mcolors
+import numpy as np
+
+# 1. Generate a scale-free network (realistic for social networks)
+# 50 nodes, each new node attaches to 2 existing nodes
+G = nx.barabasi_albert_graph(50, 2, seed=42)
+
+# Calculate layout once to ensure nodes and edges align perfectly
+pos = nx.spring_layout(G, seed=42)
+
+# 2. Calculate Betweenness Centrality
+centrality = nx.betweenness_centrality(G)
+
+# 3. Prepare visualization based on centrality scores
+# Node size depends on centrality (scaled up for visibility)
+# Add a small base size (e.g., +100) so nodes with 0 centrality don't disappear entirely
+node_sizes = [(v * 10000) + 100 for v in centrality.values()]
+
+# Node color gradient based on centrality
+node_colors = list(centrality.values())
+
+# Create plot structure
+plt.figure(figsize=(10, 7))
+# Get Current Axes - crucial for the fix later
+ax = plt.gca()
+
+# Draw Nodes
+nodes = nx.draw_networkx_nodes(G, pos=pos,
+                               node_size=node_sizes,
+                               node_color=node_colors,
+                               cmap=plt.cm.coolwarm, # Red-Blue color map
+                               edgecolors='gray',
+                               ax=ax)
+
+# Draw Edges
+nx.draw_networkx_edges(G, pos=pos, alpha=0.3, ax=ax)
+
+# Create the ScalarMappable for the legend
+vmin = min(node_colors)
+vmax = max(node_colors)
+# Ensure vmin and vmax are not identical to avoid division by zero in normalization if graph is tiny
+if vmin == vmax:
+      vmax += 0.0001
+
+sm = plt.cm.ScalarMappable(cmap=plt.cm.coolwarm, norm=plt.Normalize(vmin=vmin, vmax=vmax))
+sm.set_array([])
+
+# Add a colorbar, explicitly telling it which axis (ax) to attach to
+cbar = plt.colorbar(sm, ax=ax, label="Epidemic Risk (Betweenness Centrality)")
+plt.title("Identifying Super-Spreaders via Graph Centrality", fontsize=14)
+plt.axis('off')
+plt.show()
+
+# Print top 3 risky individuals
+sorted_risk = sorted(centrality.items(), key=lambda x: x[1], reverse=True)
+print("Top 3 Highest Risk Nodes (Super-Spreaders):")
+for node, score in sorted_risk[:3]:
+    print(f"Node ID: {node}, Risk Score: {score:.4f}")
 ```
 
 ## Conclusion

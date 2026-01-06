@@ -271,15 +271,20 @@ window.Quarto = {
   <li><a href="#knowledge-graphs-kgs" id="toc-knowledge-graphs-kgs" class="nav-link" data-scroll-target="#knowledge-graphs-kgs">Knowledge Graphs (KGs)</a>
   <ul class="collapse">
   <li><a href="#what-is-a-knowledge-graph" id="toc-what-is-a-knowledge-graph" class="nav-link" data-scroll-target="#what-is-a-knowledge-graph">What is a Knowledge Graph?</a></li>
+  <li><a href="#how-kgs-enable-reasoning-inference" id="toc-how-kgs-enable-reasoning-inference" class="nav-link" data-scroll-target="#how-kgs-enable-reasoning-inference">How KGs Enable “Reasoning” (Inference)</a></li>
+  <li><a href="#the-concept-of-embeddings-bridging-kgs-to-deep-learning" id="toc-the-concept-of-embeddings-bridging-kgs-to-deep-learning" class="nav-link" data-scroll-target="#the-concept-of-embeddings-bridging-kgs-to-deep-learning">The Concept of Embeddings (Bridging KGs to Deep Learning)</a></li>
   <li><a href="#real-engineering-applications" id="toc-real-engineering-applications" class="nav-link" data-scroll-target="#real-engineering-applications">Real Engineering Applications</a></li>
   <li><a href="#mini-example-in-python-networkx" id="toc-mini-example-in-python-networkx" class="nav-link" data-scroll-target="#mini-example-in-python-networkx">Mini Example in Python (NetworkX)</a></li>
   </ul></li>
   <li><a href="#pagerank-algorithm" id="toc-pagerank-algorithm" class="nav-link" data-scroll-target="#pagerank-algorithm">PageRank Algorithm</a>
   <ul class="collapse">
+  <li><a href="#the-revolution-before-the-algorithm" id="toc-the-revolution-before-the-algorithm" class="nav-link" data-scroll-target="#the-revolution-before-the-algorithm">The “Revolution” Before the Algorithm</a></li>
   <li><a href="#intuition" id="toc-intuition" class="nav-link" data-scroll-target="#intuition">Intuition</a></li>
   <li><a href="#core-formula" id="toc-core-formula" class="nav-link" data-scroll-target="#core-formula">Core formula</a></li>
+  <li><a href="#how-its-calculated--power-iteration" id="toc-how-its-calculated--power-iteration" class="nav-link" data-scroll-target="#how-its-calculated--power-iteration">How it’s Calculated?- <em>Power Iteration:</em></a></li>
   <li><a href="#example-code" id="toc-example-code" class="nav-link" data-scroll-target="#example-code">Example code</a></li>
   <li><a href="#graph-neural-networks-gnns" id="toc-graph-neural-networks-gnns" class="nav-link" data-scroll-target="#graph-neural-networks-gnns">Graph Neural Networks (GNNs)</a></li>
+  <li><a href="#major-variants-gcn-vs.-gat" id="toc-major-variants-gcn-vs.-gat" class="nav-link" data-scroll-target="#major-variants-gcn-vs.-gat">Major Variants: GCN vs.&nbsp;GAT</a></li>
   <li><a href="#gnn-usescases" id="toc-gnn-usescases" class="nav-link" data-scroll-target="#gnn-usescases">GNN usescases</a></li>
   </ul></li>
   <li><a href="#case-study-epidemic-spread-modelling" id="toc-case-study-epidemic-spread-modelling" class="nav-link" data-scroll-target="#case-study-epidemic-spread-modelling">Case Study — Epidemic Spread Modelling</a></li>
@@ -353,7 +358,7 @@ Mastering graph theory and graph ML prepares learners to solve scalable real-wor
 <h2 class="anchored" data-anchor-id="knowledge-graphs-kgs">Knowledge Graphs (KGs)</h2>
 <section id="what-is-a-knowledge-graph" class="level3">
 <h3 class="anchored" data-anchor-id="what-is-a-knowledge-graph">What is a Knowledge Graph?</h3>
-<p>A <em>Knowledge Graph</em> is a labelled, directed graph used to represent knowledge in terms of <em>entities (nodes)</em> and <em>relationships (edges)</em>.</p>
+<p>A <em>Knowledge Graph</em> is a labelled, directed graph used to represent knowledge in terms of <em>entities (nodes)</em> and <em>relationships (edges)</em>. A Knowledge Graph is a massive collection of <code>Subject-Predicate-Object</code> triples. This is the standard format for resource description (like RDF in the Semantic Web)</p>
 <p>Example structure:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span><span class="ex">Person</span><span class="kw">)</span> <span class="ex">---[lives_in]---</span><span class="op">&gt;</span> <span class="er">(</span><span class="ex">City</span><span class="kw">)</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span><span class="ex">Author</span><span class="kw">)</span> <span class="ex">---[wrote]------</span><span class="op">&gt;</span> <span class="er">(</span><span class="ex">Book</span><span class="kw">)</span></span>
@@ -361,6 +366,15 @@ Mastering graph theory and graph ML prepares learners to solve scalable real-wor
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ex">Alan</span> Turing<span class="er">)</span> <span class="ex">—[pioneer_of]→</span> <span class="er">(</span><span class="ex">AI</span><span class="kw">)</span></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span><span class="ex">AI</span><span class="kw">)</span> <span class="ex">—[includes]→</span> <span class="er">(</span><span class="ex">Machine</span> Learning<span class="kw">)</span></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span><span class="ex">ML</span><span class="kw">)</span> <span class="ex">—[subset_of]→</span> <span class="er">(</span><span class="ex">Deep</span> Learning<span class="kw">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>For example in the Alan– Turing– Pioneer_of – AI:</p>
+<ul>
+<li><p><em>Subject:</em> The node you are describing (e.g., “Alan Turing”).</p></li>
+<li><p><em>Predicate:</em> The specific relationship edge (e.g., “pioneer_of”).</p></li>
+<li><p><em>Object:</em> The target node or literal value (e.g., “Artificial Intelligence”).</p></li>
+</ul>
+<blockquote class="blockquote">
+<p><strong>Why Triples Matter:</strong> Triples standardize knowledge so machines can parse it without ambiguity. Instead of vague text like “Turing started AI,” the triple (Alan Turing, pioneer_of, AI) is structured data.</p>
+</blockquote>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -378,6 +392,15 @@ Key Characteristics
 </ul>
 </div>
 </div>
+</section>
+<section id="how-kgs-enable-reasoning-inference" class="level3">
+<h3 class="anchored" data-anchor-id="how-kgs-enable-reasoning-inference">How KGs Enable “Reasoning” (Inference)</h3>
+<p>The biggest advantage of a KG over a relational database is the ability to infer new knowledge that isn’t explicitly stored.Example of Inference:Imagine your KG has these two facts:(Elon Musk, CEO_of, Tesla)(Tesla, located_in, Texas)A standard database only knows those two facts. A Knowledge Graph with reasoning rules can infer a third fact:Inferred Fact: (Elon Musk, works_in, Texas)This is done via transitive properties defined in the graph’s schema (ontology). If <span class="math inline">\(A \to B\)</span> and <span class="math inline">\(B \to C\)</span>, the system knows <span class="math inline">\(A \to C\)</span>. This is crucial for AI assistants (like Siri or Google Assistant) to answer multi-hop questions.</p>
+</section>
+<section id="the-concept-of-embeddings-bridging-kgs-to-deep-learning" class="level3">
+<h3 class="anchored" data-anchor-id="the-concept-of-embeddings-bridging-kgs-to-deep-learning">The Concept of Embeddings (Bridging KGs to Deep Learning)</h3>
+<p>How do you feed a node like “Alan Turing” into a Neural Network? You can’t feed text.</p>
+<p>We convert nodes into Knowledge Graph Embeddings (KGEs). These are dense vector representations (e.g., an array of 128 numbers) that capture the semantic meaning of the node based on its position in the graph. Nodes with similar roles end up closer together in vector space. Models like TransE or RotatE are used to learn these embeddings.</p>
 </section>
 <section id="real-engineering-applications" class="level3">
 <h3 class="anchored" data-anchor-id="real-engineering-applications">Real Engineering Applications</h3>
@@ -420,7 +443,7 @@ Key Characteristics
 </section>
 <section id="mini-example-in-python-networkx" class="level3">
 <h3 class="anchored" data-anchor-id="mini-example-in-python-networkx">Mini Example in Python (NetworkX)</h3>
-<div id="882b0da5" class="cell" data-execution_count="1">
+<div id="3bec02c3" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> networkx <span class="im">as</span> nx</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -446,6 +469,11 @@ Key Characteristics
 </section>
 <section id="pagerank-algorithm" class="level2">
 <h2 class="anchored" data-anchor-id="pagerank-algorithm">PageRank Algorithm</h2>
+<section id="the-revolution-before-the-algorithm" class="level3">
+<h3 class="anchored" data-anchor-id="the-revolution-before-the-algorithm">The “Revolution” Before the Algorithm</h3>
+<p>Before Google’s PageRank (circa 1998), search engines primarily used keyword matching (e.g., AltaVista). If you searched for “car,” they looked for pages where the word “car” appeared the most times. This was easily spammed.</p>
+<p>Larry Page and Sergey Brin’s insight was that the web structure itself was a voting system. A link from page A to page B is a “vote of confidence” from A to B.</p>
+</section>
 <section id="intuition" class="level3">
 <h3 class="anchored" data-anchor-id="intuition">Intuition</h3>
 <p>PageRank assigns an “importance” score to each node based on the importance and number of incoming links. Think of a random surfer who follows outgoing links with probability d (damping factor, usually 0.85) and jumps to a random node with probability 1−d.&nbsp;Pages that are linked from many important pages get higher PageRank.</p>
@@ -462,10 +490,21 @@ Key Characteristics
 <li><span class="math inline">\(Out(u)\)</span> represents the number of outgoing links from <span class="math inline">\(u\)</span></li>
 </ul>
 <p>This is solved iteratively (power iteration) until convergence.</p>
+<blockquote class="blockquote">
+<p><em>Discussion:</em> The formula contains a crucial constant, <span class="math inline">\(d\)</span> (usually 0.85), called the damping factor.Why is it there?</p>
+</blockquote>
+<p>It solves two major problems in graph traversal: - <em>Spider Traps (Sinks):</em> Imagine a group of websites that link to each other but never link out to the rest of the web. Without <span class="math inline">\(d\)</span>, the “random surfer” would get stuck inside that group forever, and their PageRank would accumulate infinitely.</p>
+<ul>
+<li><em>Dead Ends:</em> Pages with no outgoing links.The term <span class="math inline">\(\frac{1-d}{N}\)</span> represents the “teleportation” probability. It means: “There is a 15% chance (<span class="math inline">\(1-0.85\)</span>) that the surfer gets bored of following links and just types a random new URL into their browser.” This ensures the surfer never gets stuck and every page has a baseline non-zero probability of being visited.</li>
+</ul>
+</section>
+<section id="how-its-calculated--power-iteration" class="level3">
+<h3 class="anchored" data-anchor-id="how-its-calculated--power-iteration">How it’s Calculated?- <em>Power Iteration:</em></h3>
+<p>Students should know that PageRank isn’t calculated in one shot. It’s an iterative process. - <em>Initialization:</em> Every node starts with an equal PageRank score of <span class="math inline">\(1/N\)</span>.Iteration 1: Every node passes its current score, divided by its outgoing links, to its neighbors. - <em>Update:</em> Every node recalculates its new score based on what it received (using the formula). - <em>Repeat:</em> Steps 2 and 3 are repeated. The scores will change drastically at first, but eventually, they “converge” (stop changing significantly). This stable state is the final PageRank.</p>
 </section>
 <section id="example-code" class="level3">
 <h3 class="anchored" data-anchor-id="example-code">Example code</h3>
-<div id="02b4b0fc" class="cell" data-execution_count="2">
+<div id="3822fcb6" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> networkx <span class="im">as</span> nx</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>G <span class="op">=</span> nx.DiGraph()</span>
@@ -500,7 +539,25 @@ Uses / Applications
 </section>
 <section id="graph-neural-networks-gnns" class="level3">
 <h3 class="anchored" data-anchor-id="graph-neural-networks-gnns">Graph Neural Networks (GNNs)</h3>
-<p>Traditional ML models such as CNNs and RNNs assume Euclidean structure (images, sequences). Graphs are non-Euclidean; therefore a new architecture is needed.</p>
+<p>Why can’t we just use a standard Convolutional Neural Network (CNN), which works great on images?</p>
+<ul>
+<li>Images are Grids: An image pixel always has exactly 8 neighbors (up, down, left, right, diagonals). A CNN filter of size <span class="math inline">\(3 \times 3\)</span> always fits perfectly.</li>
+<li>Graphs are Irregular: In a social network, one person might have 5 friends, another might have 5,000. There is no fixed “grid.” A standard CNN filter cannot slide over a graph.</li>
+<li>Permutation Invariance: In a graph, the order of nodes doesn’t matter. If you reorder the adjacency matrix, it’s still the same graph. Standard neural nets depend on a fixed input order.</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Traditional ML models such as CNNs and RNNs assume Euclidean structure (images, sequences). Graphs are non-Euclidean; therefore a new architecture is needed. GNNs solve this by being designed specifically for irregular neighbor structures.</p>
+</div>
+</div>
 <p>GNNs generalize neural networks to graph-structured data using message passing.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -522,6 +579,44 @@ Message Passing Update Rule
 </ul>
 </div>
 </div>
+<p>Imagine Node <span class="math inline">\(V\)</span> trying to update its understanding of the world.</p>
+<ul>
+<li>Step 1: (Message Computation) Every neighbor (<span class="math inline">\(u \in N(v)\)</span>) prepares a “message” to send to node <span class="math inline">\(V\)</span>. This message is usually the neighbor’s current features transformed by a learnable weight matrix.
+<ul>
+<li>Analogy: Your friends write down their opinions on a topic.</li>
+</ul></li>
+<li>Step 2: Aggregation (The Crucial Step) Node <span class="math inline">\(V\)</span> receives messages from all its neighbors. Since the number of neighbors varies, <span class="math inline">\(V\)</span> needs a way to combine them into a fixed-size representation.
+<ul>
+<li>Common Aggregators: Sum, Mean, or Max.</li>
+<li>Analogy: You read all your friends’ opinions and take the average opinion to summarize what your social circle thinks.</li>
+<li>Mathematically, this is the <span class="math inline">\(\sum\limits_{u\in N(v)}\)</span> part of the formula.</li>
+</ul></li>
+<li>Step 3: (Update) Node <span class="math inline">\(V\)</span> takes the aggregated neighborhood information and combines it with its own previous information to generate its new state.
+<ul>
+<li>Analogy: You combine your friends’ average opinion with your own previous beliefs to form a new opinion.</li>
+<li>Mathematically, this is the <span class="math inline">\(\sigma(W_k \cdot [\text{aggregated\_info}])\)</span> part.</li>
+</ul></li>
+</ul>
+</section>
+<section id="major-variants-gcn-vs.-gat" class="level3">
+<h3 class="anchored" data-anchor-id="major-variants-gcn-vs.-gat">Major Variants: GCN vs.&nbsp;GAT</h3>
+<p>The two most famous variants differ in how they aggregate messages in Step 2.</p>
+<blockquote class="blockquote">
+<p><strong>Graph Convolutional Networks (GCN):</strong></p>
+</blockquote>
+<ul>
+<li><p>Mechanism: It takes a simple average (mean) of neighbor messages.</p></li>
+<li><p>Philosophy: “All my neighbors are equally important; I’ll just take the consensus.”</p></li>
+<li><p>Pros/Cons: Simple and fast, but sometimes over-smooths information.</p></li>
+</ul>
+<blockquote class="blockquote">
+<p><strong>Graph Attention Networks (GAT):</strong></p>
+</blockquote>
+<ul>
+<li><p>Mechanism: It uses an attention mechanism to learn which neighbors are more important. It computes a weighted average, where the weights are learned during training.</p></li>
+<li><p>Philosophy: “Neighbor A is an expert on this topic, so I’ll listen to them twice as much as Neighbor B.”</p></li>
+<li><p>Pros/Cons: More powerful and accurate, but computationally heavier.</p></li>
+</ul>
 </section>
 <section id="gnn-usescases" class="level3">
 <h3 class="anchored" data-anchor-id="gnn-usescases">GNN usescases</h3>
@@ -569,7 +664,24 @@ Message Passing Update Rule
 <li><p>The minimal set of nodes to isolate or track for maximum reduction in infection propagation.</p></li>
 <li><p>Visualise the network and highlight highly influential individuals.</p></li>
 </ol>
-<div id="963ff1be" class="cell" data-execution_count="3">
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The current case study calculates centrality. To fit this module better, link it to AI/ML concepts.</p>
+<ul>
+<li><p><strong>Current state (Analytics):</strong> We used mathematical formulas (Betweenness Centrality) defined by humans to find super-spreaders.</p></li>
+<li><p><strong>The AI/ML Perspective (Future thought):</strong> In a real-world scenario, “risk” isn’t just about topology. It’s also about node features (age, occupation, vaccination status). A GNN could take both the graph structure and the individual node features to learn a far more accurate prediction of who is likely to become a super-spreader, even perhaps identifying risky nodes that don’t look central in a simple topology view.</p></li>
+</ul>
+</div>
+</div>
+<div id="12e3ab07" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> networkx <span class="im">as</span> nx</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -587,7 +699,82 @@ Message Passing Update Rule
 </div>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[(0, 0.5154970760233918), (4, 0.254775828460039), (5, 0.14951267056530215), (2, 0.06822612085769979), (8, 0.060916179337231965), (3, 0.04454191033138401), (12, 0.04035087719298246), (15, 0.0384990253411306), (6, 0.03216374269005848), (14, 0.0253411306042885), (9, 0.013645224171539959), (17, 0.013157894736842105), (16, 0.008966861598440545), (7, 0.006822612085769979), (11, 0.005360623781676413), (18, 0.0029239766081871343), (1, 0.0), (10, 0.0), (13, 0.0), (19, 0.0)]</code></pre>
+<pre><code>[(0, 0.4678362573099415), (8, 0.2933723196881091), (1, 0.12475633528265108), (9, 0.1218323586744639), (3, 0.07115009746588694), (2, 0.04532163742690058), (6, 0.042884990253411304), (12, 0.028265107212475632), (13, 0.021929824561403504), (15, 0.011208576998050682), (14, 0.009746588693957114), (10, 0.00682261208576998), (5, 0.006822612085769979), (18, 0.006822612085769979), (19, 0.0043859649122807015), (4, 0.0), (7, 0.0), (11, 0.0), (16, 0.0), (17, 0.0)]</code></pre>
+</div>
+</div>
+<div id="04018437" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> networkx <span class="im">as</span> nx</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.colors <span class="im">as</span> mcolors</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Generate a scale-free network (realistic for social networks)</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 50 nodes, each new node attaches to 2 existing nodes</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>G <span class="op">=</span> nx.barabasi_albert_graph(<span class="dv">50</span>, <span class="dv">2</span>, seed<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate layout once to ensure nodes and edges align perfectly</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>pos <span class="op">=</span> nx.spring_layout(G, seed<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Calculate Betweenness Centrality</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>centrality <span class="op">=</span> nx.betweenness_centrality(G)</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Prepare visualization based on centrality scores</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Node size depends on centrality (scaled up for visibility)</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Add a small base size (e.g., +100) so nodes with 0 centrality don't disappear entirely</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>node_sizes <span class="op">=</span> [(v <span class="op">*</span> <span class="dv">10000</span>) <span class="op">+</span> <span class="dv">100</span> <span class="cf">for</span> v <span class="kw">in</span> centrality.values()]</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Node color gradient based on centrality</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>node_colors <span class="op">=</span> <span class="bu">list</span>(centrality.values())</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Create plot structure</span></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">7</span>))</span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Get Current Axes - crucial for the fix later</span></span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> plt.gca()</span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Draw Nodes</span></span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>nodes <span class="op">=</span> nx.draw_networkx_nodes(G, pos<span class="op">=</span>pos,</span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>                               node_size<span class="op">=</span>node_sizes,</span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>                               node_color<span class="op">=</span>node_colors,</span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>                               cmap<span class="op">=</span>plt.cm.coolwarm, <span class="co"># Red-Blue color map</span></span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>                               edgecolors<span class="op">=</span><span class="st">'gray'</span>,</span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>                               ax<span class="op">=</span>ax)</span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a><span class="co"># Draw Edges</span></span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a>nx.draw_networkx_edges(G, pos<span class="op">=</span>pos, alpha<span class="op">=</span><span class="fl">0.3</span>, ax<span class="op">=</span>ax)</span>
+<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the ScalarMappable for the legend</span></span>
+<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a>vmin <span class="op">=</span> <span class="bu">min</span>(node_colors)</span>
+<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a>vmax <span class="op">=</span> <span class="bu">max</span>(node_colors)</span>
+<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a><span class="co"># Ensure vmin and vmax are not identical to avoid division by zero in normalization if graph is tiny</span></span>
+<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> vmin <span class="op">==</span> vmax:</span>
+<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a>      vmax <span class="op">+=</span> <span class="fl">0.0001</span></span>
+<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a>sm <span class="op">=</span> plt.cm.ScalarMappable(cmap<span class="op">=</span>plt.cm.coolwarm, norm<span class="op">=</span>plt.Normalize(vmin<span class="op">=</span>vmin, vmax<span class="op">=</span>vmax))</span>
+<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a>sm.set_array([])</span>
+<span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a><span class="co"># Add a colorbar, explicitly telling it which axis (ax) to attach to</span></span>
+<span id="cb7-51"><a href="#cb7-51" aria-hidden="true" tabindex="-1"></a>cbar <span class="op">=</span> plt.colorbar(sm, ax<span class="op">=</span>ax, label<span class="op">=</span><span class="st">"Epidemic Risk (Betweenness Centrality)"</span>)</span>
+<span id="cb7-52"><a href="#cb7-52" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Identifying Super-Spreaders via Graph Centrality"</span>, fontsize<span class="op">=</span><span class="dv">14</span>)</span>
+<span id="cb7-53"><a href="#cb7-53" aria-hidden="true" tabindex="-1"></a>plt.axis(<span class="st">'off'</span>)</span>
+<span id="cb7-54"><a href="#cb7-54" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb7-55"><a href="#cb7-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-56"><a href="#cb7-56" aria-hidden="true" tabindex="-1"></a><span class="co"># Print top 3 risky individuals</span></span>
+<span id="cb7-57"><a href="#cb7-57" aria-hidden="true" tabindex="-1"></a>sorted_risk <span class="op">=</span> <span class="bu">sorted</span>(centrality.items(), key<span class="op">=</span><span class="kw">lambda</span> x: x[<span class="dv">1</span>], reverse<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb7-58"><a href="#cb7-58" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Top 3 Highest Risk Nodes (Super-Spreaders):"</span>)</span>
+<span id="cb7-59"><a href="#cb7-59" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> node, score <span class="kw">in</span> sorted_risk[:<span class="dv">3</span>]:</span>
+<span id="cb7-60"><a href="#cb7-60" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Node ID: </span><span class="sc">{</span>node<span class="sc">}</span><span class="ss">, Risk Score: </span><span class="sc">{</span>score<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Graphs_in_AIML_files/figure-html/cell-5-output-1.png" width="726" height="567" class="figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Top 3 Highest Risk Nodes (Super-Spreaders):
+Node ID: 0, Risk Score: 0.4505
+Node ID: 1, Risk Score: 0.2170
+Node ID: 5, Risk Score: 0.1923</code></pre>
 </div>
 </div>
 </section>
