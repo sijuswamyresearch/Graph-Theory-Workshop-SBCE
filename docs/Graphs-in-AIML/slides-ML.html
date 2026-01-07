@@ -321,7 +321,7 @@ Mastering graph theory and graph ML prepares learners to solve scalable real-wor
 </tbody>
 </table>
 <h3 id="mini-example-in-python-networkx">Mini Example in Python (NetworkX)</h3>
-<div id="3bb66d6b" class="cell" data-execution_count="1">
+<div id="928e33bc" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
@@ -352,16 +352,43 @@ Mastering graph theory and graph ML prepares learners to solve scalable real-wor
 <blockquote>
 <p><em>Discussion:</em> The formula contains a crucial constant, <span class="math inline">\(d\)</span> (usually 0.85), called the damping factor.Why is it there?</p>
 </blockquote>
-<p>It solves two major problems in graph traversal: - <em>Spider Traps (Sinks):</em> Imagine a group of websites that link to each other but never link out to the rest of the web. Without <span class="math inline">\(d\)</span>, the “random surfer” would get stuck inside that group forever, and their PageRank would accumulate infinitely.</p>
+<p>It solves two major problems in graph traversal:</p>
 <ul>
-<li><em>Dead Ends:</em> Pages with no outgoing links.The term <span class="math inline">\(\frac{1-d}{N}\)</span> represents the “teleportation” probability. It means: “There is a 15% chance (<span class="math inline">\(1-0.85\)</span>) that the surfer gets bored of following links and just types a random new URL into their browser.” This ensures the surfer never gets stuck and every page has a baseline non-zero probability of being visited.</li>
+<li><p><em>Spider Traps (Sinks):</em> Imagine a group of websites that link to each other but never link out to the rest of the web. Without <span class="math inline">\(d\)</span>, the “random surfer” would get stuck inside that group forever, and their PageRank would accumulate infinitely.</p></li>
+<li><p><em>Dead Ends:</em> Pages with no outgoing links.The term <span class="math inline">\(\frac{1-d}{N}\)</span> represents the “teleportation” probability. It means: “There is a 15% chance (<span class="math inline">\(1-0.85\)</span>) that the surfer gets bored of following links and just types a random new URL into their browser.” This ensures the surfer never gets stuck and every page has a baseline non-zero probability of being visited.</p></li>
 </ul>
 <h3 id="how-its-calculated--power-iteration">How it’s Calculated?- <em>Power Iteration:</em></h3>
-<p>Students should know that PageRank isn’t calculated in one shot. It’s an iterative process. - <em>Initialization:</em> Every node starts with an equal PageRank score of <span class="math inline">\(1/N\)</span>.Iteration 1: Every node passes its current score, divided by its outgoing links, to its neighbors. - <em>Update:</em> Every node recalculates its new score based on what it received (using the formula). - <em>Repeat:</em> Steps 2 and 3 are repeated. The scores will change drastically at first, but eventually, they “converge” (stop changing significantly). This stable state is the final PageRank.</p>
+<p>One should know that PageRank isn’t calculated in one shot. It’s an iterative process.</p>
+<ul>
+<li><em>Initialization:</em> Every node starts with an equal PageRank score of <span class="math inline">\(1/N\)</span>.</li>
+<li><em>Iteration 1:</em> Every node passes its current score, divided by its outgoing links, to its neighbors.</li>
+<li><em>Update:</em> Every node recalculates its new score based on what it received (using the formula).</li>
+<li><em>Repeat:</em> Steps 2 and 3 are repeated. The scores will change drastically at first, but eventually, they “converge” (stop changing significantly). This stable state is the final PageRank.</li>
+</ul>
 <h3 id="example-code">Example code</h3>
-<div id="df1b9919" class="cell" data-execution_count="2">
+<div id="cd58b8e7" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-stdout">
 <pre><code>{'A': 0.21991357059363242, 'B': 0.13096360941900992, 'C': 0.4292092493937253, 'D': 0.21991357059363242}</code></pre>
+</div>
+</div>
+<blockquote>
+<p><strong>Web demonstration</strong></p>
+</blockquote>
+<div id="35a466bd" class="cell" data-execution_count="3">
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><img data-src="Graphs_in_AIML_files/figure-revealjs/cell-4-output-1.png" width="763" height="557"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>--- Search Engine Rankings ---
+#1: Google (Score: 0.3250)
+#2: Blogs (Score: 0.2611)
+#3: News (Score: 0.2158)
+#4: Wikipedia (Score: 0.1681)
+#5: SpamSite (Score: 0.0300)</code></pre>
 </div>
 </div>
 <div class="callout callout-note callout-titled callout-style-default">
@@ -380,6 +407,7 @@ Mastering graph theory and graph ML prepares learners to solve scalable real-wor
 <li>Social networks: measure influence or authority.</li>
 <li>Spam/fraud detection: detect anomalous link patterns.</li>
 </ul>
+<p>Resources :<a href="https://shaoxiongji.github.io/knowledge-graphs/#knowledge-graphs" class="uri">https://shaoxiongji.github.io/knowledge-graphs/#knowledge-graphs</a> <a href="https://github.com/totogo/awesome-knowledge-graph?tab=readme-ov-file#infrastructure" class="uri">https://github.com/totogo/awesome-knowledge-graph?tab=readme-ov-file#infrastructure</a></p>
 </div>
 </div>
 </div>
@@ -496,6 +524,61 @@ Mastering graph theory and graph ML prepares learners to solve scalable real-wor
 </tbody>
 </table>
 </section>
+<section id="the-karate-club-demo" class="slide level2">
+<h2>The Karate Club Demo</h2>
+<p>This is a real dataset from the 1970s. A Karate instructor and an administrator got into a fight. The club split. Using just the graph structure—who talked to whom—our code can predict exactly which student joined which faction. This is how Facebook suggests friends. This is how Amazon suggests products. It’s not magic. It’s Graph Theory.</p>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>What thus script do?</strong></p>
+</div>
+<div class="callout-content">
+<p>This script is designed to demonstrate Semi-Supervised Learning. Instead of just “coloring” the graph, we will simulate an AI problem:</p>
+<ul>
+<li><p>We “hide” the faction of everyone except the two leaders (Node 0 and Node 33).</p></li>
+<li><p>We use an algorithm (Label Propagation) to learn which side everyone else belongs to based purely on the connections.</p></li>
+</ul>
+<p>This mimics how Graph Neural Networks work (using neighbors to predict node properties).</p>
+</div>
+</div>
+</div>
+<blockquote>
+<p><strong>The Script: AI Prediction on Zachary’s Karate Club</strong></p>
+</blockquote>
+<div id="9884547c" class="cell" data-execution_count="4">
+<div class="cell-output cell-output-stdout">
+<pre><code>Graph Loaded: 34 Students, 78 Interactions.</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure>
+<p><img data-src="Graphs_in_AIML_files/figure-revealjs/cell-5-output-2.png" width="912" height="654"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>--- Prediction Analysis ---
+Algorithm identified 3 distinct communities.
+Note: In a perfect structural split, these match the two real-world factions.</code></pre>
+</div>
+</div>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Playlist Recommendation!</strong></p>
+</div>
+<div class="callout-content">
+<p>This is exactly how Spotify predicts you will like a song because your ‘graph neighbors’ (people with similar taste) liked it.</p>
+</div>
+</div>
+</div>
+</section>
 <section id="case-study-epidemic-spread-modelling" class="slide level2">
 <h2>Case Study — Epidemic Spread Modelling</h2>
 <p>During the outbreak of contagious diseases such as COVID-19, Influenza, or Nipah virus, rapid identification of individuals who play a critical role in spreading infection is essential for effective containment. Public health authorities model social interactions as graphs where nodes represent individuals and edges represent close contact events capable of transmitting disease. Given a simulated contact network of individuals in a community, determine:</p>
@@ -521,23 +604,23 @@ Mastering graph theory and graph ML prepares learners to solve scalable real-wor
 </div>
 </div>
 </div>
-<div id="d35c4206" class="cell" data-execution_count="3">
+<div id="0696de90" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="Graphs_in_AIML_files/figure-revealjs/cell-4-output-1.png" width="979" height="499"></p>
+<p><img data-src="Graphs_in_AIML_files/figure-revealjs/cell-6-output-1.png" width="979" height="499"></p>
 </figure>
 </div>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[(0, 0.4246031746031746), (2, 0.32131718184349756), (5, 0.14035087719298245), (14, 0.11010860484544693), (1, 0.08872180451127817), (4, 0.06414647730437203), (10, 0.04990253411306043), (15, 0.025828460038986353), (13, 0.02247284878863826), (6, 0.019493177387914225), (11, 0.014814814814814814), (9, 0.012879420774157617), (16, 0.012183235867446391), (19, 0.010721247563352826), (3, 0.006822612085769979), (8, 0.0031189083820662767), (7, 0.0), (12, 0.0), (17, 0.0), (18, 0.0)]</code></pre>
+<pre><code>[(4, 0.33338902812587023), (3, 0.23984962406015034), (14, 0.1354775828460039), (8, 0.1214146477304372), (2, 0.11095795043163462), (11, 0.10100250626566412), (6, 0.07678919521024782), (7, 0.059941520467836254), (0, 0.058549150654413795), (5, 0.050877192982456146), (1, 0.04515455304928989), (15, 0.030075187969924807), (19, 0.019005847953216373), (9, 0.010930103035366194), (13, 0.008632692843219159), (18, 0.007309941520467836), (10, 0.0), (12, 0.0), (16, 0.0), (17, 0.0)]</code></pre>
 </div>
 </div>
-<div id="637a5bdc" class="cell" data-execution_count="4">
+<div id="7d7351c9" class="cell" data-execution_count="6">
 <div class="cell-output cell-output-display">
 <div>
 <figure>
-<p><img data-src="Graphs_in_AIML_files/figure-revealjs/cell-5-output-1.png" width="726" height="567"></p>
+<p><img data-src="Graphs_in_AIML_files/figure-revealjs/cell-7-output-1.png" width="726" height="567"></p>
 </figure>
 </div>
 </div>

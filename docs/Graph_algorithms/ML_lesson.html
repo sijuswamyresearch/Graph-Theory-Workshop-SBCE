@@ -329,7 +329,7 @@ window.Quarto = {
 </blockquote>
 <p>Formally, for a graph<br>
 <span class="math display">\[G = (V, E, w)\]</span><br>
-with non-negative weights (w(u,v) ), find a path from (s) to (t) minimizing</p>
+with non-negative weights <span class="math inline">\(w(u,v) \ge 0\)</span>, find a path from <span class="math inline">\(s\)</span> to <span class="math inline">\(t\)</span> minimizing</p>
 <p><span class="math display">\[ \text{Cost}(P) = \sum_{(u,v)\in P} w(u,v). \]</span></p>
 </section>
 <section id="types-of-graphs-relevant-to-shortest-path" class="level2">
@@ -456,7 +456,7 @@ Key Property
 </section>
 <section id="hands-on-example-using-networkx" class="level4">
 <h4 class="anchored" data-anchor-id="hands-on-example-using-networkx">Hands-on Example Using <code>NetworkX</code></h4>
-<div id="d1f72b98" class="cell" data-execution_count="1">
+<div id="a18f9bd6" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> networkx <span class="im">as</span> nx</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>G <span class="op">=</span> nx.DiGraph()</span>
@@ -579,7 +579,7 @@ APplications
 <section id="real-world-demonstration-example" class="level3">
 <h3 class="anchored" data-anchor-id="real-world-demonstration-example">Real-world Demonstration Example</h3>
 <p>Compute shortest path in a mini city graph</p>
-<div id="739adc0f" class="cell" data-execution_count="2">
+<div id="0443657b" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> networkx <span class="im">as</span> nx</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>cities <span class="op">=</span> nx.Graph()</span>

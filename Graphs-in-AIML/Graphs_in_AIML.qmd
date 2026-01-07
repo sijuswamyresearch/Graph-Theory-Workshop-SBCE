@@ -167,14 +167,17 @@ This is solved iteratively (power iteration) until convergence.
 >*Discussion:* The formula contains a crucial constant, $d$ (usually 0.85), called the damping factor.Why is it there?
 
 It solves two major problems in graph traversal:
+
 - *Spider Traps (Sinks):* Imagine a group of websites that link to each other but never link out to the rest of the web. Without $d$, the "random surfer" would get stuck inside that group forever, and their PageRank would accumulate infinitely.
 
 - *Dead Ends:* Pages with no outgoing links.The term $\frac{1-d}{N}$ represents the "teleportation" probability. It means: "There is a 15% chance ($1-0.85$) that the surfer gets bored of following links and just types a random new URL into their browser." This ensures the surfer never gets stuck and every page has a baseline non-zero probability of being visited.
 
 ### How it's Calculated?- *Power Iteration:*
 
-Students should know that PageRank isn't calculated in one shot. It's an iterative process.
-- *Initialization:* Every node starts with an equal PageRank score of $1/N$.Iteration 1: Every node passes its current score, divided by its outgoing links, to its neighbors.
+One should know that PageRank isn't calculated in one shot. It's an iterative process.
+
+- *Initialization:* Every node starts with an equal PageRank score of $1/N$.
+- *Iteration 1:* Every node passes its current score, divided by its outgoing links, to its neighbors.
 - *Update:* Every node recalculates its new score based on what it received (using the formula).
 - *Repeat:* Steps 2 and 3 are repeated. The scores will change drastically at first, but eventually, they "converge" (stop changing significantly). This stable state is the final PageRank.
 
@@ -191,6 +194,52 @@ pr = nx.pagerank(G, alpha=0.85)
 print(pr)
 ```
 
+>**Web demonstration**
+
+```{python}
+import networkx as nx
+import matplotlib.pyplot as plt
+
+# 1. Create a "Mini Internet"
+web = nx.DiGraph()
+edges = [
+    ('Google', 'Wikipedia'), 
+    ('Google', 'News'), 
+    ('Wikipedia', 'Google'), 
+    ('Wikipedia', 'News'), 
+    ('Wikipedia', 'Blogs'),
+    ('News', 'Blogs'), 
+    ('Blogs', 'Google'), # The blog refers back to Google
+    ('SpamSite', 'Google') # Spam trying to get attention
+]
+web.add_edges_from(edges)
+
+# 2. Calculate PageRank
+# alpha=0.85 is the "damping factor" (probability of continuing to click)
+pagerank_scores = nx.pagerank(web, alpha=0.85)
+
+# 3. Visualize
+plt.figure(figsize=(10, 7))
+pos = nx.spring_layout(web, seed=9)
+
+# Node Size = Authority Score (Multiplied by 5000 for visibility)
+node_sizes = [pagerank_scores[n] * 5000 for n in web.nodes()]
+
+nx.draw_networkx_nodes(web, pos, node_size=node_sizes, node_color='skyblue', edgecolors='black')
+nx.draw_networkx_edges(web, pos, arrowsize=20, edge_color='gray')
+nx.draw_networkx_labels(web, pos, font_weight='bold')
+
+plt.title("PageRank Visualization: Size = Authority/Influence")
+plt.axis('off')
+plt.show()
+
+# 4. Show the Rankings
+print("--- Search Engine Rankings ---")
+# Sort by score
+sorted_rank = sorted(pagerank_scores.items(), key=lambda x: x[1], reverse=True)
+for rank, (node, score) in enumerate(sorted_rank, 1):
+    print(f"#{rank}: {node} (Score: {score:.4f})")
+```
 
 :::{.callout-note}
 ### Uses / Applications
@@ -199,6 +248,9 @@ print(pr)
 - Citation analysis: identify influential papers/authors.
 - Social networks: measure influence or authority.
 - Spam/fraud detection: detect anomalous link patterns.
+
+Resources :<https://shaoxiongji.github.io/knowledge-graphs/#knowledge-graphs>
+ <https://github.com/totogo/awesome-knowledge-graph?tab=readme-ov-file#infrastructure>
 :::
 
 ### Graph Neural Networks (GNNs)
@@ -237,7 +289,7 @@ Imagine Node $V$ trying to update its understanding of the world.
 
 - Step 1: (Message Computation) Every neighbor ($u \in N(v)$) prepares a "message" to send to node $V$. This message is usually the neighbor's current features transformed by a learnable weight matrix.
    - Analogy: Your friends write down their opinions on a topic.
-   
+
 - Step 2: Aggregation (The Crucial Step) Node $V$ receives messages from all its neighbors. Since the number of neighbors varies, $V$ needs a way to combine them into a fixed-size representation.
   - Common Aggregators: Sum, Mean, or Max.
   - Analogy: You read all your friends' opinions and take the average opinion to summarize what your social circle thinks. 
@@ -277,6 +329,124 @@ The two most famous variants differ in how they aggregate messages in Step 2.
 | Cybersecurity          | anomaly detection                          |
 | Finance                | fraud & risk modelling                     |
 | Recommendation Systems | deep collaborative filtering               |
+
+## The Karate Club Demo
+
+This is a real dataset from the 1970s. A Karate instructor and an administrator got into a fight. The club split. Using just the graph structure—who talked to whom—our code can predict exactly which student joined which faction. This is how Facebook suggests friends. This is how Amazon suggests products. It’s not magic. It’s Graph Theory.
+
+:::{.callout-note}
+
+### What thus script do?
+
+This script is designed to demonstrate Semi-Supervised Learning. Instead of just "coloring" the graph, we will simulate an AI problem:
+
+- We "hide" the faction of everyone except the two leaders (Node 0 and Node 33).
+
+- We use an algorithm (Label Propagation) to learn which side everyone else belongs to based purely on the connections.
+
+This mimics how Graph Neural Networks work (using neighbors to predict node properties).
+
+:::
+
+>**The Script: AI Prediction on Zachary's Karate Club**
+
+```{python}
+import networkx as nx
+import matplotlib.pyplot as plt
+import matplotlib.colors as mcolors
+
+# ==========================================
+# STEP 1: LOAD THE DATASET
+# ==========================================
+# Zachary's Karate Club is a built-in dataset in NetworkX
+G = nx.karate_club_graph()
+
+# The dataset comes with the "club" attribute which tells us the TRUE faction
+# 'Mr. Hi' (Node 0) vs 'Officer' (Node 33)
+true_labels = [G.nodes[i]['club'] for i in G.nodes()]
+
+print(f"Graph Loaded: {G.number_of_nodes()} Students, {G.number_of_edges()} Interactions.")
+
+# ==========================================
+# STEP 2: SIMULATE "MISSING DATA" FOR AI
+# ==========================================
+# We will hide the labels of all students except the two leaders.
+# The AI must "guess" the rest.
+known_labels = {}
+for node in G.nodes():
+    if node == 0:
+        known_labels[node] = 'Mr. Hi'  # Leader 1
+    elif node == 33:
+        known_labels[node] = 'Officer' # Leader 2
+    else:
+        # We pretend we don't know which club these students joined
+        continue 
+
+# ==========================================
+# STEP 3: THE "LEARNING" (Label Propagation)
+# ==========================================
+# This algorithm spreads the known labels to neighbors iteratively.
+# It is a fundamental concept behind GNNs (Message Passing).
+H = G.copy()
+nx.set_node_attributes(H, known_labels, 'predicted_club')
+
+# Use NetworkX's built-in Label Propagation (semi-supervised)
+# Note: We use the community detection version here for demonstration
+from networkx.algorithms import community
+
+# Find communities purely based on structure
+communities = community.greedy_modularity_communities(H)
+
+# Map the results back to a dictionary
+predicted_groups = {}
+for i, comm in enumerate(communities):
+    for node in comm:
+        predicted_groups[node] = i
+
+# ==========================================
+# STEP 4: VISUALIZATION
+# ==========================================
+plt.figure(figsize=(12, 8))
+pos = nx.spring_layout(G, seed=42) # Fixed layout for consistency
+
+# Prepare colors based on the PREDICTED groups
+node_colors = [predicted_groups[n] for n in G.nodes()]
+
+# Draw the Nodes
+# We use a cool-warm colormap to clearly show the two factions
+nodes = nx.draw_networkx_nodes(G, pos, 
+                               node_size=600, 
+                               node_color=node_colors, 
+                               cmap=plt.cm.coolwarm, 
+                               edgecolors='black')
+
+# Draw the Edges
+nx.draw_networkx_edges(G, pos, alpha=0.3)
+
+# Highlight the Leaders (The only data we "gave" the AI)
+nx.draw_networkx_nodes(G, pos, nodelist=[0, 33], node_size=1000, node_color='gold', edgecolors='black', linewidths=2)
+nx.draw_networkx_labels(G, pos, labels={0: "Mr. Hi", 33: "Officer"}, font_weight="bold", font_size=12)
+nx.draw_networkx_labels(G, pos, font_color='white', font_size=8)
+
+
+plt.title("AI Prediction of Karate Club Factions\n(Gold Nodes = Known Leaders, Red/Blue = Learned from Structure)", fontsize=14)
+plt.axis('off')
+plt.show()
+# ==========================================
+# STEP 5: EVALUATION
+# ==========================================
+# Let's see if the structure-based split matches reality
+print("--- Prediction Analysis ---")
+print(f"Algorithm identified {len(communities)} distinct communities.")
+print("Note: In a perfect structural split, these match the two real-world factions.")
+```
+
+:::{.callout-tip}
+### Playlist Recommendation!
+
+This is exactly how Spotify predicts you will like a song because your 'graph neighbors' (people with similar taste) liked it.
+
+:::
 
 ## Case Study — Epidemic Spread Modelling
 

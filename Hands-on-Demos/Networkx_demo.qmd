@@ -62,8 +62,8 @@ To bridge this gap, we utilize data handling libraries (like Pandas) to load dat
 
 The graph is constructed by mapping:
 
-* **Source/Target columns** $\rightarrow$ Edges
-* **Cost/Type columns** $\rightarrow$ Edge Attributes (Weights)
+- **Source/Target columns** $\rightarrow$ Edges
+- **Cost/Type columns** $\rightarrow$ Edge Attributes (Weights)
 
 ```{python}
 import networkx as nx

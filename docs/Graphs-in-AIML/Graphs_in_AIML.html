@@ -287,6 +287,7 @@ window.Quarto = {
   <li><a href="#major-variants-gcn-vs.-gat" id="toc-major-variants-gcn-vs.-gat" class="nav-link" data-scroll-target="#major-variants-gcn-vs.-gat">Major Variants: GCN vs.&nbsp;GAT</a></li>
   <li><a href="#gnn-usescases" id="toc-gnn-usescases" class="nav-link" data-scroll-target="#gnn-usescases">GNN usescases</a></li>
   </ul></li>
+  <li><a href="#the-karate-club-demo" id="toc-the-karate-club-demo" class="nav-link" data-scroll-target="#the-karate-club-demo">The Karate Club Demo</a></li>
   <li><a href="#case-study-epidemic-spread-modelling" id="toc-case-study-epidemic-spread-modelling" class="nav-link" data-scroll-target="#case-study-epidemic-spread-modelling">Case Study — Epidemic Spread Modelling</a></li>
   <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
   </ul>
@@ -443,7 +444,7 @@ Key Characteristics
 </section>
 <section id="mini-example-in-python-networkx" class="level3">
 <h3 class="anchored" data-anchor-id="mini-example-in-python-networkx">Mini Example in Python (NetworkX)</h3>
-<div id="3bec02c3" class="cell" data-execution_count="1">
+<div id="08d5deb8" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> networkx <span class="im">as</span> nx</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -493,18 +494,25 @@ Key Characteristics
 <blockquote class="blockquote">
 <p><em>Discussion:</em> The formula contains a crucial constant, <span class="math inline">\(d\)</span> (usually 0.85), called the damping factor.Why is it there?</p>
 </blockquote>
-<p>It solves two major problems in graph traversal: - <em>Spider Traps (Sinks):</em> Imagine a group of websites that link to each other but never link out to the rest of the web. Without <span class="math inline">\(d\)</span>, the “random surfer” would get stuck inside that group forever, and their PageRank would accumulate infinitely.</p>
+<p>It solves two major problems in graph traversal:</p>
 <ul>
-<li><em>Dead Ends:</em> Pages with no outgoing links.The term <span class="math inline">\(\frac{1-d}{N}\)</span> represents the “teleportation” probability. It means: “There is a 15% chance (<span class="math inline">\(1-0.85\)</span>) that the surfer gets bored of following links and just types a random new URL into their browser.” This ensures the surfer never gets stuck and every page has a baseline non-zero probability of being visited.</li>
+<li><p><em>Spider Traps (Sinks):</em> Imagine a group of websites that link to each other but never link out to the rest of the web. Without <span class="math inline">\(d\)</span>, the “random surfer” would get stuck inside that group forever, and their PageRank would accumulate infinitely.</p></li>
+<li><p><em>Dead Ends:</em> Pages with no outgoing links.The term <span class="math inline">\(\frac{1-d}{N}\)</span> represents the “teleportation” probability. It means: “There is a 15% chance (<span class="math inline">\(1-0.85\)</span>) that the surfer gets bored of following links and just types a random new URL into their browser.” This ensures the surfer never gets stuck and every page has a baseline non-zero probability of being visited.</p></li>
 </ul>
 </section>
 <section id="how-its-calculated--power-iteration" class="level3">
 <h3 class="anchored" data-anchor-id="how-its-calculated--power-iteration">How it’s Calculated?- <em>Power Iteration:</em></h3>
-<p>Students should know that PageRank isn’t calculated in one shot. It’s an iterative process. - <em>Initialization:</em> Every node starts with an equal PageRank score of <span class="math inline">\(1/N\)</span>.Iteration 1: Every node passes its current score, divided by its outgoing links, to its neighbors. - <em>Update:</em> Every node recalculates its new score based on what it received (using the formula). - <em>Repeat:</em> Steps 2 and 3 are repeated. The scores will change drastically at first, but eventually, they “converge” (stop changing significantly). This stable state is the final PageRank.</p>
+<p>One should know that PageRank isn’t calculated in one shot. It’s an iterative process.</p>
+<ul>
+<li><em>Initialization:</em> Every node starts with an equal PageRank score of <span class="math inline">\(1/N\)</span>.</li>
+<li><em>Iteration 1:</em> Every node passes its current score, divided by its outgoing links, to its neighbors.</li>
+<li><em>Update:</em> Every node recalculates its new score based on what it received (using the formula).</li>
+<li><em>Repeat:</em> Steps 2 and 3 are repeated. The scores will change drastically at first, but eventually, they “converge” (stop changing significantly). This stable state is the final PageRank.</li>
+</ul>
 </section>
 <section id="example-code" class="level3">
 <h3 class="anchored" data-anchor-id="example-code">Example code</h3>
-<div id="3822fcb6" class="cell" data-execution_count="2">
+<div id="90887553" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> networkx <span class="im">as</span> nx</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>G <span class="op">=</span> nx.DiGraph()</span>
@@ -515,6 +523,68 @@ Key Characteristics
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(pr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>{'A': 0.21991357059363242, 'B': 0.13096360941900992, 'C': 0.4292092493937253, 'D': 0.21991357059363242}</code></pre>
+</div>
+</div>
+<blockquote class="blockquote">
+<p><strong>Web demonstration</strong></p>
+</blockquote>
+<div id="f7d7e10f" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> networkx <span class="im">as</span> nx</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Create a "Mini Internet"</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>web <span class="op">=</span> nx.DiGraph()</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>edges <span class="op">=</span> [</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    (<span class="st">'Google'</span>, <span class="st">'Wikipedia'</span>), </span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    (<span class="st">'Google'</span>, <span class="st">'News'</span>), </span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    (<span class="st">'Wikipedia'</span>, <span class="st">'Google'</span>), </span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    (<span class="st">'Wikipedia'</span>, <span class="st">'News'</span>), </span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    (<span class="st">'Wikipedia'</span>, <span class="st">'Blogs'</span>),</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    (<span class="st">'News'</span>, <span class="st">'Blogs'</span>), </span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    (<span class="st">'Blogs'</span>, <span class="st">'Google'</span>), <span class="co"># The blog refers back to Google</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    (<span class="st">'SpamSite'</span>, <span class="st">'Google'</span>) <span class="co"># Spam trying to get attention</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>web.add_edges_from(edges)</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Calculate PageRank</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a><span class="co"># alpha=0.85 is the "damping factor" (probability of continuing to click)</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>pagerank_scores <span class="op">=</span> nx.pagerank(web, alpha<span class="op">=</span><span class="fl">0.85</span>)</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Visualize</span></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">7</span>))</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>pos <span class="op">=</span> nx.spring_layout(web, seed<span class="op">=</span><span class="dv">9</span>)</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Node Size = Authority Score (Multiplied by 5000 for visibility)</span></span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>node_sizes <span class="op">=</span> [pagerank_scores[n] <span class="op">*</span> <span class="dv">5000</span> <span class="cf">for</span> n <span class="kw">in</span> web.nodes()]</span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>nx.draw_networkx_nodes(web, pos, node_size<span class="op">=</span>node_sizes, node_color<span class="op">=</span><span class="st">'skyblue'</span>, edgecolors<span class="op">=</span><span class="st">'black'</span>)</span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>nx.draw_networkx_edges(web, pos, arrowsize<span class="op">=</span><span class="dv">20</span>, edge_color<span class="op">=</span><span class="st">'gray'</span>)</span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>nx.draw_networkx_labels(web, pos, font_weight<span class="op">=</span><span class="st">'bold'</span>)</span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"PageRank Visualization: Size = Authority/Influence"</span>)</span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>plt.axis(<span class="st">'off'</span>)</span>
+<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Show the Rankings</span></span>
+<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"--- Search Engine Rankings ---"</span>)</span>
+<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a><span class="co"># Sort by score</span></span>
+<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a>sorted_rank <span class="op">=</span> <span class="bu">sorted</span>(pagerank_scores.items(), key<span class="op">=</span><span class="kw">lambda</span> x: x[<span class="dv">1</span>], reverse<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> rank, (node, score) <span class="kw">in</span> <span class="bu">enumerate</span>(sorted_rank, <span class="dv">1</span>):</span>
+<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"#</span><span class="sc">{</span>rank<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>node<span class="sc">}</span><span class="ss"> (Score: </span><span class="sc">{</span>score<span class="sc">:.4f}</span><span class="ss">)"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Graphs_in_AIML_files/figure-html/cell-4-output-1.png" width="763" height="557" class="figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>--- Search Engine Rankings ---
+#1: Google (Score: 0.3250)
+#2: Blogs (Score: 0.2611)
+#3: News (Score: 0.2158)
+#4: Wikipedia (Score: 0.1681)
+#5: SpamSite (Score: 0.0300)</code></pre>
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -534,6 +604,7 @@ Uses / Applications
 <li>Social networks: measure influence or authority.</li>
 <li>Spam/fraud detection: detect anomalous link patterns.</li>
 </ul>
+<p>Resources :<a href="https://shaoxiongji.github.io/knowledge-graphs/#knowledge-graphs" class="uri">https://shaoxiongji.github.io/knowledge-graphs/#knowledge-graphs</a> <a href="https://github.com/totogo/awesome-knowledge-graph?tab=readme-ov-file#infrastructure" class="uri">https://github.com/totogo/awesome-knowledge-graph?tab=readme-ov-file#infrastructure</a></p>
 </div>
 </div>
 </section>
@@ -656,6 +727,149 @@ Message Passing Update Rule
 </table>
 </section>
 </section>
+<section id="the-karate-club-demo" class="level2">
+<h2 class="anchored" data-anchor-id="the-karate-club-demo">The Karate Club Demo</h2>
+<p>This is a real dataset from the 1970s. A Karate instructor and an administrator got into a fight. The club split. Using just the graph structure—who talked to whom—our code can predict exactly which student joined which faction. This is how Facebook suggests friends. This is how Amazon suggests products. It’s not magic. It’s Graph Theory.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+What thus script do?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This script is designed to demonstrate Semi-Supervised Learning. Instead of just “coloring” the graph, we will simulate an AI problem:</p>
+<ul>
+<li><p>We “hide” the faction of everyone except the two leaders (Node 0 and Node 33).</p></li>
+<li><p>We use an algorithm (Label Propagation) to learn which side everyone else belongs to based purely on the connections.</p></li>
+</ul>
+<p>This mimics how Graph Neural Networks work (using neighbors to predict node properties).</p>
+</div>
+</div>
+<blockquote class="blockquote">
+<p><strong>The Script: AI Prediction on Zachary’s Karate Club</strong></p>
+</blockquote>
+<div id="c391f6ac" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> networkx <span class="im">as</span> nx</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.colors <span class="im">as</span> mcolors</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># ==========================================</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># STEP 1: LOAD THE DATASET</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co"># ==========================================</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Zachary's Karate Club is a built-in dataset in NetworkX</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>G <span class="op">=</span> nx.karate_club_graph()</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="co"># The dataset comes with the "club" attribute which tells us the TRUE faction</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="co"># 'Mr. Hi' (Node 0) vs 'Officer' (Node 33)</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>true_labels <span class="op">=</span> [G.nodes[i][<span class="st">'club'</span>] <span class="cf">for</span> i <span class="kw">in</span> G.nodes()]</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Graph Loaded: </span><span class="sc">{</span>G<span class="sc">.</span>number_of_nodes()<span class="sc">}</span><span class="ss"> Students, </span><span class="sc">{</span>G<span class="sc">.</span>number_of_edges()<span class="sc">}</span><span class="ss"> Interactions."</span>)</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="co"># ==========================================</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="co"># STEP 2: SIMULATE "MISSING DATA" FOR AI</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="co"># ==========================================</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="co"># We will hide the labels of all students except the two leaders.</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="co"># The AI must "guess" the rest.</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>known_labels <span class="op">=</span> {}</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> node <span class="kw">in</span> G.nodes():</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> node <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>        known_labels[node] <span class="op">=</span> <span class="st">'Mr. Hi'</span>  <span class="co"># Leader 1</span></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> node <span class="op">==</span> <span class="dv">33</span>:</span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>        known_labels[node] <span class="op">=</span> <span class="st">'Officer'</span> <span class="co"># Leader 2</span></span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>        <span class="co"># We pretend we don't know which club these students joined</span></span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>        <span class="cf">continue</span> </span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a><span class="co"># ==========================================</span></span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a><span class="co"># STEP 3: THE "LEARNING" (Label Propagation)</span></span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a><span class="co"># ==========================================</span></span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a><span class="co"># This algorithm spreads the known labels to neighbors iteratively.</span></span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a><span class="co"># It is a fundamental concept behind GNNs (Message Passing).</span></span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a>H <span class="op">=</span> G.copy()</span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a>nx.set_node_attributes(H, known_labels, <span class="st">'predicted_club'</span>)</span>
+<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a><span class="co"># Use NetworkX's built-in Label Propagation (semi-supervised)</span></span>
+<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a><span class="co"># Note: We use the community detection version here for demonstration</span></span>
+<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> networkx.algorithms <span class="im">import</span> community</span>
+<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a><span class="co"># Find communities purely based on structure</span></span>
+<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a>communities <span class="op">=</span> community.greedy_modularity_communities(H)</span>
+<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a><span class="co"># Map the results back to a dictionary</span></span>
+<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a>predicted_groups <span class="op">=</span> {}</span>
+<span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i, comm <span class="kw">in</span> <span class="bu">enumerate</span>(communities):</span>
+<span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> node <span class="kw">in</span> comm:</span>
+<span id="cb7-51"><a href="#cb7-51" aria-hidden="true" tabindex="-1"></a>        predicted_groups[node] <span class="op">=</span> i</span>
+<span id="cb7-52"><a href="#cb7-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-53"><a href="#cb7-53" aria-hidden="true" tabindex="-1"></a><span class="co"># ==========================================</span></span>
+<span id="cb7-54"><a href="#cb7-54" aria-hidden="true" tabindex="-1"></a><span class="co"># STEP 4: VISUALIZATION</span></span>
+<span id="cb7-55"><a href="#cb7-55" aria-hidden="true" tabindex="-1"></a><span class="co"># ==========================================</span></span>
+<span id="cb7-56"><a href="#cb7-56" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">8</span>))</span>
+<span id="cb7-57"><a href="#cb7-57" aria-hidden="true" tabindex="-1"></a>pos <span class="op">=</span> nx.spring_layout(G, seed<span class="op">=</span><span class="dv">42</span>) <span class="co"># Fixed layout for consistency</span></span>
+<span id="cb7-58"><a href="#cb7-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-59"><a href="#cb7-59" aria-hidden="true" tabindex="-1"></a><span class="co"># Prepare colors based on the PREDICTED groups</span></span>
+<span id="cb7-60"><a href="#cb7-60" aria-hidden="true" tabindex="-1"></a>node_colors <span class="op">=</span> [predicted_groups[n] <span class="cf">for</span> n <span class="kw">in</span> G.nodes()]</span>
+<span id="cb7-61"><a href="#cb7-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-62"><a href="#cb7-62" aria-hidden="true" tabindex="-1"></a><span class="co"># Draw the Nodes</span></span>
+<span id="cb7-63"><a href="#cb7-63" aria-hidden="true" tabindex="-1"></a><span class="co"># We use a cool-warm colormap to clearly show the two factions</span></span>
+<span id="cb7-64"><a href="#cb7-64" aria-hidden="true" tabindex="-1"></a>nodes <span class="op">=</span> nx.draw_networkx_nodes(G, pos, </span>
+<span id="cb7-65"><a href="#cb7-65" aria-hidden="true" tabindex="-1"></a>                               node_size<span class="op">=</span><span class="dv">600</span>, </span>
+<span id="cb7-66"><a href="#cb7-66" aria-hidden="true" tabindex="-1"></a>                               node_color<span class="op">=</span>node_colors, </span>
+<span id="cb7-67"><a href="#cb7-67" aria-hidden="true" tabindex="-1"></a>                               cmap<span class="op">=</span>plt.cm.coolwarm, </span>
+<span id="cb7-68"><a href="#cb7-68" aria-hidden="true" tabindex="-1"></a>                               edgecolors<span class="op">=</span><span class="st">'black'</span>)</span>
+<span id="cb7-69"><a href="#cb7-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-70"><a href="#cb7-70" aria-hidden="true" tabindex="-1"></a><span class="co"># Draw the Edges</span></span>
+<span id="cb7-71"><a href="#cb7-71" aria-hidden="true" tabindex="-1"></a>nx.draw_networkx_edges(G, pos, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
+<span id="cb7-72"><a href="#cb7-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-73"><a href="#cb7-73" aria-hidden="true" tabindex="-1"></a><span class="co"># Highlight the Leaders (The only data we "gave" the AI)</span></span>
+<span id="cb7-74"><a href="#cb7-74" aria-hidden="true" tabindex="-1"></a>nx.draw_networkx_nodes(G, pos, nodelist<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">33</span>], node_size<span class="op">=</span><span class="dv">1000</span>, node_color<span class="op">=</span><span class="st">'gold'</span>, edgecolors<span class="op">=</span><span class="st">'black'</span>, linewidths<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb7-75"><a href="#cb7-75" aria-hidden="true" tabindex="-1"></a>nx.draw_networkx_labels(G, pos, labels<span class="op">=</span>{<span class="dv">0</span>: <span class="st">"Mr. Hi"</span>, <span class="dv">33</span>: <span class="st">"Officer"</span>}, font_weight<span class="op">=</span><span class="st">"bold"</span>, font_size<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb7-76"><a href="#cb7-76" aria-hidden="true" tabindex="-1"></a>nx.draw_networkx_labels(G, pos, font_color<span class="op">=</span><span class="st">'white'</span>, font_size<span class="op">=</span><span class="dv">8</span>)</span>
+<span id="cb7-77"><a href="#cb7-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-78"><a href="#cb7-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-79"><a href="#cb7-79" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"AI Prediction of Karate Club Factions</span><span class="ch">\n</span><span class="st">(Gold Nodes = Known Leaders, Red/Blue = Learned from Structure)"</span>, fontsize<span class="op">=</span><span class="dv">14</span>)</span>
+<span id="cb7-80"><a href="#cb7-80" aria-hidden="true" tabindex="-1"></a>plt.axis(<span class="st">'off'</span>)</span>
+<span id="cb7-81"><a href="#cb7-81" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb7-82"><a href="#cb7-82" aria-hidden="true" tabindex="-1"></a><span class="co"># ==========================================</span></span>
+<span id="cb7-83"><a href="#cb7-83" aria-hidden="true" tabindex="-1"></a><span class="co"># STEP 5: EVALUATION</span></span>
+<span id="cb7-84"><a href="#cb7-84" aria-hidden="true" tabindex="-1"></a><span class="co"># ==========================================</span></span>
+<span id="cb7-85"><a href="#cb7-85" aria-hidden="true" tabindex="-1"></a><span class="co"># Let's see if the structure-based split matches reality</span></span>
+<span id="cb7-86"><a href="#cb7-86" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"--- Prediction Analysis ---"</span>)</span>
+<span id="cb7-87"><a href="#cb7-87" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Algorithm identified </span><span class="sc">{</span><span class="bu">len</span>(communities)<span class="sc">}</span><span class="ss"> distinct communities."</span>)</span>
+<span id="cb7-88"><a href="#cb7-88" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Note: In a perfect structural split, these match the two real-world factions."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Graph Loaded: 34 Students, 78 Interactions.</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Graphs_in_AIML_files/figure-html/cell-5-output-2.png" width="912" height="654" class="figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>--- Prediction Analysis ---
+Algorithm identified 3 distinct communities.
+Note: In a perfect structural split, these match the two real-world factions.</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Playlist Recommendation!
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This is exactly how Spotify predicts you will like a song because your ‘graph neighbors’ (people with similar taste) liked it.</p>
+</div>
+</div>
+</section>
 <section id="case-study-epidemic-spread-modelling" class="level2">
 <h2 class="anchored" data-anchor-id="case-study-epidemic-spread-modelling">Case Study — Epidemic Spread Modelling</h2>
 <p>During the outbreak of contagious diseases such as COVID-19, Influenza, or Nipah virus, rapid identification of individuals who play a critical role in spreading infection is essential for effective containment. Public health authorities model social interactions as graphs where nodes represent individuals and edges represent close contact events capable of transmitting disease. Given a simulated contact network of individuals in a community, determine:</p>
@@ -681,92 +895,92 @@ Note
 </ul>
 </div>
 </div>
-<div id="12e3ab07" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> networkx <span class="im">as</span> nx</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>G <span class="op">=</span> nx.barabasi_albert_graph(<span class="dv">20</span>, <span class="dv">2</span>)</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>nx.draw(G, with_labels<span class="op">=</span><span class="va">True</span>, node_size<span class="op">=</span><span class="dv">900</span>)</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>centrality <span class="op">=</span> nx.betweenness_centrality(G)</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">sorted</span>(centrality.items(), key<span class="op">=</span><span class="kw">lambda</span> x: x[<span class="dv">1</span>], reverse<span class="op">=</span><span class="va">True</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="c5560785" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> networkx <span class="im">as</span> nx</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>G <span class="op">=</span> nx.barabasi_albert_graph(<span class="dv">20</span>, <span class="dv">2</span>)</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>nx.draw(G, with_labels<span class="op">=</span><span class="va">True</span>, node_size<span class="op">=</span><span class="dv">900</span>)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>centrality <span class="op">=</span> nx.betweenness_centrality(G)</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">sorted</span>(centrality.items(), key<span class="op">=</span><span class="kw">lambda</span> x: x[<span class="dv">1</span>], reverse<span class="op">=</span><span class="va">True</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Graphs_in_AIML_files/figure-html/cell-4-output-1.png" width="691" height="499" class="figure-img"></p>
+<p><img src="Graphs_in_AIML_files/figure-html/cell-6-output-1.png" width="691" height="499" class="figure-img"></p>
 </figure>
 </div>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[(0, 0.4678362573099415), (8, 0.2933723196881091), (1, 0.12475633528265108), (9, 0.1218323586744639), (3, 0.07115009746588694), (2, 0.04532163742690058), (6, 0.042884990253411304), (12, 0.028265107212475632), (13, 0.021929824561403504), (15, 0.011208576998050682), (14, 0.009746588693957114), (10, 0.00682261208576998), (5, 0.006822612085769979), (18, 0.006822612085769979), (19, 0.0043859649122807015), (4, 0.0), (7, 0.0), (11, 0.0), (16, 0.0), (17, 0.0)]</code></pre>
+<pre><code>[(0, 0.36414415668801636), (15, 0.18090364800891115), (5, 0.10617283950617283), (1, 0.10264550264550262), (8, 0.09642393019586001), (7, 0.08992388378353292), (16, 0.08745010674835235), (14, 0.07301819363222871), (12, 0.06794996751137101), (2, 0.06027104799034622), (9, 0.06027104799034622), (13, 0.04132553606237816), (11, 0.04067576348278103), (18, 0.02617655249234197), (19, 0.012621832358674463), (3, 0.006042884990253411), (4, 0.0050357374918778425), (6, 0.0), (10, 0.0), (17, 0.0)]</code></pre>
 </div>
 </div>
-<div id="04018437" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> networkx <span class="im">as</span> nx</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.colors <span class="im">as</span> mcolors</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Generate a scale-free network (realistic for social networks)</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 50 nodes, each new node attaches to 2 existing nodes</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>G <span class="op">=</span> nx.barabasi_albert_graph(<span class="dv">50</span>, <span class="dv">2</span>, seed<span class="op">=</span><span class="dv">42</span>)</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate layout once to ensure nodes and edges align perfectly</span></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>pos <span class="op">=</span> nx.spring_layout(G, seed<span class="op">=</span><span class="dv">42</span>)</span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Calculate Betweenness Centrality</span></span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>centrality <span class="op">=</span> nx.betweenness_centrality(G)</span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Prepare visualization based on centrality scores</span></span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Node size depends on centrality (scaled up for visibility)</span></span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Add a small base size (e.g., +100) so nodes with 0 centrality don't disappear entirely</span></span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>node_sizes <span class="op">=</span> [(v <span class="op">*</span> <span class="dv">10000</span>) <span class="op">+</span> <span class="dv">100</span> <span class="cf">for</span> v <span class="kw">in</span> centrality.values()]</span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Node color gradient based on centrality</span></span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>node_colors <span class="op">=</span> <span class="bu">list</span>(centrality.values())</span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Create plot structure</span></span>
-<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">7</span>))</span>
-<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Get Current Axes - crucial for the fix later</span></span>
-<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> plt.gca()</span>
-<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Draw Nodes</span></span>
-<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>nodes <span class="op">=</span> nx.draw_networkx_nodes(G, pos<span class="op">=</span>pos,</span>
-<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>                               node_size<span class="op">=</span>node_sizes,</span>
-<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>                               node_color<span class="op">=</span>node_colors,</span>
-<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>                               cmap<span class="op">=</span>plt.cm.coolwarm, <span class="co"># Red-Blue color map</span></span>
-<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>                               edgecolors<span class="op">=</span><span class="st">'gray'</span>,</span>
-<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>                               ax<span class="op">=</span>ax)</span>
-<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a><span class="co"># Draw Edges</span></span>
-<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a>nx.draw_networkx_edges(G, pos<span class="op">=</span>pos, alpha<span class="op">=</span><span class="fl">0.3</span>, ax<span class="op">=</span>ax)</span>
-<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the ScalarMappable for the legend</span></span>
-<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a>vmin <span class="op">=</span> <span class="bu">min</span>(node_colors)</span>
-<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a>vmax <span class="op">=</span> <span class="bu">max</span>(node_colors)</span>
-<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a><span class="co"># Ensure vmin and vmax are not identical to avoid division by zero in normalization if graph is tiny</span></span>
-<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> vmin <span class="op">==</span> vmax:</span>
-<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a>      vmax <span class="op">+=</span> <span class="fl">0.0001</span></span>
-<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a>sm <span class="op">=</span> plt.cm.ScalarMappable(cmap<span class="op">=</span>plt.cm.coolwarm, norm<span class="op">=</span>plt.Normalize(vmin<span class="op">=</span>vmin, vmax<span class="op">=</span>vmax))</span>
-<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a>sm.set_array([])</span>
-<span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a><span class="co"># Add a colorbar, explicitly telling it which axis (ax) to attach to</span></span>
-<span id="cb7-51"><a href="#cb7-51" aria-hidden="true" tabindex="-1"></a>cbar <span class="op">=</span> plt.colorbar(sm, ax<span class="op">=</span>ax, label<span class="op">=</span><span class="st">"Epidemic Risk (Betweenness Centrality)"</span>)</span>
-<span id="cb7-52"><a href="#cb7-52" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Identifying Super-Spreaders via Graph Centrality"</span>, fontsize<span class="op">=</span><span class="dv">14</span>)</span>
-<span id="cb7-53"><a href="#cb7-53" aria-hidden="true" tabindex="-1"></a>plt.axis(<span class="st">'off'</span>)</span>
-<span id="cb7-54"><a href="#cb7-54" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
-<span id="cb7-55"><a href="#cb7-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-56"><a href="#cb7-56" aria-hidden="true" tabindex="-1"></a><span class="co"># Print top 3 risky individuals</span></span>
-<span id="cb7-57"><a href="#cb7-57" aria-hidden="true" tabindex="-1"></a>sorted_risk <span class="op">=</span> <span class="bu">sorted</span>(centrality.items(), key<span class="op">=</span><span class="kw">lambda</span> x: x[<span class="dv">1</span>], reverse<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb7-58"><a href="#cb7-58" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Top 3 Highest Risk Nodes (Super-Spreaders):"</span>)</span>
-<span id="cb7-59"><a href="#cb7-59" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> node, score <span class="kw">in</span> sorted_risk[:<span class="dv">3</span>]:</span>
-<span id="cb7-60"><a href="#cb7-60" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Node ID: </span><span class="sc">{</span>node<span class="sc">}</span><span class="ss">, Risk Score: </span><span class="sc">{</span>score<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="6d133636" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> networkx <span class="im">as</span> nx</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.colors <span class="im">as</span> mcolors</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Generate a scale-free network (realistic for social networks)</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 50 nodes, each new node attaches to 2 existing nodes</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>G <span class="op">=</span> nx.barabasi_albert_graph(<span class="dv">50</span>, <span class="dv">2</span>, seed<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate layout once to ensure nodes and edges align perfectly</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>pos <span class="op">=</span> nx.spring_layout(G, seed<span class="op">=</span><span class="dv">42</span>)</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Calculate Betweenness Centrality</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>centrality <span class="op">=</span> nx.betweenness_centrality(G)</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Prepare visualization based on centrality scores</span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Node size depends on centrality (scaled up for visibility)</span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Add a small base size (e.g., +100) so nodes with 0 centrality don't disappear entirely</span></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>node_sizes <span class="op">=</span> [(v <span class="op">*</span> <span class="dv">10000</span>) <span class="op">+</span> <span class="dv">100</span> <span class="cf">for</span> v <span class="kw">in</span> centrality.values()]</span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Node color gradient based on centrality</span></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>node_colors <span class="op">=</span> <span class="bu">list</span>(centrality.values())</span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Create plot structure</span></span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">7</span>))</span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Get Current Axes - crucial for the fix later</span></span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> plt.gca()</span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a><span class="co"># Draw Nodes</span></span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a>nodes <span class="op">=</span> nx.draw_networkx_nodes(G, pos<span class="op">=</span>pos,</span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a>                               node_size<span class="op">=</span>node_sizes,</span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a>                               node_color<span class="op">=</span>node_colors,</span>
+<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a>                               cmap<span class="op">=</span>plt.cm.coolwarm, <span class="co"># Red-Blue color map</span></span>
+<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a>                               edgecolors<span class="op">=</span><span class="st">'gray'</span>,</span>
+<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a>                               ax<span class="op">=</span>ax)</span>
+<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a><span class="co"># Draw Edges</span></span>
+<span id="cb12-38"><a href="#cb12-38" aria-hidden="true" tabindex="-1"></a>nx.draw_networkx_edges(G, pos<span class="op">=</span>pos, alpha<span class="op">=</span><span class="fl">0.3</span>, ax<span class="op">=</span>ax)</span>
+<span id="cb12-39"><a href="#cb12-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-40"><a href="#cb12-40" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the ScalarMappable for the legend</span></span>
+<span id="cb12-41"><a href="#cb12-41" aria-hidden="true" tabindex="-1"></a>vmin <span class="op">=</span> <span class="bu">min</span>(node_colors)</span>
+<span id="cb12-42"><a href="#cb12-42" aria-hidden="true" tabindex="-1"></a>vmax <span class="op">=</span> <span class="bu">max</span>(node_colors)</span>
+<span id="cb12-43"><a href="#cb12-43" aria-hidden="true" tabindex="-1"></a><span class="co"># Ensure vmin and vmax are not identical to avoid division by zero in normalization if graph is tiny</span></span>
+<span id="cb12-44"><a href="#cb12-44" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> vmin <span class="op">==</span> vmax:</span>
+<span id="cb12-45"><a href="#cb12-45" aria-hidden="true" tabindex="-1"></a>      vmax <span class="op">+=</span> <span class="fl">0.0001</span></span>
+<span id="cb12-46"><a href="#cb12-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-47"><a href="#cb12-47" aria-hidden="true" tabindex="-1"></a>sm <span class="op">=</span> plt.cm.ScalarMappable(cmap<span class="op">=</span>plt.cm.coolwarm, norm<span class="op">=</span>plt.Normalize(vmin<span class="op">=</span>vmin, vmax<span class="op">=</span>vmax))</span>
+<span id="cb12-48"><a href="#cb12-48" aria-hidden="true" tabindex="-1"></a>sm.set_array([])</span>
+<span id="cb12-49"><a href="#cb12-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-50"><a href="#cb12-50" aria-hidden="true" tabindex="-1"></a><span class="co"># Add a colorbar, explicitly telling it which axis (ax) to attach to</span></span>
+<span id="cb12-51"><a href="#cb12-51" aria-hidden="true" tabindex="-1"></a>cbar <span class="op">=</span> plt.colorbar(sm, ax<span class="op">=</span>ax, label<span class="op">=</span><span class="st">"Epidemic Risk (Betweenness Centrality)"</span>)</span>
+<span id="cb12-52"><a href="#cb12-52" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Identifying Super-Spreaders via Graph Centrality"</span>, fontsize<span class="op">=</span><span class="dv">14</span>)</span>
+<span id="cb12-53"><a href="#cb12-53" aria-hidden="true" tabindex="-1"></a>plt.axis(<span class="st">'off'</span>)</span>
+<span id="cb12-54"><a href="#cb12-54" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb12-55"><a href="#cb12-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-56"><a href="#cb12-56" aria-hidden="true" tabindex="-1"></a><span class="co"># Print top 3 risky individuals</span></span>
+<span id="cb12-57"><a href="#cb12-57" aria-hidden="true" tabindex="-1"></a>sorted_risk <span class="op">=</span> <span class="bu">sorted</span>(centrality.items(), key<span class="op">=</span><span class="kw">lambda</span> x: x[<span class="dv">1</span>], reverse<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb12-58"><a href="#cb12-58" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Top 3 Highest Risk Nodes (Super-Spreaders):"</span>)</span>
+<span id="cb12-59"><a href="#cb12-59" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> node, score <span class="kw">in</span> sorted_risk[:<span class="dv">3</span>]:</span>
+<span id="cb12-60"><a href="#cb12-60" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Node ID: </span><span class="sc">{</span>node<span class="sc">}</span><span class="ss">, Risk Score: </span><span class="sc">{</span>score<span class="sc">:.4f}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="Graphs_in_AIML_files/figure-html/cell-5-output-1.png" width="726" height="567" class="figure-img"></p>
+<p><img src="Graphs_in_AIML_files/figure-html/cell-7-output-1.png" width="726" height="567" class="figure-img"></p>
 </figure>
 </div>
 </div>
