@@ -29,8 +29,6 @@ We are pleased to announce that the Department of Mathematics, is hosting a hand
 Graph Theory is fundamental to modern engineering intelligence systems. Originating from Euler’s solution to the Königsberg Bridge Problem, graph theory now drives advanced technologies including Artificial Intelligence, Machine Learning, Cybersecurity, Network Routing, Smart Transportation and Compiler Optimization. This expert session explores the evolution of graph theory through interactive demonstrations, 
 live coding, simulation examples and real-world engineering applications.
 
-
-
 ### Agenda
 
 :::: {.columns}
@@ -91,11 +89,10 @@ live coding, simulation examples and real-world engineering applications.
 ::::
 
 
+
+
+
 Hands-On Notebook link: <https://colab.research.google.com/drive/1hRvI7iWq-FXBtu0oJgZZFkyESnqhpvuo?usp=sharing>
-
-{{< qrcode https://colab.research.google.com/drive/1hRvI7iWq-FXBtu0oJgZZFkyESnqhpvuo?usp=sharing >}}
-
-
 
 
 
