@@ -93,7 +93,7 @@ live coding, simulation examples and real-world engineering applications.
 
 Hands-On Notebook link: <https://colab.research.google.com/drive/1hRvI7iWq-FXBtu0oJgZZFkyESnqhpvuo?usp=sharing>
 
-
+{{< qrcode https://colab.research.google.com/drive/1hRvI7iWq-FXBtu0oJgZZFkyESnqhpvuo?usp=sharing >}}
 
 ### Feed back form. 
 
