@@ -176,7 +176,7 @@ Siju Swamy
 <li><strong>Source/Target columns</strong> <span class="math inline">\(\rightarrow\)</span> Edges</li>
 <li><strong>Cost/Type columns</strong> <span class="math inline">\(\rightarrow\)</span> Edge Attributes (Weights)</li>
 </ul>
-<div id="4c443bf8" class="cell" data-execution_count="1">
+<div id="9b88bdca" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-stdout">
 <pre><code>Graph Successfully Constructed!
 Nodes (Cities): 8
@@ -198,7 +198,7 @@ Edges (Power Lines): 9</code></pre>
 <p><strong>The Scenario:</strong> We need to connect <em>all</em> cities with power lines to ensure everyone has electricity, but we want to minimize the total construction cost. We do not need redundant loops; we just need basic connectivity.</p>
 <p><strong>The Solution:</strong> We apply <strong>Kruskal’s or Prim’s Algorithm</strong>. This algorithm identifies a subset of edges that connects all vertices together, without any cycles, and with the minimum possible total edge weight. By comparing the total cost of the full network versus the MST, engineers can quantify potential infrastructure savings.</p>
 <p><strong>Algorithm:</strong> Kruskal’s or Prim’s Algorithm (implemented via minimum_spanning_tree).</p>
-<div id="47c52706" class="cell" data-execution_count="2">
+<div id="a45fcbe8" class="cell" data-execution_count="2">
 <div class="cell-output cell-output-stdout">
 <pre><code>Total Network Cost: $107M
 Optimized MST Cost: $72M
@@ -215,7 +215,7 @@ Savings: $35M</code></pre>
 <h3 id="shortest-path-routing">Shortest Path (Routing)</h3>
 <p><strong>The Scenario:</strong> A maintenance team needs to travel from <code>City_A</code> to <code>City_H</code> as quickly as possible to fix a fault.</p>
 <p><strong>The Solution:</strong> We apply <strong>Dijkstra’s Algorithm</strong>. Unlike the MST (which optimizes the <em>whole</em> network), Dijkstra focuses on the optimal route between <em>two specific points</em>. It accounts for the accumulated “cost” (distance, time, or money) along the path.</p>
-<div id="f5fbde19" class="cell" data-execution_count="3">
+<div id="0a3141ab" class="cell" data-execution_count="3">
 <div class="cell-output cell-output-stdout">
 <pre><code>Optimal Route from City_A to City_H: ['City_A', 'City_B', 'City_E', 'City_G', 'City_H']
 Total Travel Cost: 45</code></pre>
@@ -231,7 +231,7 @@ Total Travel Cost: 45</code></pre>
 <li><strong>The Result:</strong> The algorithm assigns a time slot to every city. The total number of unique colors used (the <em>Chromatic Number</em>) tells us the minimum days required for the full cycle.</li>
 </ul>
 <p><strong>Algorithm:</strong> Greedy Graph Colouring.</p>
-<div id="7912bbff" class="cell" data-execution_count="4">
+<div id="31834b10" class="cell" data-execution_count="4">
 <div class="cell-output cell-output-stdout">
 <pre><code>--- Maintenance Schedule (Graph Colouring) ---
 City_B: Day 1
@@ -262,7 +262,7 @@ Minimum days required for full cycle: 3</code></pre>
 <li><strong>Degree Centrality:</strong> Measures how many direct connections a node has. In our grid, this identifies the central distribution hubs.</li>
 <li><strong>Betweenness Centrality:</strong> Measures how often a node acts as a bridge along the shortest path between two other nodes. This identifies <strong>Single Points of Failure</strong>. If a node with high Betweenness fails, the network is likely to split into disconnected islands.</li>
 </ul>
-<div id="699f5022" class="cell" data-execution_count="5">
+<div id="3332a06c" class="cell" data-execution_count="5">
 <div class="cell-output cell-output-display">
 <div>
 <figure>

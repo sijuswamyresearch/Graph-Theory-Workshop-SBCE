@@ -344,7 +344,7 @@ window.Quarto = {
 <li><strong>Source/Target columns</strong> <span class="math inline">\(\rightarrow\)</span> Edges</li>
 <li><strong>Cost/Type columns</strong> <span class="math inline">\(\rightarrow\)</span> Edge Attributes (Weights)</li>
 </ul>
-<div id="4a6ff31a" class="cell" data-execution_count="1">
+<div id="cd9b3d00" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> networkx <span class="im">as</span> nx</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -396,7 +396,7 @@ Edges (Power Lines): 9</code></pre>
 <p><strong>The Scenario:</strong> We need to connect <em>all</em> cities with power lines to ensure everyone has electricity, but we want to minimize the total construction cost. We do not need redundant loops; we just need basic connectivity.</p>
 <p><strong>The Solution:</strong> We apply <strong>Kruskal’s or Prim’s Algorithm</strong>. This algorithm identifies a subset of edges that connects all vertices together, without any cycles, and with the minimum possible total edge weight. By comparing the total cost of the full network versus the MST, engineers can quantify potential infrastructure savings.</p>
 <p><strong>Algorithm:</strong> Kruskal’s or Prim’s Algorithm (implemented via minimum_spanning_tree).</p>
-<div id="ca61e1a6" class="cell" data-execution_count="2">
+<div id="62348c15" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the Minimum Spanning Tree</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>mst <span class="op">=</span> nx.minimum_spanning_tree(G, weight<span class="op">=</span><span class="st">'Cost'</span>)</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -434,7 +434,7 @@ Savings: $35M</code></pre>
 <h3 class="anchored" data-anchor-id="shortest-path-routing">Shortest Path (Routing)</h3>
 <p><strong>The Scenario:</strong> A maintenance team needs to travel from <code>City_A</code> to <code>City_H</code> as quickly as possible to fix a fault.</p>
 <p><strong>The Solution:</strong> We apply <strong>Dijkstra’s Algorithm</strong>. Unlike the MST (which optimizes the <em>whole</em> network), Dijkstra focuses on the optimal route between <em>two specific points</em>. It accounts for the accumulated “cost” (distance, time, or money) along the path.</p>
-<div id="047fc931" class="cell" data-execution_count="3">
+<div id="b6d65de3" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute Shortest Path</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>source, target <span class="op">=</span> <span class="st">'City_A'</span>, <span class="st">'City_H'</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>path <span class="op">=</span> nx.dijkstra_path(G, source, target, weight<span class="op">=</span><span class="st">'Cost'</span>)</span>
@@ -458,7 +458,7 @@ Total Travel Cost: 45</code></pre>
 <li><strong>The Result:</strong> The algorithm assigns a time slot to every city. The total number of unique colors used (the <em>Chromatic Number</em>) tells us the minimum days required for the full cycle.</li>
 </ul>
 <p><strong>Algorithm:</strong> Greedy Graph Colouring.</p>
-<div id="f73c9cba" class="cell" data-execution_count="4">
+<div id="697dd9cd" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply Greedy Coloring</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>strategies <span class="op">=</span> nx.coloring.greedy_color(G, strategy<span class="op">=</span><span class="st">'largest_first'</span>)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -506,7 +506,7 @@ Minimum days required for full cycle: 3</code></pre>
 <li><strong>Degree Centrality:</strong> Measures how many direct connections a node has. In our grid, this identifies the central distribution hubs.</li>
 <li><strong>Betweenness Centrality:</strong> Measures how often a node acts as a bridge along the shortest path between two other nodes. This identifies <strong>Single Points of Failure</strong>. If a node with high Betweenness fails, the network is likely to split into disconnected islands.</li>
 </ul>
-<div id="254c94f7" class="cell" data-execution_count="5">
+<div id="89463e35" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Compute Centralities</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>degree_cent <span class="op">=</span> nx.degree_centrality(G)</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>betweenness_cent <span class="op">=</span> nx.betweenness_centrality(G, weight<span class="op">=</span><span class="st">'Cost'</span>)</span>

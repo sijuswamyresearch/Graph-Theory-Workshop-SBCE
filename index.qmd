@@ -95,6 +95,10 @@ Hands-On Notebook link: <https://colab.research.google.com/drive/1hRvI7iWq-FXBtu
 
 {{< qrcode https://colab.research.google.com/drive/1hRvI7iWq-FXBtu0oJgZZFkyESnqhpvuo?usp=sharing >}}
 
+
+
+
+
 ### Feed back form. 
 
 We would greatly appreciate it if you could take a few moments to complete our feedback form.
